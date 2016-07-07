@@ -1,0 +1,2 @@
+include ':testjavaall', ':app1'
+project(':app1').projectDir = new File('app')

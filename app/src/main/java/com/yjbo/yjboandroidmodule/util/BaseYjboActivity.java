@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * 基类
+ * 基类，这个基类得认真弄
+ *
  * Created by yjbo on 2016/6/6.
  */
 public abstract class BaseYjboActivity extends AppCompatActivity{

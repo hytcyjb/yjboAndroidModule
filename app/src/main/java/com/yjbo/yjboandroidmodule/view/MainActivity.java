@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.yjbo.yjboandroidmodule.R;
-import com.yjbo.yjboandroidmodule.util.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

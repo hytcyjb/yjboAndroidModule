@@ -5,7 +5,7 @@ import android.net.wifi.WifiManager;
 import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
-import com.yjbo.yjboandroidmodule.util.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 
 import butterknife.Bind;

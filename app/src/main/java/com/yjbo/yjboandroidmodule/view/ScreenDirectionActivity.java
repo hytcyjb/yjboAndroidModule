@@ -6,7 +6,7 @@ import android.hardware.SensorEventListener;
 import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
-import com.yjbo.yjboandroidmodule.util.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

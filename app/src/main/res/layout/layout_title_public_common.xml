@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/public_body"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#59a6dc">
+
+    <TextView
+        android:id="@+id/back_public_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:drawableLeft="@drawable/wowo_back_white_normel"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxEms="12"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        android:text="返回"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/right_next_public_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/next_public_txt"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="too"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/next_public_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="next"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/title_public"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:text="标题"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+</RelativeLayout>

@@ -14,13 +14,13 @@ import java.util.List;
  *
  * @author yjbo
  */
-public class SouGuClass {
+public class BaseIntanClass {
 
     public static final String TAG_STRING = "SouGu";
 
-    private static SouGuClass souGuClass = new SouGuClass();
+    private static BaseIntanClass souGuClass = new BaseIntanClass();
 
-    public static SouGuClass getInstance() {
+    public static BaseIntanClass getInstance() {
 
         return souGuClass;
     }

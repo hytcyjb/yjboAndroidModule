@@ -19,6 +19,7 @@ allprojects {
 //            //weak-handler三方需要用的呢
 //            url 'https://oss.sonatype.org/content/repositories/releases/'
 //        }
+        maven { url "https://jitpack.io" }
     }
 }
 task clean(type: Delete) {

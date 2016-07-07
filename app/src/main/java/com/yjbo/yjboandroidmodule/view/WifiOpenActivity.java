@@ -2,6 +2,7 @@ package com.yjbo.yjboandroidmodule.view;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
@@ -24,11 +25,19 @@ public class WifiOpenActivity extends BaseYjboActivity {
     @Bind(R.id.wifi_txt_show)
     TextView wifiTxtShow;
 
-
     @Override
-    public void setContentView() {
+    public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_wifi_open);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setonView() {
+
+    }
+
+    @Override
+    public void setonData() {
         showWifiState();
         //打开wifi
         CommonUtil.OpenWifi(WifiOpenActivity.this);
@@ -64,4 +73,5 @@ public class WifiOpenActivity extends BaseYjboActivity {
     public void onClick() {
         openWifi();
     }
+
 }

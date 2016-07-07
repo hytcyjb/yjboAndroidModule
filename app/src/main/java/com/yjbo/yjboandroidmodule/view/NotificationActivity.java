@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -32,7 +31,7 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
         ShowNotion();
-        Log.d("yjbo","Product Model:" + android.os.Build.MODEL +"\n" + android.os.Build.VERSION.SDK + "\n"
+        Log.d("yjbo", "Product Model:" + android.os.Build.MODEL + "\n" + android.os.Build.VERSION.SDK + "\n"
                 + android.os.Build.VERSION.RELEASE);
 //        Product Model:SCL-TL00
 //        22
@@ -42,14 +41,15 @@ public class NotificationActivity extends AppCompatActivity {
 
     @OnClick(R.id.notifica_txt)
     public void onClick() {
-       ShowNotion();
+        ShowNotion();
     }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void ShowNotion() {
         NotificationManager nm = (NotificationManager) NotificationActivity.this.getSystemService(NOTIFICATION_SERVICE);
         Resources res = NotificationActivity.this.getResources();
         builder = new Notification.Builder(NotificationActivity.this);
-        contentIntent = PendingIntent.getActivity(this, 0,getIntent(), 0);
+        contentIntent = PendingIntent.getActivity(this, 0, getIntent(), 0);
         builder.setContentIntent(contentIntent).
                 setSmallIcon(R.mipmap.ic_launcher)//设置状态栏里面的图标（小图标）
                 .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))//下拉下拉列表里面的图标（大图标）
@@ -61,8 +61,8 @@ public class NotificationActivity extends AppCompatActivity {
 
         n = builder.getNotification();//获取一个Notification
         n.defaults = Notification.DEFAULT_SOUND;//设置为默认的声音
-        n.flags=Notification.FLAG_NO_CLEAR;//无法清除
-        n.flags=Notification.FLAG_ONGOING_EVENT;//正在进行的
+        n.flags = Notification.FLAG_NO_CLEAR;//无法清除
+        n.flags = Notification.FLAG_ONGOING_EVENT;//正在进行的
         nm.notify(NOTIFICATION_BASE_NUMBER, n);//显示通知 break; }
     }
 //    //无法清除

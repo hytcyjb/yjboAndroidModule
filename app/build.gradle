@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.yjbo.yjboandroidmodule"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,4 +28,9 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:design:23.4.0'
 //    compile 'com.badoo.mobile:android-weak-handler:1.1'
+
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.2'
+    /*进度条，对话框*/
+    compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
 }

@@ -3,6 +3,7 @@ package com.yjbo.yjboandroidmodule.view;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.os.Bundle;
 import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
@@ -22,12 +23,21 @@ public class ScreenDirectionActivity extends BaseYjboActivity implements SensorE
 
     @Bind(R.id.screen_direct_txt_show)
     TextView screenDirectTxtShow;
-
     @Override
-    public void setContentView() {
+    public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_screen_direction);
         ButterKnife.bind(this);
         getScreenDirec();
+    }
+
+    @Override
+    public void setonView() {
+
+    }
+
+    @Override
+    public void setonData() {
+
     }
 
     private void getScreenDirec() {
@@ -54,4 +64,5 @@ public class ScreenDirectionActivity extends BaseYjboActivity implements SensorE
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
 }

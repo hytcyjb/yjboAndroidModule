@@ -34,7 +34,7 @@ public abstract class BaseYjboActivity extends AppCompatActivity {
     protected TextView rightNextPublicTxt;//右侧旁边的键和图标
     protected TextView titlePublic;//中间的标题
     RelativeLayout publicBody;//背景条目
-    SouGuClass souGuClass;
+    BaseIntanClass souGuClass;
 
     // 设置当前的view布局
     public abstract void setonCreate(Bundle savedInstanceState);
@@ -51,7 +51,7 @@ public abstract class BaseYjboActivity extends AppCompatActivity {
         //默认不打开软键盘
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        souGuClass = SouGuClass.getInstance();
+        souGuClass = BaseIntanClass.getInstance();
         souGuClass.addActivity(this);
         publicBody = (RelativeLayout) findViewById(R.id.public_body);
         backPublicTxt = (TextView) findViewById(R.id.back_public_txt);

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="每个标题"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:id="@+id/item_txt" />
+</LinearLayout>

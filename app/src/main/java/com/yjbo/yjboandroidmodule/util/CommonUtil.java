@@ -3,6 +3,7 @@ package com.yjbo.yjboandroidmodule.util;
 import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.widget.Toast;
 
 /**
  * 工具类
@@ -33,7 +34,6 @@ public class CommonUtil {
         int g = (color >> 8) & 0xFF;
         int b = (color >> 0) & 0xFF;
 
-
         String red = Integer.toHexString(r);
         red = red.length() == 1 ? "0" + red : red;
 
@@ -43,10 +43,39 @@ public class CommonUtil {
         String blue = Integer.toHexString(b);
         blue = blue.length() == 1 ? "0" + blue : blue;
 
-
         return String.format("#%s%s%s", red,
                 green,
                 blue);
     }
 
+    /***
+     * 土司
+     * @param context
+     * @param str
+     */
+    public static void show(Context context, String str) {
+        if (!isNull(str)) {
+            Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+        }
+    }
+    /**
+     * 判断字符是否为空
+     * 空--true
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isNull(String str) {
+        String str1;
+        try {
+            str1 = str.trim();
+        } catch (Exception e) {
+            str1 = str;
+        }
+        if ("".equals(str1) || str1 == null || "null".equals(str1)
+                || str1.length() == 0) {
+            return true;
+        }
+        return false;
+    }
 }

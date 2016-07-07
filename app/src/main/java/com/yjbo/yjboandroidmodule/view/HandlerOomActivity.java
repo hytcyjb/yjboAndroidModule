@@ -81,12 +81,8 @@ public class HandlerOomActivity extends AppCompatActivity {
         weakHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-//                txtShowHandler.setText("WeakHandler，有处理");
                String  colorAccent = CommonUtil.colorToString(getResources().getColor(R.color.colorAccent));
                String  colorPrimary = CommonUtil.colorToString(getResources().getColor(R.color.colorPrimary));
-//                txtShowHandler.setText(Html.fromHtml("<font size=3 color="+colorAccent+">扫一扫付款</font>" +
-//                        "<font size=3 color="+colorPrimary+">&nbsp;&nbsp;&nbsp;" + "以及博客上课" +
-//                        "</font>"));
                 String x = "111";
                 txtShowHandler.setText(Html.fromHtml(String.format("<font size='%s' color='%s'>%s</font>" +
                         "<font size='%s' color='%s'>&nbsp;&nbsp;&nbsp;" + "<br />以及博客上课" +

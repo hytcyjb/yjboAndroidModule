@@ -41,14 +41,16 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(MainActivity.this);
     }
 
     @Override
     public void setonView() {
+        ButterKnife.bind(MainActivity.this);
         setSGBackVisible();
         setSGTitleStr("各知识模块知识总结");
         initSwipeLayout();
+        setSGNextStr("···");
+        setSGNextColor(R.color.white);
     }
 
     private void initSwipeLayout() {
@@ -123,12 +125,13 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
 
     @Override
     public void onLoadMore() {
+        listAdapter.removeData(3);
         loadover();
     }
 
     @Override
     public void onRefresh() {
-        listAdapter.addData(3,"你好呀，字符插进来了");
+        listAdapter.addData(3,"你好呀，字符进来了");
         loadover();
     }
     //刷新结束
@@ -136,30 +139,14 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         swipeToLoadLayout.setRefreshing(false);
         swipeToLoadLayout.setLoadingMore(false);
     }
-    @OnClick({R.id.wifi_txt, R.id.scree_direct_txt, R.id.top_slid_fragment, R.id.handler_exception_catch
-            , R.id.json_txt, R.id.textstyle_txt, R.id.notification_txt})
+    @OnClick({R.id.next_public_txt})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.wifi_txt:
-                startActivity(new Intent(MainActivity.this, WifiOpenActivity.class));
-                break;
-            case R.id.scree_direct_txt:
-                startActivity(new Intent(MainActivity.this, ScreenDirectionActivity.class));
-                break;
-            case R.id.top_slid_fragment:
-                startActivity(new Intent(MainActivity.this, SlidFragmentActivity.class));
-                break;
-            case R.id.handler_exception_catch://https://github.com/badoo/android-weak-handler/
-                startActivity(new Intent(MainActivity.this, HandlerOomActivity.class));
-                break;
-            case R.id.json_txt:
-                startActivity(new Intent(MainActivity.this, JsonActivity.class));
-                break;
-            case R.id.textstyle_txt:
-                startActivity(new Intent(MainActivity.this, TextViewLinkActivity.class));
-                break;
-            case R.id.notification_txt:
-                startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+            case R.id.next_public_txt:
+                Intent minten = new Intent(MainActivity.this,WebViewActivity.class);
+                minten.putExtra("url","https://github.com/hytcyjb/yjboAndroidModule");
+                minten.putExtra("titleStr","各种模块的开发");
+                startActivity(minten);
                 break;
         }
     }

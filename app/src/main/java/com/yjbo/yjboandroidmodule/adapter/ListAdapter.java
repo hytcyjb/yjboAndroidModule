@@ -47,7 +47,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemTxt.setText(position+"."+list.get(position));
+        holder.itemTxt.setText(position + "." + list.get(position));
         holder.itemTxt.setTag(position);
     }
 
@@ -59,6 +59,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.item_txt)
         TextView itemTxt;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -66,25 +67,31 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     L.d("NormalTextViewHolder", "onClick--> position = " + itemTxt.getTag() + "---" + getPosition());
-                    CommonUtil.show(mContext, "----->" + itemTxt.getTag() + "---" + getPosition());
-                    mdialogChoose.pos(Integer.valueOf(itemTxt.getTag()+""));
+//                    CommonUtil.show(mContext, "----->" + itemTxt.getTag() + "---" + getPosition());
+                    mdialogChoose.pos(Integer.valueOf(itemTxt.getTag() + ""));
                 }
             });
         }
     }
+
     //添加数据的方法
-    public void addData(int position,String str) {
+    public void addData(int position, String str) {
         list.add(position, str);
         notifyItemInserted(position);
         notifyDataSetChanged();
     }
+
     //删除数据的方法
     public void removeData(int position) {
-        list.remove(position);
-        notifyItemRemoved(position);
-        notifyDataSetChanged();
+        if ("你好呀，字符进来了".equals(list.get(position))) {
+            list.remove(position);
+            notifyItemRemoved(position);
+            notifyDataSetChanged();
+        }
     }
+
     private static DialogChoose mdialogChoose;
+
     public static void SetonDialogChoose(DialogChoose dialogChoose) {
         mdialogChoose = dialogChoose;
     }

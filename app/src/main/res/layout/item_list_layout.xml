@@ -7,8 +7,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="left|center_vertical"
         android:paddingTop="5dp"
+        android:layout_marginLeft="10dp"
         android:paddingBottom="5dp"
         android:text="每个标题"
         android:textColor="@color/black"

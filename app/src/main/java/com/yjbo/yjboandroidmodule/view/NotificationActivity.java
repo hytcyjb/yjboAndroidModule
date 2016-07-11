@@ -13,29 +13,48 @@ import android.util.Log;
 import android.view.View;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.base.BaseIntanClass;
+import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.base.BaseYjboSwipeActivity;
 import com.yjbo.yjboandroidmodule.util.L;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-public class NotificationActivity extends AppCompatActivity {
+/***
+ * 各种模块的开发 之通知
+ * 2016年7月11日15:34:15
+ *
+ * @author yjbo
+ */
+public class NotificationActivity extends BaseYjboSwipeActivity {
 
     private final int NOTIFICATION_BASE_NUMBER = 110;
     private Notification.Builder builder = null;
     private Notification n = null;
 
-//    private NotificationManager nm = null;
+    private NotificationManager nm = null;
     private PendingIntent contentIntent = null;
-    NotificationManager nm = null;
+
+    @Override
+    public void setonCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_notification);
+    }
+
+    @Override
+    public void setonView() {
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setonData() {
+        ShowNotion();
+        L.d("yjbo", "Product Model:" + Build.MODEL + "\n" + Build.VERSION.SDK + "\n" + Build.VERSION.RELEASE);
+        //Product Model:SCL-TL00  //        22   //        5.1.1
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
-        ButterKnife.bind(this);
-        ShowNotion();
-        L.d("yjbo", "Product Model:" + Build.MODEL + "\n" + Build.VERSION.SDK + "\n" + Build.VERSION.RELEASE);
-        //Product Model:SCL-TL00  //        22   //        5.1.1
     }
 
 
@@ -64,11 +83,11 @@ public class NotificationActivity extends AppCompatActivity {
         builder.setContentIntent(contentIntent).
                 setSmallIcon(R.mipmap.ic_launcher)//设置状态栏里面的图标（小图标）
                 .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))//下拉下拉列表里面的图标（大图标）
-                .setTicker("this is bitch!") //设置状态栏的显示的信息
+                .setTicker("android各模块开发!") //设置状态栏的显示的信息
                 .setWhen(System.currentTimeMillis())//设置时间发生时间
                 .setAutoCancel(false)//设置可以清除
-                .setContentTitle("This is ContentTitle")//设置下拉列表里的标题
-                .setContentText("this is ContentText");//设置上下文内容
+                .setContentTitle("android-yjbo")//设置下拉列表里的标题
+                .setContentText("android各模块开发进行中");//设置上下文内容
 
         n = builder.getNotification();//获取一个Notification
         n.defaults = Notification.DEFAULT_SOUND;//设置为默认的声音

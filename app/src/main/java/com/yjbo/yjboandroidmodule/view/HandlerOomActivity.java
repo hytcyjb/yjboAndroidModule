@@ -69,9 +69,6 @@ public class HandlerOomActivity extends AppCompatActivity {
         Message message = new Message();
         message.obj = "很好";
         message.what = 0;
-//        Caused by: java.lang.IllegalStateException: { when=0 what=0 obj=很好 target = com.badoo.mobile.util.WeakHandler$ExecHandler } This message is already in use.
-//        at android.os.MessageQueue.enqueueMessage(MessageQueue.java:538)
-//        mhandler.sendMessage(message);
         weakHandler.sendMessage(message);
 
         Message message1 = new Message();

@@ -26,6 +26,11 @@ public class FirstFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         return view;
     }
+    /***
+     * 这里可以被外部引用。改变值
+     */
+    public void changeNum() {
 
+    }
 
 }

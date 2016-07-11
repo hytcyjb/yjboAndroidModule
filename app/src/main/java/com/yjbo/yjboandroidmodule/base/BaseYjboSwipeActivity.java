@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.util.swipeUtil.SwipeBackActivity;
 
 /**
  * 基类，这个基类得认真弄
@@ -30,7 +31,7 @@ import com.yjbo.yjboandroidmodule.R;
  * </p>
  * Created by yjbo on 2016/6/6.
  */
-public abstract class BaseYjboActivity extends AppCompatActivity {
+public abstract class BaseYjboSwipeActivity extends SwipeBackActivity {
 
     protected TextView backPublicTxt;//返回键和图标
     protected TextView nextPublicTxt;//最右侧的键和图标
@@ -50,7 +51,11 @@ public abstract class BaseYjboActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setonCreate(savedInstanceState);
-        getSupportActionBar().hide();
+//        try {
+//            getSupportActionBar().hide();
+//        }catch (Exception ex){
+//            ex.printStackTrace();
+//        }
         //默认不打开软键盘
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 

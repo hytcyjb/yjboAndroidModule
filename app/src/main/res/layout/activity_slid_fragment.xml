@@ -2,13 +2,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     android:orientation="vertical">
 
+    <include layout="@layout/layout_title_public_common" />
 
     <com.yjbo.yjboandroidmodule.util.PagerSlidingTabStrip
+        xmlns:pagetool="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="?attr/actionBarSize"
+        pagetool:pstsShouldExpand = "true"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

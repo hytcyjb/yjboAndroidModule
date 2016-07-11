@@ -28,5 +28,11 @@ public class ThridFragment extends Fragment {
         return view;
     }
 
+    /***
+     * 这里可以被外部引用。改变值
+     */
+    public void changeNum() {
+
+    }
 
 }

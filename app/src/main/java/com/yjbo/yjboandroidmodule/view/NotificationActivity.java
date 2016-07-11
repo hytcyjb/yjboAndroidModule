@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.util.L;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,9 +34,8 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
         ShowNotion();
-        Log.d("yjbo", "Product Model:" + Build.MODEL + "\n" + Build.VERSION.SDK + "\n"
-                + Build.VERSION.RELEASE);
-//        Product Model:SCL-TL00  //        22   //        5.1.1
+        L.d("yjbo", "Product Model:" + Build.MODEL + "\n" + Build.VERSION.SDK + "\n" + Build.VERSION.RELEASE);
+        //Product Model:SCL-TL00  //        22   //        5.1.1
     }
 
 

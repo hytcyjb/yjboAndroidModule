@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.yjbo.yjboandroidmodule.R;
 
@@ -22,8 +23,9 @@ public class NotificationActivity extends AppCompatActivity {
     private Notification.Builder builder = null;
     private Notification n = null;
 
-    private NotificationManager nm = null;
+//    private NotificationManager nm = null;
     private PendingIntent contentIntent = null;
+    NotificationManager nm = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +33,31 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
         ShowNotion();
-        Log.d("yjbo", "Product Model:" + android.os.Build.MODEL + "\n" + android.os.Build.VERSION.SDK + "\n"
-                + android.os.Build.VERSION.RELEASE);
-//        Product Model:SCL-TL00
-//        22
-//        5.1.1
+        Log.d("yjbo", "Product Model:" + Build.MODEL + "\n" + Build.VERSION.SDK + "\n"
+                + Build.VERSION.RELEASE);
+//        Product Model:SCL-TL00  //        22   //        5.1.1
     }
 
 
-    @OnClick(R.id.notifica_txt)
-    public void onClick() {
-        ShowNotion();
+    @OnClick({R.id.notifica_txt, R.id.add_notification})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.notifica_txt:
+                if (nm != null) {
+                    nm.cancel(NOTIFICATION_BASE_NUMBER);
+                }
+                break;
+            case R.id.add_notification:
+                if (nm != null && n != null) {
+                    nm.notify(NOTIFICATION_BASE_NUMBER, n);//显示通知
+                }
+                break;
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void ShowNotion() {
-        NotificationManager nm = (NotificationManager) NotificationActivity.this.getSystemService(NOTIFICATION_SERVICE);
+        nm = (NotificationManager) NotificationActivity.this.getSystemService(NOTIFICATION_SERVICE);
         Resources res = NotificationActivity.this.getResources();
         builder = new Notification.Builder(NotificationActivity.this);
         contentIntent = PendingIntent.getActivity(this, 0, getIntent(), 0);
@@ -63,8 +74,9 @@ public class NotificationActivity extends AppCompatActivity {
         n.defaults = Notification.DEFAULT_SOUND;//设置为默认的声音
         n.flags = Notification.FLAG_NO_CLEAR;//无法清除
         n.flags = Notification.FLAG_ONGOING_EVENT;//正在进行的
-        nm.notify(NOTIFICATION_BASE_NUMBER, n);//显示通知 break; }
+//        nm.notify(NOTIFICATION_BASE_NUMBER, n);//显示通知 break; }
     }
+
 //    //无法清除
 //    noti.flags=Notification.FLAG_NO_CLEAR;
 //    //正在进行的

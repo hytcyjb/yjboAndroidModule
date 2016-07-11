@@ -73,6 +73,38 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                 }
             }
         });
+        listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
+            @Override
+            public void pos(int position) {
+                switch (position){
+                    case 0:
+                        startActivity(new Intent(MainActivity.this, WifiOpenActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(MainActivity.this, ScreenDirectionActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this, SlidFragmentActivity.class));
+                        break;
+                    case 3://https://github.com/badoo/android-weak-handler/
+                        startActivity(new Intent(MainActivity.this, HandlerOomActivity.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(MainActivity.this, JsonActivity.class));
+                        break;
+                    case 5:
+                        startActivity(new Intent(MainActivity.this, TextViewLinkActivity.class));
+                        break;
+                    case 6:
+                        startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                }
+            }
+        });
     }
 
     @Override

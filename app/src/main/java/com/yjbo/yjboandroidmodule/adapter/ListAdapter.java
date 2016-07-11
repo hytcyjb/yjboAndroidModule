@@ -62,11 +62,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    L.d("NormalTextViewHolder", "onClick--> position = " + getPosition());
-                    CommonUtil.show(mContext, "----->" + getPosition());
+                    L.d("NormalTextViewHolder", "onClick--> position = " + itemTxt.getTag() + "---" + getPosition());
+                    CommonUtil.show(mContext, "----->" + itemTxt.getTag() + "---" + getPosition());
+                    mdialogChoose.pos(Integer.valueOf(itemTxt.getTag()+""));
                 }
             });
         }
@@ -82,5 +83,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         list.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
+    }
+    private static DialogChoose mdialogChoose;
+    public static void SetonDialogChoose(DialogChoose dialogChoose) {
+        mdialogChoose = dialogChoose;
+    }
+
+    public interface DialogChoose {
+        void pos(int position);
     }
 }

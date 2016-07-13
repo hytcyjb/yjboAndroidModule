@@ -12,6 +12,7 @@
         android:layout_marginLeft="10dp"
         android:paddingBottom="5dp"
         android:text="每个标题"
+        android:background="@drawable/waterripple_qianhui_bg"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:id="@+id/item_txt" />

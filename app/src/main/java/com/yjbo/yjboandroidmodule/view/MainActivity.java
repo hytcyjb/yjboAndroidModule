@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
@@ -14,8 +15,8 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
-
-import org.json.JSONObject;
+import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,10 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Bind(R.id.swipeToLoadLayout)
     SwipeToLoadLayout swipeToLoadLayout;
     ListAdapter listAdapter;
+    @Bind(R.id.top_btn)
+    Button topBtn;
     private List<String> list = new ArrayList<>();
+
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
@@ -68,7 +72,16 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                L.i("--onScrollStateChanged的状态值--" + newState);//手指滑动的时候是1，手指离开之后就是0
+//                setSGTitleStr("--onScrollSta=="+newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int spanCount = CommonUtil.getSpanCount(recyclerView);
+                    int childCount = recyclerView.getAdapter().getItemCount();
+                    setSGTitleStr("--onScrollSta==" + newState + "--" + spanCount + "===" + childCount);
+//                    if (CommonUtil.isLastRaw(recyclerView, itemPosition, spanCount, childCount))// 如果是最后一行，则不需要绘制底部
+//                    {
+//
+//                    }
                     if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
                         swipeToLoadLayout.setLoadingMore(true);
                     }
@@ -78,7 +91,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
             @Override
             public void pos(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         startActivity(new Intent(MainActivity.this, WifiOpenActivity.class));
                         break;
@@ -131,25 +144,35 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
 
     @Override
     public void onRefresh() {
-        listAdapter.addData(3,"你好呀，字符进来了");
+        listAdapter.addData(3, "你好呀，字符进来了");
         loadover();
     }
+
     //刷新结束
     private void loadover() {
         swipeToLoadLayout.setRefreshing(false);
         swipeToLoadLayout.setLoadingMore(false);
     }
-    @OnClick({R.id.next_public_txt})
+
+    @OnClick({R.id.next_public_txt, R.id.top_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.next_public_txt:
-                Intent minten = new Intent(MainActivity.this,WebViewActivity.class);
-                minten.putExtra("url","https://github.com/hytcyjb/yjboAndroidModule");
-                minten.putExtra("titleStr","各种模块的开发");
+                Intent minten = new Intent(MainActivity.this, WebViewActivity.class);
+                minten.putExtra("url", "https://github.com/hytcyjb/yjboAndroidModule");
+                minten.putExtra("titleStr", "各种模块的开发");
                 startActivity(minten);
+                break;
+            case R.id.top_btn:
+
                 break;
         }
     }
 
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

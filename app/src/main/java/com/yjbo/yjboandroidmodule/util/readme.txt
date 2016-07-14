@@ -12,4 +12,8 @@
  /*进度条，对话框*/
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
 
+<<<<<<< HEAD
  2.在测试一下，待会删除
+=======
+ 2.测试，待会就删了，2016年7月14日17:34:37
+>>>>>>> 2dc8145a1eea1529cdb79c6714ceb171552273e4

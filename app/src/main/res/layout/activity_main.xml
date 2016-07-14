@@ -32,6 +32,7 @@
             android:text="滑向顶部"
             android:id="@+id/top_btn"
             android:layout_marginBottom="10dp"
+            android:visibility="gone"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"/>

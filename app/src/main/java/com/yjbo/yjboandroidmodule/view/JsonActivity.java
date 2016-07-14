@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.ClipboardManager;
 import android.widget.EditText;
 
 import com.yjbo.yjboandroidmodule.R;
@@ -31,6 +32,9 @@ public class JsonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
         ButterKnife.bind(this);
+        ClipboardManager clip = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+//        clip.getText(); // 粘贴
+        clip.setText("杨建波你好"); // 复制
         String json1 = getString(R.string.json_1);
         String json2 = getString(R.string.json_2);
 //        edtShow.setText(R.string.json_1);

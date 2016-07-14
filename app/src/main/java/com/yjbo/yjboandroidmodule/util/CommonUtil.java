@@ -176,5 +176,18 @@ public class CommonUtil {
         }
         return spanCount;
     }
-
+    /**
+     * 防止过快点击造成多次事件
+     * @return true 是快速点击，不能往下走
+     *          false 不是快速点击
+     */
+    private static long lastClickTime;
+    public synchronized static boolean isFastClick() {
+        long time = System.currentTimeMillis();
+        if ( time - lastClickTime < 1000) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
 }

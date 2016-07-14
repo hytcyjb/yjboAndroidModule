@@ -91,6 +91,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
             @Override
             public void pos(int position) {
+                if (CommonUtil.isFastClick()){
+                    return;
+                }
                 switch (position) {
                     case 0:
                         startActivity(new Intent(MainActivity.this, WifiOpenActivity.class));

@@ -17,6 +17,7 @@ import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
+import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,38 +92,43 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
             @Override
             public void pos(int position) {
-                if (CommonUtil.isFastClick()){
+                if (CommonUtil.isFastClick()) {
                     return;
                 }
                 switch (position) {
                     case 0:
-                        startActivity(new Intent(MainActivity.this, WifiOpenActivity.class));
+                        startClass(WifiOpenActivity.class);
                         break;
                     case 1:
-                        startActivity(new Intent(MainActivity.this, ScreenDirectionActivity.class));
+                        startClass(ScreenDirectionActivity.class);
                         break;
                     case 2:
-                        startActivity(new Intent(MainActivity.this, SlidFragmentActivity.class));
+                        startClass(SlidFragmentActivity.class);
                         break;
                     case 3://https://github.com/badoo/android-weak-handler/
-                        startActivity(new Intent(MainActivity.this, HandlerOomActivity.class));
+                        startClass(HandlerOomActivity.class);
                         break;
                     case 4:
-                        startActivity(new Intent(MainActivity.this, JsonActivity.class));
+                        startClass(JsonActivity.class);
                         break;
                     case 5:
-                        startActivity(new Intent(MainActivity.this, TextViewLinkActivity.class));
+                        startClass(TextViewLinkActivity.class);
                         break;
                     case 6:
-                        startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+                        startClass(NotificationActivity.class);
                         break;
                     case 7:
+                        startClass(TakeVideoActivity.class);
                         break;
                     case 8:
                         break;
                 }
             }
         });
+    }
+
+    private void startClass(Class<?> cls) {
+        startActivity(new Intent(MainActivity.this, cls));
     }
 
     @Override
@@ -135,6 +141,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         list.add("固定解析json字符串");
         list.add("textstyle的展示");
         list.add("显示通知栏");
+        list.add("录视频");
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }

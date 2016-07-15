@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TakeVideoActivity" >
+
+    <SurfaceView
+        android:id="@+id/surfaceView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_margin="3dp" />
+
+    <Button
+        android:id="@+id/btnRecoder"
+        android:layout_width="@dimen/item_icon_size"
+        android:layout_height="@dimen/item_icon_size"
+        android:layout_alignBottom="@+id/surfaceView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+         android:visibility="invisible"
+        android:background="@drawable/camera_1" />
+
+    <Button
+        android:id="@+id/btn_no"
+        android:layout_width="@dimen/item_icon_simle_size"
+        android:layout_height="@dimen/item_icon_simle_size"
+        android:layout_alignBaseline="@+id/btnRecoder"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/btnRecoder"
+        android:visibility="invisible"
+        android:background="@drawable/camera_2" />
+
+    <Button
+        android:id="@+id/btn_yes"
+        android:layout_width="@dimen/item_icon_simle_size"
+        android:layout_height="@dimen/item_icon_simle_size"
+        android:layout_alignBaseline="@+id/btnRecoder"
+        android:layout_marginLeft="20dp"
+         android:visibility="invisible"
+        android:layout_toRightOf="@+id/btnRecoder"
+        android:background="@drawable/camera_4" />
+
+    <TextView
+        android:id="@+id/tx_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/surfaceView1"
+        android:layout_marginTop="10dp"
+        android:text="最长拍摄30秒 " />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="切换屏幕"
+        android:id="@+id/change_surfaceview"
+        android:layout_alignTop="@+id/surfaceView1"
+        android:layout_alignRight="@+id/surfaceView1"
+        android:layout_alignEnd="@+id/surfaceView1" />
+
+</RelativeLayout>

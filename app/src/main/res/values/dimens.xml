@@ -21,4 +21,9 @@
     <dimen name="refresh_drawable_size_google">40dp</dimen>
     <dimen name="dp_fourtyEight">48dp</dimen>
     <!-- google end-->
+
+    <!-- item的小页面里面的图标的大小 -->
+    <dimen name="item_icon_size">50dp</dimen>
+    <!-- item的小页面里面的图标的大小-小点的；同时也是右侧头/底部分的图片的高度 ,以及侧滑眉头的高度,是日报、周报的宽度 -->
+    <dimen name="item_icon_simle_size">33dp</dimen>
 </resources>

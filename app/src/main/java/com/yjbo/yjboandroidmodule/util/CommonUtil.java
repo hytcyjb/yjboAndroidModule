@@ -190,4 +190,70 @@ public class CommonUtil {
         lastClickTime = time;
         return false;
     }
+
+    /**
+     * 这是24小时以内（不包含24小时）采用的方法：
+     * 2016年7月15日15:48:01
+     * @param dateInt
+     * @return 时间格式
+     */
+    public static String getFormatedDateTime(int dateInt) {
+        String dateTime = "";
+        if (dateInt < 10) {
+            dateTime = "00:0" + dateInt;
+        } else if (dateInt < 60) {
+            dateTime = "00:" + dateInt;
+        } else if (dateInt < (60 * 60 +1)) {//60' * 60 +1
+            int miaoInt = dateInt % 60 ;
+            int fenInt = dateInt / 60;
+            //分别判断分钟和秒钟是否大于10，进行赋值；大于10则不需要前面放一个0了
+            String fenStr = "";
+            String miaoStr = "";
+            if (fenInt < 10) {
+                fenStr = "0" + fenInt;
+            }else {
+                fenStr = "" + fenInt;
+            }
+            if (miaoInt < 10) {
+                miaoStr ="0" + miaoInt;
+            } else {
+                miaoStr ="" + miaoInt;
+            }
+            dateTime = fenStr + ":" + miaoStr;
+        } else if (dateInt < (60 * 60 * 24 +1)) {//60' * 60' * 24 +1
+
+            int shiInt = dateInt / 60 / 60;
+
+            dateInt = dateInt - shiInt * 60 * 60;
+            int miaoInt = dateInt % 60 ;
+            int fenInt = dateInt / 60;
+
+            //分别判断小时，分钟和秒钟是否大于10，进行赋值；大于10则不需要前面放一个0了
+            String shiStr = "";
+            String fenStr = "";
+            String miaoStr = "";
+
+            if (shiInt < 10) {
+                shiStr = "0" + shiInt;//这个不会遇到，因为没有到一小时，不走这里
+            }else {
+                shiStr = "" + shiInt;
+            }
+            if (fenInt < 10) {
+                fenStr = "0" + fenInt;
+            }else {
+                fenStr = "" + fenInt;
+            }
+            if (miaoInt < 10) {
+                miaoStr ="0" + miaoInt;
+            } else {
+                miaoStr ="" + miaoInt;
+            }
+
+            dateTime =shiStr+":"+ fenStr + ":" + miaoStr;
+        }else  {
+            dateTime = "时间到停止计时";
+        }
+
+        return dateTime + "s";
+    }
 }

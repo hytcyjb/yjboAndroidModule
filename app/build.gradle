@@ -33,4 +33,6 @@ dependencies {
     compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.2'
     /*进度条，对话框*/
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
+    //eventbus
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
 }

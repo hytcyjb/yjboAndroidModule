@@ -121,6 +121,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         startClass(TakeVideoActivity.class);
                         break;
                     case 8:
+                        startClass(MyCramerActivity.class);
                         break;
                 }
             }
@@ -142,6 +143,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         list.add("textstyle的展示");
         list.add("显示通知栏");
         list.add("录视频");
+        list.add("后台录视频");
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }

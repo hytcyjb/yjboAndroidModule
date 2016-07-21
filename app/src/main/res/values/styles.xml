@@ -24,4 +24,9 @@
         <item name="colorPrimary">#db4336</item>
         <item name="colorPrimaryDark">#b63120</item>
     </style>
+
+    <style name="dialog_layout" parent="@android:style/Theme.Dialog">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

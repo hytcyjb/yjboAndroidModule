@@ -91,6 +91,8 @@ public abstract class BaseYjboSwipeActivity extends SwipeBackActivity {
                 }
             });
         }
+        String  titleName = this.getIntent().getStringExtra("titleName");
+        titlePublic.setText(titleName);
         setonView();
         setonData();
     }

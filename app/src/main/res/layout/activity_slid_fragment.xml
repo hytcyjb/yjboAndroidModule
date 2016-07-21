@@ -1,22 +1,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include layout="@layout/layout_title_public_common" />
 
-    <com.yjbo.yjboandroidmodule.util.PagerSlidingTabStrip
-        xmlns:pagetool="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tabs"
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipeToLoadLayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        pagetool:pstsShouldExpand = "true"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:swipe_style="classic">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <LinearLayout
+            android:id="@id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.yjbo.yjboandroidmodule.util.PagerSlidingTabStrip xmlns:pagetool="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                pagetool:pstsShouldExpand="true" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
 </LinearLayout>

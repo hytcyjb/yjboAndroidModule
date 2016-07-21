@@ -8,6 +8,7 @@ import android.text.ClipboardManager;
 import android.widget.EditText;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.entity.MainMessage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /***
  * josn解析
@@ -32,6 +34,7 @@ public class JsonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
         ButterKnife.bind(this);
+
         ClipboardManager clip = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
 //        clip.getText(); // 粘贴
         clip.setText("杨建波你好"); // 复制

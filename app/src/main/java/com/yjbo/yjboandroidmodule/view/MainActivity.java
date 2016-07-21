@@ -12,9 +12,12 @@ import android.widget.Button;
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.yjbo.yjboandroidmodule.BuildConfig;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.test.testActivity;
+import com.yjbo.yjboandroidmodule.test.testService;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
@@ -46,6 +49,10 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
+        if (BuildConfig.DEBUG){
+            L.isDebug = true;
+            L.i("当前是debug模式");
+        }
     }
 
     @Override
@@ -97,39 +104,55 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                 }
                 switch (position) {
                     case 0:
-                        startClass(WifiOpenActivity.class);
+                        startClass(WifiOpenActivity.class,position);
                         break;
                     case 1:
-                        startClass(ScreenDirectionActivity.class);
+                        startClass(ScreenDirectionActivity.class,position);
                         break;
                     case 2:
-                        startClass(SlidFragmentActivity.class);
+                        startClass(SlidFragmentActivity.class,position);
                         break;
                     case 3://https://github.com/badoo/android-weak-handler/
-                        startClass(HandlerOomActivity.class);
+                        startClass(HandlerOomActivity.class,position);
                         break;
                     case 4:
-                        startClass(JsonActivity.class);
+                        startClass(JsonActivity.class,position);
                         break;
                     case 5:
-                        startClass(TextViewLinkActivity.class);
+                        startClass(TextViewLinkActivity.class,position);
                         break;
                     case 6:
-                        startClass(NotificationActivity.class);
+                        startClass(NotificationActivity.class,position);
                         break;
                     case 7:
-                        startClass(TakeVideoActivity.class);
+                        startClass(TakeVideoActivity.class,position);
                         break;
                     case 8:
-                        startClass(MyCramerActivity.class);
+                        startClass(MyCramerActivity.class,position);
+                        break;
+                    case 9:
+                        startClass(EventbusActivity.class,position);
+                        break;
+                    case 10:
+                        startClass(ViewPageActivity.class,position);
+                        break;
+                    case 11:
+                        startClass(testActivity.class,position);
                         break;
                 }
             }
         });
     }
 
-    private void startClass(Class<?> cls) {
-        startActivity(new Intent(MainActivity.this, cls));
+    private void startClass(Class<?> cls,int pos) {
+        String titleName = list.get(pos);
+        startActivity(new Intent(MainActivity.this, cls).putExtra("titleName", titleName));
+        //测试服务的启动
+//        if(pos % 2 == 1) {
+//            startService(new Intent(MainActivity.this, testService.class));
+//        }else{
+//            stopService(new Intent(MainActivity.this, testService.class));
+//        }
     }
 
     @Override
@@ -144,19 +167,22 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         list.add("显示通知栏");
         list.add("录视频");
         list.add("后台录视频");
+        list.add("测试eventbus");
+        list.add("测试横向滑动Fragment和侧滑同时使用的冲突问题");
+        list.add("测试Activity生命周期");
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }
 
     @Override
     public void onLoadMore() {
-        listAdapter.removeData(3);
+//        listAdapter.removeData(3);
         loadover();
     }
 
     @Override
     public void onRefresh() {
-        listAdapter.addData(3, "你好呀，字符进来了");
+//        listAdapter.addData(3, "你好呀，字符进来了");
         loadover();
     }
 

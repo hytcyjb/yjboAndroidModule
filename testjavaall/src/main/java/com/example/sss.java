@@ -20,6 +20,12 @@ public class sss {
         }
         System.out.println("--00-" + x);
         System.out.println("-22----");
+
+        String activityStr = "HomeMainActivity";
+        if (!"HomeMainActivity".equals(activityStr)
+                && !"SouGUMainActivity".equals(activityStr)) {
+            System.out.println("--00-" + activityStr);
+        }
     }
 
     /***

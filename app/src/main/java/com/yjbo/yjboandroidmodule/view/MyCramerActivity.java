@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -150,13 +151,18 @@ public class MyCramerActivity extends Activity implements
 //		System.out.println("--------------");
 //
 //	}
-    @Subscribe(threadMode = ThreadMode.MainThread)
+    @Subscribe(threadMode = ThreadMode.BackgroundThread)
     public void onMainEventBus(HomeStatusClass msg) {
         L.i("onEventBus() returned: " + Thread.currentThread() + "--" + msg.getStatusStr());
+        Toast.makeText(MyCramerActivity.this, "开始录像0", Toast.LENGTH_SHORT).show();
         if ("继续录像".equals(msg.getStatusStr())) {
-            CramerThread thread = new CramerThread(context);
-            thread.start();
-//            Toast.makeText(MyCramerActivity.this, "开始录像", Toast.LENGTH_SHORT).show();
+            L.i("--开始录像--");
+//            CramerThread.recordTime = 10 * 1000;
+//            SurfaceView surfaceview = new SurfaceView(this);
+//            CramerThread.surfaceHolder = surfaceview.getHolder();
+//            CramerThread thread = new CramerThread(context);
+//            thread.start();
+            Toast.makeText(MyCramerActivity.this, "开始录像1", Toast.LENGTH_SHORT).show();
         }
     }
 

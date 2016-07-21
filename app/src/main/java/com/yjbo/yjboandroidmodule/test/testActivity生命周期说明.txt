@@ -1,0 +1,45 @@
+testActivity生命周期说明
+1.启动： startActivity(new Intent(MainActivity.this, testActivity.class));
+ estActivity--onCreate
+ testActivity--onStart
+ testActivity--onResume
+
+2.锁屏
+testActivity--onPause
+ testActivity--onStop
+
+3.开启屏幕
+testActivity--onRestart
+testActivity--onStart
+testActivity--onResume
+
+4.返回键：
+testActivity--onPause
+testActivity--onStop
+testActivity--onDestroy
+
+5.home键：
+testActivity--onPause
+testActivity--onStop
+
+6.从home返回主页面
+testActivity--onRestart
+testActivity--onStart
+testActivity--onResume
+
+---------------对话框-------------
+
+7.不会执行任何操作
+
+
+---------------打开另一个页面-----------
+
+8.打开-到-另一个页面
+testActivity--onPause
+testActivity--onStop
+
+9.从另一个页面-到-前页面
+testActivity--onRestart
+testActivity--onStart
+testActivity--onResume
+ 

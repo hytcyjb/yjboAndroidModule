@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yjbo.yjboandroidmodule.entity.HomeStatusClass;
+import com.yjbo.yjboandroidmodule.entity.MainMessage;
 
 import de.greenrobot.event.EventBus;
 
@@ -165,11 +166,13 @@ public class CramerThread extends Thread {
 				mCamera.release();
 				mCamera = null;
 			}
-//			EventBus.getDefault().post(new HomeStatusClass("继续录像"));
+			EventBus.getDefault().post(new MainMessage("继续录像"));
 //			SurfaceView surfaceview = new SurfaceView(context);
 //			surfaceHolder = surfaceview.getHolder();
 //			Toast.makeText(context, "开始录像", Toast.LENGTH_SHORT).show();
-			run();
+//			run();
+//			CramerThread thread = new CramerThread(context);
+//			thread.start();
 		}
 	}
 

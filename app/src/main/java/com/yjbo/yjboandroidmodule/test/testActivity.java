@@ -68,7 +68,7 @@ public class testActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.show_dialog, R.id.show_otheractivity})
+    @OnClick({R.id.show_dialog, R.id.show_otheractivity,R.id.show_dialog_activity})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.show_dialog:
@@ -86,6 +86,9 @@ public class testActivity extends AppCompatActivity {
                 break;
             case R.id.show_otheractivity:
                 startActivity(new Intent(testActivity.this, EventbusActivity.class));
+                break;
+            case R.id.show_dialog_activity:
+                startActivity(new Intent(testActivity.this, testDialogActivity.class));
                 break;
         }
     }

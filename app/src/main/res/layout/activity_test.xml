@@ -28,4 +28,15 @@
         android:layout_below="@+id/show_dialog"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="97dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="显示对话框Activity"
+        android:id="@+id/show_dialog_activity"
+        android:layout_below="@+id/show_otheractivity"
+        android:layout_alignRight="@+id/show_otheractivity"
+        android:layout_alignEnd="@+id/show_otheractivity"
+        android:layout_marginTop="45dp" />
 </RelativeLayout>

@@ -18,7 +18,8 @@ public class testService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         L.i("testService--onBind");
-        throw new UnsupportedOperationException("Not yet implemented");
+//        throw new UnsupportedOperationException("Not yet implemented");
+        return  null;
     }
 
     @Override

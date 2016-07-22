@@ -80,7 +80,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".test.testActivity"></activity>
+        <activity android:name=".test.testActivity" />
+        <activity
+            android:name=".test.testDialogActivity"
+            android:theme="@android:style/Theme.Dialog"></activity>
+        <!--@android:style/Theme.Dialog-->
     </application>
 
 </manifest>

@@ -1,7 +1,10 @@
 package com.yjbo.yjboandroidmodule.view;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,7 +52,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             L.isDebug = true;
             L.i("当前是debug模式");
         }
@@ -104,55 +107,64 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                 }
                 switch (position) {
                     case 0:
-                        startClass(WifiOpenActivity.class,position);
+                        startClass(WifiOpenActivity.class, position);
                         break;
                     case 1:
-                        startClass(ScreenDirectionActivity.class,position);
+                        startClass(ScreenDirectionActivity.class, position);
                         break;
                     case 2:
-                        startClass(SlidFragmentActivity.class,position);
+                        startClass(SlidFragmentActivity.class, position);
                         break;
                     case 3://https://github.com/badoo/android-weak-handler/
-                        startClass(HandlerOomActivity.class,position);
+                        startClass(HandlerOomActivity.class, position);
                         break;
                     case 4:
-                        startClass(JsonActivity.class,position);
+                        startClass(JsonActivity.class, position);
                         break;
                     case 5:
-                        startClass(TextViewLinkActivity.class,position);
+                        startClass(TextViewLinkActivity.class, position);
                         break;
                     case 6:
-                        startClass(NotificationActivity.class,position);
+                        startClass(NotificationActivity.class, position);
                         break;
                     case 7:
-                        startClass(TakeVideoActivity.class,position);
+                        startClass(TakeVideoActivity.class, position);
                         break;
                     case 8:
-                        startClass(MyCramerActivity.class,position);
+                        startClass(MyCramerActivity.class, position);
                         break;
                     case 9:
-                        startClass(EventbusActivity.class,position);
+                        startClass(EventbusActivity.class, position);
                         break;
                     case 10:
-                        startClass(ViewPageActivity.class,position);
+                        startClass(ViewPageActivity.class, position);
                         break;
                     case 11:
-                        startClass(testActivity.class,position);
+                        startClass(testActivity.class, position);
+                        break;
+                    case 12:
                         break;
                 }
             }
         });
     }
 
-    private void startClass(Class<?> cls,int pos) {
+    private void startClass(Class<?> cls, int pos) {
         String titleName = list.get(pos);
         startActivity(new Intent(MainActivity.this, cls).putExtra("titleName", titleName));
         //测试服务的启动
-//        if(pos % 2 == 1) {
+        //"测试Service-startService生命周期"
+//        if (pos % 2 == 1) {
 //            startService(new Intent(MainActivity.this, testService.class));
-//        }else{
+//        } else {
 //            stopService(new Intent(MainActivity.this, testService.class));
 //        }
+        //"测试Service-bind生命周期"
+        if (pos % 2 == 1) {
+            bindService(new Intent(MainActivity.this, testService.class), sc, BIND_AUTO_CREATE);
+        } else {
+            unbindService(sc);
+        }
     }
 
     @Override
@@ -213,4 +225,16 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
+    ServiceConnection sc = new ServiceConnection() {
+
+        public void onServiceConnected(ComponentName arg0, IBinder arg1) {
+            System.out.println("onServiceConnected");
+        }
+
+        public void onServiceDisconnected(ComponentName arg0) {
+            System.out.println("onServiceDisconnected");
+        }
+
+    };
 }

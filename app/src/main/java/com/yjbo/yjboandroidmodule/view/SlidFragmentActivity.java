@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -133,6 +134,10 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity implements OnRef
         }
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+       return super.dispatchTouchEvent(event);
+    }
 
     public class MyPagerAdapter extends FragmentPagerAdapter {
 

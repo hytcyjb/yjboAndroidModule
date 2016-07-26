@@ -1,10 +1,14 @@
 package com.yjbo.yjboandroidmodule.view;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +27,7 @@ import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.test.testService;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
+import com.yjbo.yjboandroidmodule.util.ShowCutUtil;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 
 import java.util.ArrayList;
@@ -143,6 +148,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         startClass(testActivity.class, position);
                         break;
                     case 12:
+                        startClass(ViewGroupActivity.class, position);
                         break;
                 }
             }
@@ -182,8 +188,11 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         list.add("测试eventbus");
         list.add("测试横向滑动Fragment和侧滑同时使用的冲突问题");
         list.add("测试Activity生命周期");
+        list.add("事件的分发1");
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
+        // Android创建桌面快捷方式
+        ShowCutUtil.CreateShotCut(MainActivity.this,ShowContentActivity.class,"yjb快捷方式","");
     }
 
     @Override
@@ -237,4 +246,5 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         }
 
     };
+
 }

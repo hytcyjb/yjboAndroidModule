@@ -22,6 +22,9 @@
     <!-- 悬浮窗口权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <!-- 创建桌面快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_module"
@@ -83,8 +86,17 @@
         <activity android:name=".test.testActivity" />
         <activity
             android:name=".test.testDialogActivity"
-            android:theme="@android:style/Theme.Dialog"></activity>
-        <!--@android:style/Theme.Dialog-->
+            android:theme="@android:style/Theme.Dialog" />
+        <!-- @android:style/Theme.Dialog -->
+        <activity android:name=".view.ViewGroupActivity" />
+        <!-- 创建桌面快捷方式 -->
+        <activity android:name="com.yjbo.yjboandroidmodule.view.ShowContentActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
 package com.yjbo.yjboandroidmodule.view;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -67,6 +69,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         setSGNextColor(R.color.white);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void initSwipeLayout() {
         View hearload = LayoutInflater.from(this).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
         View footload = LayoutInflater.from(this).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
@@ -83,19 +86,33 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 L.i("--onScrollStateChanged的状态值--" + newState);//手指滑动的时候是1，手指离开之后就是0
-//                setSGTitleStr("--onScrollSta=="+newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int spanCount = CommonUtil.getSpanCount(recyclerView);
                     int childCount = recyclerView.getAdapter().getItemCount();
                     setSGTitleStr("--onScrollSta==" + newState + "--" + spanCount + "===" + childCount);
-//                    if (CommonUtil.isLastRaw(recyclerView, itemPosition, spanCount, childCount))// 如果是最后一行，则不需要绘制底部
-//                    {
-//
-//                    }
                     if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
                         swipeToLoadLayout.setLoadingMore(true);
                     }
                 }
+            }
+        });
+        swipeTarget.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                L.e("====" + scrollX + "=====" + scrollY + "====" + oldScrollX + "=-===" + oldScrollY);
+            }
+        });
+        swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                L.e("==1=="+newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                L.e("==2==" + dx+"---"+dy);
             }
         });
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
@@ -150,6 +167,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     case 14:
                         startClass(TestServiceActivity.class, position);
                         break;
+                    case 15:
+                        startClass(WifiOpenActivity.class, position);
+                        break;
                 }
             }
         });
@@ -163,7 +183,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonData() {
         listAdapter = new ListAdapter();
-        list.add("自动打开wifi模块");
+        list.add("navigate侧滑");
         list.add("获取屏幕旋转角度");
         list.add("横向滑动fragment");
         list.add("handler的内存泄露处理");
@@ -178,6 +198,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         list.add("事件的分发1");
         list.add("创建桌面快捷方式");
         list.add("测试Service的生命周期");
+        list.add("自动打开wifi模块");
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }

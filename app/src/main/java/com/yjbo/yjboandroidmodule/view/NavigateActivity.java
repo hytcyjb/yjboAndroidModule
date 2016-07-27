@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.fragment.Home2Fragment;
+import com.yjbo.yjboandroidmodule.fragment.Home3Fragment;
 import com.yjbo.yjboandroidmodule.fragment.HomePageFragment;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 
@@ -69,47 +70,18 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         };
         mDrawerToggle.syncState();
         drawerLayout.addDrawerListener(mDrawerToggle);
-
-//        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem menuItem) {
-//
-//                Snackbar.make(drawerLayout, menuItem.getTitle() + " pressed", Snackbar.LENGTH_SHORT).show();
-//                menuItem.setChecked(true);
-//                drawerLayout.closeDrawers();
-//                return true;
-//            }
-//        });
+        if (savedInstanceState == null) {
+            navigation.setCheckedItem(R.id.drawer_home);
+            showNavigationFragment(R.id.drawer_home);
+        }
         navigation.setNavigationItemSelectedListener(this);
-        initFragment();
     }
 
-    private void initFragment() {
-
-    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         changeMenuBg(item);
         showNavigationFragment(item.getItemId());
-//        switch (item.getItemId()){
-//            case R.id.drawer_home:
-//                CommonUtil.show(NavigateActivity.this,"--drawer_home--");
-//                break;
-//            case R.id.drawer_favourite:
-//                CommonUtil.show(NavigateActivity.this,"--drawer_favourite--");
-//                break;
-//            case R.id.drawer_downloaded:
-//                CommonUtil.show(NavigateActivity.this,"--drawer_downloaded--");
-//                break;
-//            case R.id.drawer_more:
-//                CommonUtil.show(NavigateActivity.this,"--drawer_more--");
-//                break;
-//            case R.id.drawer_settings:
-//                CommonUtil.show(NavigateActivity.this,"--drawer_settings--");
-//                break;
-//        }
         return false;
     }
 
@@ -151,7 +123,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         switch (itemId) {
             case R.id.drawer_home:
                 CommonUtil.show(NavigateActivity.this, "--drawer_home--");
-                navigationFragment = new HomePageFragment();
+                navigationFragment = new Home3Fragment();
                 break;
             case R.id.drawer_favourite:
                 CommonUtil.show(NavigateActivity.this, "--drawer_favourite--");
@@ -159,7 +131,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.drawer_downloaded:
                 CommonUtil.show(NavigateActivity.this, "--drawer_downloaded--");
-                navigationFragment = new HomePageFragment();
+                navigationFragment = new Home3Fragment();
                 break;
             case R.id.drawer_more:
                 CommonUtil.show(NavigateActivity.this, "--drawer_more--");

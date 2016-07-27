@@ -89,6 +89,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             notifyDataSetChanged();
         }
     }
+    //更新数据
+    public void updateData(List<String> mlist) {
+            list = mlist;
+            notifyDataSetChanged();
+    }
 
     private static DialogChoose mdialogChoose;
 

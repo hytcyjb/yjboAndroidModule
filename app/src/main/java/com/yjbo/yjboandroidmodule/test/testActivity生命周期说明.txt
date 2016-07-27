@@ -1,6 +1,6 @@
 testActivity生命周期说明
 1.启动： startActivity(new Intent(MainActivity.this, testActivity.class));
- estActivity--onCreate
+ testActivity--onCreate
  testActivity--onStart
  testActivity--onResume
 

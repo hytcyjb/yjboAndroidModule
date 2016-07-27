@@ -1,14 +1,7 @@
 package com.yjbo.yjboandroidmodule.view;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,10 +17,8 @@ import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.test.testActivity;
-import com.yjbo.yjboandroidmodule.test.testService;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
-import com.yjbo.yjboandroidmodule.util.ShowCutUtil;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 
 import java.util.ArrayList;
@@ -53,6 +44,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Bind(R.id.top_btn)
     Button topBtn;
     private List<String> list = new ArrayList<>();
+    private List<String> otherlist = new ArrayList<>();
 
     @Override
     public void setonCreate(Bundle savedInstanceState) {
@@ -65,11 +57,13 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
 
     @Override
     public void setonView() {
-        ButterKnife.bind(MainActivity.this);
+        ButterKnife.bind(this);
         setSGBackVisible();
         setSGTitleStr("各知识模块知识总结");
         initSwipeLayout();
         setSGNextStr("···");
+        setSGRightNextStr("切换");
+        setSGRightNextColor(R.color.red);
         setSGNextColor(R.color.white);
     }
 
@@ -150,6 +144,12 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     case 12:
                         startClass(ViewGroupActivity.class, position);
                         break;
+                    case 13:
+                        startClass(ShowContentActivity.class, position);
+                        break;
+                    case 14:
+                        startClass(TestServiceActivity.class, position);
+                        break;
                 }
             }
         });
@@ -158,19 +158,6 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     private void startClass(Class<?> cls, int pos) {
         String titleName = list.get(pos);
         startActivity(new Intent(MainActivity.this, cls).putExtra("titleName", titleName));
-        //测试服务的启动
-        //"测试Service-startService生命周期"
-//        if (pos % 2 == 1) {
-//            startService(new Intent(MainActivity.this, testService.class));
-//        } else {
-//            stopService(new Intent(MainActivity.this, testService.class));
-//        }
-        //"测试Service-bind生命周期"
-        if (pos % 2 == 1) {
-            bindService(new Intent(MainActivity.this, testService.class), sc, BIND_AUTO_CREATE);
-        } else {
-            unbindService(sc);
-        }
     }
 
     @Override
@@ -189,10 +176,10 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         list.add("测试横向滑动Fragment和侧滑同时使用的冲突问题");
         list.add("测试Activity生命周期");
         list.add("事件的分发1");
+        list.add("创建桌面快捷方式");
+        list.add("测试Service的生命周期");
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
-        // Android创建桌面快捷方式
-        ShowCutUtil.CreateShotCut(MainActivity.this,ShowContentActivity.class,"yjb快捷方式","");
     }
 
     @Override
@@ -213,7 +200,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         swipeToLoadLayout.setLoadingMore(false);
     }
 
-    @OnClick({R.id.next_public_txt, R.id.top_btn})
+    @OnClick({R.id.next_public_txt, R.id.top_btn, R.id.right_next_public_txt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.next_public_txt:
@@ -225,6 +212,23 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
             case R.id.top_btn:
 
                 break;
+            case R.id.right_next_public_txt:
+                if (otherlist.size() > 0) {
+                    if (otherlist.get(0).contains("yjbo")) {
+                        listAdapter.updateData(list);
+                        otherlist = new ArrayList<>();
+                    }
+                } else {
+                    otherlist = new ArrayList<>();
+                    for (int i = 0; i < list.size(); i++) {
+                        if (!list.get(0).contains("yjbo")) {
+                            otherlist.add(list.get(i) + "yjbo");
+                        }
+                    }
+                    listAdapter.updateData(otherlist);
+                }
+
+                break;
         }
     }
 
@@ -234,17 +238,5 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
-
-    ServiceConnection sc = new ServiceConnection() {
-
-        public void onServiceConnected(ComponentName arg0, IBinder arg1) {
-            System.out.println("onServiceConnected");
-        }
-
-        public void onServiceDisconnected(ComponentName arg0) {
-            System.out.println("onServiceDisconnected");
-        }
-
-    };
 
 }

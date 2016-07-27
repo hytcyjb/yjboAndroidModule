@@ -83,20 +83,23 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".test.testActivity" />
+        <activity android:name=".test.testActivity"
+            android:theme="@style/ThemeSwipeBack"/>
         <activity
             android:name=".test.testDialogActivity"
             android:theme="@android:style/Theme.Dialog" />
         <!-- @android:style/Theme.Dialog -->
         <activity android:name=".view.ViewGroupActivity" />
         <!-- 创建桌面快捷方式 -->
-        <activity android:name="com.yjbo.yjboandroidmodule.view.ShowContentActivity">
+        <activity android:name=".view.ShowContentActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.TestServiceActivity"
+            android:theme="@style/ThemeSwipeBack"></activity>
     </application>
 
 </manifest>

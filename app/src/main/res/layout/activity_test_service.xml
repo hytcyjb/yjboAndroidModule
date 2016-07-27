@@ -7,20 +7,20 @@
     <include layout="@layout/layout_title_public_common" />
 
     <TextView
-        android:id="@+id/show_dialog"
+        android:id="@+id/start_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/waterripple_qianhui_bg"
-        android:text="显示对话框"
+        android:text="start服务"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/show_otheractivity"
+        android:id="@+id/stop_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/show_dialog"
@@ -29,11 +29,11 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/waterripple_qianhui_bg"
-        android:text="打开另一个页面"
+        android:text="stop服务"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/show_dialog_activity"
+        android:id="@+id/bind_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/show_otheractivity"
@@ -43,7 +43,21 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/waterripple_qianhui_bg"
-        android:text="显示对话框Activity"
+        android:text="bind服务"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/unbind_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/show_otheractivity"
+        android:layout_alignRight="@+id/show_otheractivity"
+        android:layout_below="@+id/show_otheractivity"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/waterripple_qianhui_bg"
+        android:text="unbind服务"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ScrollView

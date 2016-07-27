@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.ClipboardManager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.base.BaseYjboSwipeActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.ShowTipDialog;
 import com.yjbo.yjboandroidmodule.view.EventbusActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -21,14 +24,25 @@ import butterknife.OnClick;
  * @author yjbo
  *         2016年7月21日18:39:58
  */
-public class testActivity extends AppCompatActivity {
+public class testActivity extends BaseYjboSwipeActivity {
+
+    @Bind(R.id.show_content_txt)
+    TextView showContentTxt;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_test);
+    }
+
+    @Override
+    public void setonView() {
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setonData() {
         L.i("testActivity--onCreate");
+        showContentTxt.setText(getResources().getString(R.string.testactivity_result_string));
     }
 
     @Override
@@ -68,7 +82,7 @@ public class testActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.show_dialog, R.id.show_otheractivity,R.id.show_dialog_activity})
+    @OnClick({R.id.show_dialog, R.id.show_otheractivity, R.id.show_dialog_activity})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.show_dialog:

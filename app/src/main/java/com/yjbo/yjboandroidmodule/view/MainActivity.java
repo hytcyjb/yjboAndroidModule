@@ -106,7 +106,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                 }
                 switch (position) {
                     case 0:
-                        startClass(WifiOpenActivity.class, position);
+                        startClass(NavigateActivity.class, position);
                         break;
                     case 1:
                         startClass(ScreenDirectionActivity.class, position);

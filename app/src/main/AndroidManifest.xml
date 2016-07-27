@@ -83,8 +83,9 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".test.testActivity"
-            android:theme="@style/ThemeSwipeBack"/>
+        <activity
+            android:name=".test.testActivity"
+            android:theme="@style/ThemeSwipeBack" />
         <activity
             android:name=".test.testDialogActivity"
             android:theme="@android:style/Theme.Dialog" />
@@ -98,8 +99,11 @@
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.TestServiceActivity"
-            android:theme="@style/ThemeSwipeBack"></activity>
+        <activity
+            android:name=".view.TestServiceActivity"
+            android:theme="@style/ThemeSwipeBack" />
+        <activity android:name=".view.NavigateActivity"
+            android:theme="@style/AppTheme2"></activity>
     </application>
 
 </manifest>

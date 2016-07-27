@@ -24,83 +24,91 @@
     </string>
 
     <string name="testactivity_result_string">
-testActivity生命周期说明\n
-1.启动： startActivity(new Intent(MainActivity.this, testActivity.class));\n
- testActivity——onCreate\n
- testActivity——onStart\n
- testActivity——onResume\n
+        testActivity生命周期说明\n
+        1.启动： startActivity(new Intent(MainActivity.this, testActivity.class));\n
+         testActivity——onCreate\n
+         testActivity——onStart\n
+         testActivity——onResume\n
 
-2.锁屏\n
-testActivity——onPause\n
- testActivity——onStop\n
+        2.锁屏\n
+        testActivity——onPause\n
+         testActivity——onStop\n
 
-3.开启屏幕\n
-testActivity——onRestart\n
-testActivity——onStart\n
-testActivity——onResume\n
+        3.开启屏幕\n
+        testActivity——onRestart\n
+        testActivity——onStart\n
+        testActivity——onResume\n
 
-4.返回键：\n
-testActivity——onPause\n
-testActivity——onStop\n
-testActivity——onDestroy\n
+        4.返回键：\n
+        testActivity——onPause\n
+        testActivity——onStop\n
+        testActivity——onDestroy\n
 
-5.home键：\n
-testActivity——onPause\n
-testActivity——onStop\n
+        5.home键：\n
+        testActivity——onPause\n
+        testActivity——onStop\n
 
-6.从home返回主页面\n
-testActivity——onRestart\n
-testActivity——onStart\n
-testActivity——onResume\n
+        6.从home返回主页面\n
+        testActivity——onRestart\n
+        testActivity——onStart\n
+        testActivity——onResume\n
 
-——————————————-对话框————————————-\n
+        ——————————————-对话框————————————-\n
 
-7.不会执行任何操作\n
+        7.不会执行任何操作\n
 
 
-——————————————-打开另一个页面——————————-\n
+        ——————————————-打开另一个页面——————————-\n
 
-8.打开-到-另一个页面\n
-testActivity——onPause\n
-testActivity——onStop\n
+        8.打开-到-另一个页面\n
+        testActivity——onPause\n
+        testActivity——onStop\n
 
-9.从另一个页面-到-前页面\n
-testActivity——onRestart\n
-testActivity——onStart\n
-testActivity——onResume\n
+        9.从另一个页面-到-前页面\n
+        testActivity——onRestart\n
+        testActivity——onStart\n
+        testActivity——onResume\n
     </string>
     <string name="testservice_result_string">
-        testService生命周期说明\n
-1.启动： startService(new Intent(MainActivity.this, testService.class));\n
-testService——onCreate\n
-testService——onStartCommand\n
-testService——onStart\n
+                testService生命周期说明\n
+        1.启动： startService(new Intent(MainActivity.this, testService.class));\n
+        testService——onCreate\n
+        testService——onStartCommand\n
+        testService——onStart\n
 
-2.再次启动： startService(new Intent(MainActivity.this, testService.class));\n
- testService——onStartCommand\n
- testService——onStart\n
+        2.再次启动： startService(new Intent(MainActivity.this, testService.class));\n
+         testService——onStartCommand\n
+         testService——onStart\n
 
-。。。。。再次启动都这样\n
+        。。。。。再次启动都这样\n
 
-3.关闭服务：stopService(new Intent(MainActivity.this, testService.class));\n
- testService——onDestroy\n
+        3.关闭服务：stopService(new Intent(MainActivity.this, testService.class));\n
+         testService——onDestroy\n
 
-4.再次关闭服务：stopService(new Intent(MainActivity.this, testService.class));\n
-  不执行任何操作\n
+        4.再次关闭服务：stopService(new Intent(MainActivity.this, testService.class));\n
+          不执行任何操作\n
 
 
 
-————————————————-如果是bind的话————————————————————————————-
-1.打开：
-testService——onCreate
-testService——onBind
+        ————————————————-如果是bind的话————————————————————————————-
+        1.打开：
+        testService——onCreate
+        testService——onBind
 
-2.再次打开：——因为它是随着Activity的打开而打开的，关闭而关闭的
-testService——onCreate
-testService——onBind
+        2.再次打开：——因为它是随着Activity的打开而打开的，关闭而关闭的
+        testService——onCreate
+        testService——onBind
 
-3.关闭：
-testService——onUnbind
-testService——onDestroy
+        3.关闭：
+        testService——onUnbind
+        testService——onDestroy
     </string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
+    <string name="build">Build</string>
+    <string name="grade">Grade</string>
+    <string name="help">Help</string>
 </resources>

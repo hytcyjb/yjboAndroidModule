@@ -86,6 +86,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         return false;
     }
 
+
     private void changeMenuBg(MenuItem item) {
         for (int i = 0; i < navigation.getMenu().size(); i++) {
             navigation.getMenu().getItem(i).setChecked(false);
@@ -114,6 +115,8 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         }
         ft.commit();
     }
+
+
 
     private String getTag(int itemId) {
         return String.valueOf(itemId);

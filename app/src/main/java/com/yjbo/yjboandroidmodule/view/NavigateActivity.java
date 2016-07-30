@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.fragment.Home2Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home3Fragment;
+import com.yjbo.yjboandroidmodule.fragment.Home4Fragment;
 import com.yjbo.yjboandroidmodule.fragment.HomePageFragment;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 
@@ -65,7 +66,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                toolBar.setTitle("使用了侧滑的布局");
+//                toolBar.setTitle("使用了侧滑的布局");
             }
         };
         mDrawerToggle.syncState();
@@ -104,6 +105,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             ft.detach(lastFragment);
         }
         Fragment fragment = fm.findFragmentByTag(getTag(itemId));
+        changeTop(itemId);
         if (fragment == null) {
             fragment = getItem(itemId);
             ft.add(R.id.framelayout_main, fragment, getTag(itemId));
@@ -119,7 +121,6 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
 
     private Fragment getItem(int itemId) {
         Fragment navigationFragment = new HomePageFragment();
-
         switch (itemId) {
             case R.id.drawer_home:
                 CommonUtil.show(NavigateActivity.this, "--drawer_home--");
@@ -131,7 +132,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.drawer_downloaded:
                 CommonUtil.show(NavigateActivity.this, "--drawer_downloaded--");
-                navigationFragment = new Home3Fragment();
+                navigationFragment = new Home4Fragment();
                 break;
             case R.id.drawer_more:
                 CommonUtil.show(NavigateActivity.this, "--drawer_more--");
@@ -143,5 +144,34 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
                 break;
         }
         return navigationFragment;
+    }
+
+    /***
+     * 改变顶部标题
+     *
+     * @param itemId
+     */
+    public void changeTop(int itemId) {
+        String string = "";
+        switch (itemId) {
+            case R.id.drawer_home:
+                string = "轮播图";
+                break;
+            case R.id.drawer_favourite:
+                string = "标题2";
+                break;
+            case R.id.drawer_downloaded:
+                string = "广告标题：Home4Fragment";
+                break;
+            case R.id.drawer_more:
+                string = "标题1";
+                break;
+            case R.id.drawer_settings:
+                string = "标题1";
+                break;
+        }
+        if (toolBar != null) {
+            toolBar.setTitle(string);
+        }
     }
 }

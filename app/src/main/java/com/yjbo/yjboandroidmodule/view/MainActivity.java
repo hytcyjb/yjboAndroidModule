@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -106,13 +107,13 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                L.e("==1=="+newState);
+                L.e("==1==" + newState);
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                L.e("==2==" + dx+"---"+dy);
+                L.e("==2==" + dx + "---" + dy);
             }
         });
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
@@ -170,6 +171,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     case 15:
                         startClass(WifiOpenActivity.class, position);
                         break;
+                    case 16:
+                        startClass(ProgressSimpleActivity.class, position);
+                        break;
                 }
             }
         });
@@ -199,6 +203,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         list.add("创建桌面快捷方式");
         list.add("测试Service的生命周期");
         list.add("自动打开wifi模块");
+        list.add("显示自定义颜色的进度条");
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }
@@ -260,4 +265,19 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         ButterKnife.bind(this);
     }
 
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                CommonUtil.show(MainActivity.this, "再按一次退出程序");
+                exitTime = System.currentTimeMillis();
+            } else {
+                this.finish();
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

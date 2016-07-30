@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -86,7 +87,7 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity implements OnRef
     }
     @Override
     public void onLoadMore() {
-        CommonUtil.show(SlidFragmentActivity.this,"加载更多成功\n和Fragment内部的scrollview冲突");
+        CommonUtil.show(SlidFragmentActivity.this, "加载更多成功\n和Fragment内部的scrollview冲突");
         swipeToLoadLayout.setLoadingMore(false);
     }
 
@@ -139,6 +140,10 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity implements OnRef
        return super.dispatchTouchEvent(event);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
         private final String[] TITLES = {"首页", "第二页", "第三页"};
@@ -165,4 +170,8 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity implements OnRef
             return listFrag.get(position);
         }
     }
+
+
+
+
 }

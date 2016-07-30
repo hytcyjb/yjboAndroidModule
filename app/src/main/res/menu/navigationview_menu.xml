@@ -7,7 +7,7 @@
         <item
             android:id="@+id/drawer_home"
             android:icon="@drawable/ic_account_balance_black_48dp"
-            android:title="@string/home"/>
+            android:title="轮播图"/>
 
 
         <item
@@ -22,7 +22,7 @@
                 <item
                     android:id="@+id/drawer_downloaded"
                     android:icon="@drawable/ic_build_black_48dp"
-                    android:title="@string/build"/>
+                    android:title="广告栏"/>
             </menu>
         </item>
 

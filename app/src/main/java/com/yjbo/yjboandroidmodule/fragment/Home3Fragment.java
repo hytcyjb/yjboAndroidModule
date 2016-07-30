@@ -77,6 +77,10 @@ public class Home3Fragment extends Fragment {
         characterClass.setAvatar(R.drawable.icon_module);
         characterClass.setName("3");
         mHeroes.add(characterClass);
+        characterClass = new CharacterClass();
+        characterClass.setAvatar(R.drawable.header_bg);
+        characterClass.setName("4");
+        mHeroes.add(characterClass);
 
         mPagerAdapter.setList(mactivity,mHeroes);
     }

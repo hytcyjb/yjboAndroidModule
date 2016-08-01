@@ -107,13 +107,11 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                L.e("==1==" + newState);
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                L.e("==2==" + dx + "---" + dy);
             }
         });
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
@@ -187,7 +185,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonData() {
         listAdapter = new ListAdapter();
-        list.add("navigate侧滑");
+        list.add("Material Design侧滑");
         list.add("获取屏幕旋转角度");
         list.add("横向滑动fragment");
         list.add("handler的内存泄露处理");

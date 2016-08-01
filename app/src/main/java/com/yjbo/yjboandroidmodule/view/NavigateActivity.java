@@ -1,5 +1,7 @@
 package com.yjbo.yjboandroidmodule.view;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -22,6 +24,7 @@ import com.yjbo.yjboandroidmodule.fragment.Home3Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home4Fragment;
 import com.yjbo.yjboandroidmodule.fragment.HomePageFragment;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.picture.AvatarImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,7 +44,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     NavigationView navigation;
     @Bind(R.id.framelayout_main)
     FrameLayout framelayoutMain;
-
+    AvatarImageView myToppic;
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -50,6 +53,8 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_navigate);
         ButterKnife.bind(this);
 
+        myToppic = (AvatarImageView) findViewById(R.id.my_toppic);
+        initData();
         toolBar.setTitle("使用了侧滑的布局");
         toolBar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolBar);
@@ -78,7 +83,15 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         navigation.setNavigationItemSelectedListener(this);
     }
 
-
+    private void initData() {
+        myToppic.setAfterCropListener(new AvatarImageView.AfterCropListener() {
+            @Override
+            public void afterCrop(Bitmap photo) {
+                CommonUtil.show(NavigateActivity.this,"未将图片保存起来，下次读取图片将显示默认图片");
+                myToppic.setImageBitmap(photo);
+            }
+        });
+    }
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         changeMenuBg(item);
@@ -98,6 +111,15 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     int lastNavItemId = -1;
 
     void showNavigationFragment(int itemId) {
+
+        if (itemId == R.id.drawer_settings) {
+            Intent minten = new Intent(NavigateActivity.this, WebViewActivity.class);
+            minten.putExtra("url", "https://github.com/hytcyjb/yjboAndroidModule");
+            minten.putExtra("titleStr", "github主页");
+            startActivity(minten);
+            overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+            return;
+        }
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment lastFragment = fm.findFragmentByTag(getTag(lastNavItemId));
@@ -117,7 +139,6 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     }
 
 
-
     private String getTag(int itemId) {
         return String.valueOf(itemId);
     }
@@ -126,25 +147,18 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         Fragment navigationFragment = new HomePageFragment();
         switch (itemId) {
             case R.id.drawer_home:
-                CommonUtil.show(NavigateActivity.this, "--drawer_home--");
                 navigationFragment = new Home3Fragment();
                 break;
-            case R.id.drawer_favourite:
-                CommonUtil.show(NavigateActivity.this, "--drawer_favourite--");
-                navigationFragment = new Home2Fragment();
-                break;
             case R.id.drawer_downloaded:
-                CommonUtil.show(NavigateActivity.this, "--drawer_downloaded--");
                 navigationFragment = new Home4Fragment();
                 break;
-            case R.id.drawer_more:
-                CommonUtil.show(NavigateActivity.this, "--drawer_more--");
-                navigationFragment = new HomePageFragment();
-                break;
-            case R.id.drawer_settings:
-                CommonUtil.show(NavigateActivity.this, "--drawer_settings--");
-                navigationFragment = new HomePageFragment();
-                break;
+//            case R.id.drawer_settings:
+//                Intent minten = new Intent(NavigateActivity.this, WebViewActivity.class);
+//                minten.putExtra("url", "https://github.com/hytcyjb/yjboAndroidModule");
+//                minten.putExtra("titleStr", "github主页");
+//                startActivity(minten);
+//                overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+//                break;
         }
         return navigationFragment;
     }
@@ -160,17 +174,11 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             case R.id.drawer_home:
                 string = "轮播图";
                 break;
-            case R.id.drawer_favourite:
-                string = "标题2";
-                break;
             case R.id.drawer_downloaded:
                 string = "广告标题：Home4Fragment";
                 break;
-            case R.id.drawer_more:
-                string = "标题1";
-                break;
             case R.id.drawer_settings:
-                string = "标题1";
+                string = "github主页";
                 break;
         }
         if (toolBar != null) {

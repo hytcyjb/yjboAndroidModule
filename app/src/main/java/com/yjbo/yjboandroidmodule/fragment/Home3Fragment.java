@@ -61,25 +61,32 @@ public class Home3Fragment extends Fragment {
         viewPager.setAdapter(mPagerAdapter);
 
         viewPager.addOnPageChangeListener(mPagerAdapter);
-        viewPager.setBackgroundDrawable(getResources().getDrawable(R.mipmap.bg_viewpager));
+        //全局设置viewpage的背景色
+//        viewPager.setBackgroundDrawable(getResources().getDrawable(R.mipmap.bg_viewpager));
 
         CharacterClass characterClass = new CharacterClass();
-        characterClass.setAvatar(R.drawable.head);
+        characterClass.setAvatar(R.drawable.roll_viewpage1);
         characterClass.setName("1");
         mHeroes.add(characterClass);
 
         characterClass = new CharacterClass();
-        characterClass.setAvatar(R.drawable.header_bg);
+        characterClass.setAvatar(R.drawable.roll_viewpage2);
         characterClass.setName("2");
         mHeroes.add(characterClass);
 
         characterClass = new CharacterClass();
-        characterClass.setAvatar(R.drawable.icon_module);
+        characterClass.setAvatar(R.drawable.roll_viewpage3);
         characterClass.setName("3");
         mHeroes.add(characterClass);
+
         characterClass = new CharacterClass();
-        characterClass.setAvatar(R.drawable.header_bg);
+        characterClass.setAvatar(R.drawable.roll_viewpage4);
         characterClass.setName("4");
+        mHeroes.add(characterClass);
+
+        characterClass = new CharacterClass();
+        characterClass.setAvatar(R.drawable.roll_viewpage5);
+        characterClass.setName("5");
         mHeroes.add(characterClass);
 
         mPagerAdapter.setList(mactivity,mHeroes);

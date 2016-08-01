@@ -102,7 +102,8 @@ public class LoopViewPagerAdapter extends BaseLoopPagerAdapter {
         CharacterClass character = mHeroes.get(position);
         holder.tvName.setText("yjbo--" + position);
         int avatar = character.getAvatar();
-        holder.ivBanner.setImageDrawable(mactivity.getResources().getDrawable(avatar));
+        holder.ivBanner.setImageResource(avatar);
+
         return convertView;
     }
 

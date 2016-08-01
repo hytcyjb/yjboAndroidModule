@@ -72,22 +72,7 @@ public abstract class BaseYjboSwipeActivity extends SwipeBackActivity {
                 @Override
                 public void onClick(View view) {
                     finish();
-                }
-            });
-        }
-        if (nextPublicTxt != null) {
-            nextPublicTxt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//					finish();
-                }
-            });
-        }
-        if (rightNextPublicTxt != null) {
-            rightNextPublicTxt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//					finish();
+                    overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
                 }
             });
         }

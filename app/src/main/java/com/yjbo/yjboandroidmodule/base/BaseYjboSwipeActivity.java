@@ -51,11 +51,11 @@ public abstract class BaseYjboSwipeActivity extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setonCreate(savedInstanceState);
-//        try {
-//            getSupportActionBar().hide();
-//        }catch (Exception ex){
-//            ex.printStackTrace();
-//        }
+        try {
+            getSupportActionBar().hide();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
         //默认不打开软键盘
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 

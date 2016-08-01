@@ -17,19 +17,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.fragment.Home2Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home3Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home4Fragment;
 import com.yjbo.yjboandroidmodule.fragment.HomePageFragment;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.picture.AvatarImageView;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /***
+ * <p/>
+ * 如何引用navigationview_header布局内的id控件
+ * View drawview = navigation.inflateHeaderView(R.layout.navigationview_header);
+ * myToppic = (AvatarImageView) drawview.findViewById(R.id.my_toppic);
+ * </P>
  * 引用自：http://blog.csdn.net/amazing7/article/details/52035324
  * 2016年7月27日15:41:30
  *
@@ -44,7 +56,9 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     NavigationView navigation;
     @Bind(R.id.framelayout_main)
     FrameLayout framelayoutMain;
+
     AvatarImageView myToppic;
+    TextView git_name_txt;
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -52,8 +66,25 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigate);
         ButterKnife.bind(this);
+        View drawview = navigation.inflateHeaderView(R.layout.navigationview_header);
+        myToppic = (AvatarImageView) drawview.findViewById(R.id.my_toppic);
+        git_name_txt = (TextView) drawview.findViewById(R.id.git_name_txt);
 
-        myToppic = (AvatarImageView) findViewById(R.id.my_toppic);
+        RxView.clicks(git_name_txt)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+
+                        Intent minten = new Intent(NavigateActivity.this, WebViewActivity.class);
+                        minten.putExtra("url", "https://github.com/hytcyjb/yjboAndroidModule");
+                        minten.putExtra("titleStr", "github主页");
+                        startActivity(minten);
+                        overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+
+                    }
+                });
         initData();
         toolBar.setTitle("使用了侧滑的布局");
         toolBar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -87,11 +118,12 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         myToppic.setAfterCropListener(new AvatarImageView.AfterCropListener() {
             @Override
             public void afterCrop(Bitmap photo) {
-                CommonUtil.show(NavigateActivity.this,"未将图片保存起来，下次读取图片将显示默认图片");
+                CommonUtil.show(NavigateActivity.this, "未将图片保存起来，下次读取图片将显示默认图片");
                 myToppic.setImageBitmap(photo);
             }
         });
     }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         changeMenuBg(item);
@@ -99,7 +131,11 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         return false;
     }
 
-
+    /***
+     * 选中什么，点亮什么
+     *
+     * @param item
+     */
     private void changeMenuBg(MenuItem item) {
         for (int i = 0; i < navigation.getMenu().size(); i++) {
             navigation.getMenu().getItem(i).setChecked(false);
@@ -183,6 +219,17 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         }
         if (toolBar != null) {
             toolBar.setTitle(string);
+        }
+    }
+
+    //接收当前位置和目标位置的返回值
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        L.i("--onActivityResult" + requestCode + "--" + resultCode + "---");
+        //在拍照、选取照片、裁剪Activity结束后，调用的方法
+        if (myToppic != null) {
+            myToppic.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

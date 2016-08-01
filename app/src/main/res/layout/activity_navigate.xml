@@ -34,8 +34,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:background="#ddd"
-            app:headerLayout="@layout/navigationview_header"
             app:menu="@menu/navigationview_menu" />
-
+<!--因为不好引用：所以在这里就不用这个了：app:headerLayout="@layout/navigationview_header"-->
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

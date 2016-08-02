@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.interfa.ItemOnclick;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
 
@@ -68,6 +69,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 public void onClick(View v) {
                     L.d("NormalTextViewHolder", "onClick--> position = " + itemTxt.getTag() + "---" + getPosition());
                     mdialogChoose.pos(Integer.valueOf(itemTxt.getTag() + ""));
+//                   new ItemOnclick().setonItem(Integer.valueOf(itemTxt.getTag() + ""));
                 }
             });
         }

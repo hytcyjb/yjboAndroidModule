@@ -76,6 +76,11 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
             @Override
             public void pos(int position) {
@@ -139,4 +144,8 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
         swipeToLoadLayout.setLoadingMore(false);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

@@ -68,7 +68,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-     private void initSwipeLayout() {
+    private void initSwipeLayout() {
         View hearload = LayoutInflater.from(this).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
         View footload = LayoutInflater.from(this).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
         swipeToLoadLayout.setRefreshHeaderView(hearload);
@@ -108,6 +108,19 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+    }
+
+    /***
+     * 因为回调了这个，不然点击事件会继续使用之前的点击事件
+     * //防止退出之后还对别的点击事件有影响---listAdapter.SetonDialogChoose(null); 这个方法都是错误的，因为这样之后，别的用到该接口就报空指针
+     *
+     * 所以在onStart方法里面写，第一次调用，onrestart之后还调用，就可以了
+     * 2016年8月2日18:32:17
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
             @Override
             public void pos(int position) {
@@ -121,7 +134,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     case 1://研究的知识
                         startClass(StudyKWActivity.class, position);
                         break;
-                    case 2://基础的知识
+                    case 2://学习的知识
                         startClass(BaseKWActivity.class, position);
                         break;
                 }
@@ -174,8 +187,8 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     }
 
 
-
     private long exitTime = 0;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

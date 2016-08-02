@@ -2,7 +2,7 @@ package com.yjbo.yjboandroidmodule.util.swipeUtil;
 
 
 /**
- *interface for {@link SwipeBackActivity} and {@link SwipeBackPreferenceActivity}
+ *interfa for {@link SwipeBackActivity} and {@link SwipeBackPreferenceActivity}
  */
 public interface SwipeBackActivityBase {
     /**

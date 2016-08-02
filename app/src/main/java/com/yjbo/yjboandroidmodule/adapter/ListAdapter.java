@@ -47,7 +47,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemTxt.setText(position + "." + list.get(position));
+        holder.itemTxt.setText(list.get(position));
         holder.itemTxt.setTag(position);
     }
 
@@ -67,7 +67,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     L.d("NormalTextViewHolder", "onClick--> position = " + itemTxt.getTag() + "---" + getPosition());
-//                    CommonUtil.show(mContext, "----->" + itemTxt.getTag() + "---" + getPosition());
                     mdialogChoose.pos(Integer.valueOf(itemTxt.getTag() + ""));
                 }
             });

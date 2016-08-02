@@ -95,7 +95,9 @@
         <activity
             android:name=".view.NavigateActivity"
             android:theme="@style/AppTheme2" />
-        <activity android:name=".view.ProgressSimpleActivity"></activity>
+        <activity android:name=".view.ProgressSimpleActivity" />
+        <activity android:name=".view.BaseKWActivity"></activity>
+        <activity android:name=".view.StudyKWActivity"></activity>
     </application>
 
 </manifest>

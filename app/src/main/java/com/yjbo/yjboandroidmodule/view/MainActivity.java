@@ -47,7 +47,6 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Bind(R.id.top_btn)
     Button topBtn;
     private List<String> list = new ArrayList<>();
-    private List<String> otherlist = new ArrayList<>();
 
     @Override
     public void setonCreate(Bundle savedInstanceState) {
@@ -65,13 +64,11 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         setSGTitleStr("各知识模块知识总结");
         initSwipeLayout();
         setSGNextStr("···");
-        setSGRightNextStr("切换");
-        setSGRightNextColor(R.color.red);
         setSGNextColor(R.color.white);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    private void initSwipeLayout() {
+     private void initSwipeLayout() {
         View hearload = LayoutInflater.from(this).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
         View footload = LayoutInflater.from(this).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
         swipeToLoadLayout.setRefreshHeaderView(hearload);
@@ -86,11 +83,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                L.i("--onScrollStateChanged的状态值--" + newState);//手指滑动的时候是1，手指离开之后就是0
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int spanCount = CommonUtil.getSpanCount(recyclerView);
                     int childCount = recyclerView.getAdapter().getItemCount();
-                    setSGTitleStr("--onScrollSta==" + newState + "--" + spanCount + "===" + childCount);
                     if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
                         swipeToLoadLayout.setLoadingMore(true);
                     }
@@ -100,7 +95,6 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         swipeTarget.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                L.e("====" + scrollX + "=====" + scrollY + "====" + oldScrollX + "=-===" + oldScrollY);
             }
         });
         swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -121,56 +115,14 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     return;
                 }
                 switch (position) {
-                    case 0:
+                    case 0://6.0的侧滑框架
                         startClass(NavigateActivity.class, position);
                         break;
-                    case 1:
-                        startClass(ScreenDirectionActivity.class, position);
+                    case 1://研究的知识
+                        startClass(StudyKWActivity.class, position);
                         break;
-                    case 2:
-                        startClass(SlidFragmentActivity.class, position);
-                        break;
-                    case 3://https://github.com/badoo/android-weak-handler/
-                        startClass(HandlerOomActivity.class, position);
-                        break;
-                    case 4:
-                        startClass(JsonActivity.class, position);
-                        break;
-                    case 5:
-                        startClass(TextViewLinkActivity.class, position);
-                        break;
-                    case 6:
-                        startClass(NotificationActivity.class, position);
-                        break;
-                    case 7:
-                        startClass(TakeVideoActivity.class, position);
-                        break;
-                    case 8:
-                        startClass(MyCramerActivity.class, position);
-                        break;
-                    case 9:
-                        startClass(EventbusActivity.class, position);
-                        break;
-                    case 10:
-                        startClass(ViewPageActivity.class, position);
-                        break;
-                    case 11:
-                        startClass(testActivity.class, position);
-                        break;
-                    case 12:
-                        startClass(ViewGroupActivity.class, position);
-                        break;
-                    case 13:
-                        startClass(ShowContentActivity.class, position);
-                        break;
-                    case 14:
-                        startClass(TestServiceActivity.class, position);
-                        break;
-                    case 15:
-                        startClass(WifiOpenActivity.class, position);
-                        break;
-                    case 16:
-                        startClass(ProgressSimpleActivity.class, position);
+                    case 2://基础的知识
+                        startClass(BaseKWActivity.class, position);
                         break;
                 }
             }
@@ -185,36 +137,18 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonData() {
         listAdapter = new ListAdapter();
-        list.add("Material Design侧滑");
-        list.add("获取屏幕旋转角度");
-        list.add("横向滑动fragment");
-        list.add("handler的内存泄露处理");
-        list.add("固定解析json字符串");
-        list.add("textstyle的展示");
-        list.add("显示通知栏");
-        list.add("录视频");
-        list.add("后台录视频");
-        list.add("测试eventbus");
-        list.add("测试横向滑动Fragment和侧滑同时使用的冲突问题");
-        list.add("测试Activity生命周期");
-        list.add("事件的分发1");
-        list.add("创建桌面快捷方式");
-        list.add("测试Service的生命周期");
-        list.add("自动打开wifi模块");
-        list.add("显示自定义颜色的进度条");
+        list = CommonUtil.getListMenu();
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }
 
     @Override
     public void onLoadMore() {
-//        listAdapter.removeData(3);
         loadover();
     }
 
     @Override
     public void onRefresh() {
-//        listAdapter.addData(3, "你好呀，字符进来了");
         loadover();
     }
 
@@ -224,47 +158,24 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         swipeToLoadLayout.setLoadingMore(false);
     }
 
-    @OnClick({R.id.next_public_txt, R.id.top_btn, R.id.right_next_public_txt})
+    @OnClick({R.id.next_public_txt, R.id.top_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.next_public_txt:
                 Intent minten = new Intent(MainActivity.this, WebViewActivity.class);
                 minten.putExtra("url", "https://github.com/hytcyjb/yjboAndroidModule");
-                minten.putExtra("titleStr", "各种模块的开发");
+                minten.putExtra("titleStr", "github主页");
                 startActivity(minten);
                 break;
             case R.id.top_btn:
 
                 break;
-            case R.id.right_next_public_txt:
-                if (otherlist.size() > 0) {
-                    if (otherlist.get(0).contains("yjbo")) {
-                        listAdapter.updateData(list);
-                        otherlist = new ArrayList<>();
-                    }
-                } else {
-                    otherlist = new ArrayList<>();
-                    for (int i = 0; i < list.size(); i++) {
-                        if (!list.get(0).contains("yjbo")) {
-                            otherlist.add(list.get(i) + "yjbo");
-                        }
-                    }
-                    listAdapter.updateData(otherlist);
-                }
-
-                break;
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 
     private long exitTime = 0;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

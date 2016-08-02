@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 工具类
  * Created by yjbo on 2016/6/6.
@@ -15,6 +18,7 @@ import android.widget.Toast;
 public class CommonUtil {
     /***
      * 判断是否打开wifi，然后直接打开wifi；
+     *
      * @param mactivity
      */
     public static void OpenWifi(Activity mactivity) {
@@ -29,6 +33,7 @@ public class CommonUtil {
 
     /***
      * 将颜色转换成string型
+     *
      * @param color
      * @return
      */
@@ -53,6 +58,7 @@ public class CommonUtil {
 
     /***
      * 土司
+     *
      * @param context
      * @param str
      */
@@ -61,6 +67,7 @@ public class CommonUtil {
             Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
         }
     }
+
     /**
      * 判断字符是否为空
      * 空--true
@@ -99,27 +106,22 @@ public class CommonUtil {
 
     // 如果是最后一列，则不需要绘制右边
     public static boolean isLastColum(RecyclerView parent, int pos, int spanCount,
-                                int childCount)
-    {
+                                      int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager)
-        {
+        if (layoutManager instanceof GridLayoutManager) {
             if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
             {
                 return true;
             }
-        } else if (layoutManager instanceof StaggeredGridLayoutManager)
-        {
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager)
                     .getOrientation();
-            if (orientation == StaggeredGridLayoutManager.VERTICAL)
-            {
+            if (orientation == StaggeredGridLayoutManager.VERTICAL) {
                 if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
                 {
                     return true;
                 }
-            } else
-            {
+            } else {
                 childCount = childCount - childCount % spanCount;
                 if (pos >= childCount)// 如果是最后一列，则不需要绘制右边
                     return true;
@@ -127,23 +129,20 @@ public class CommonUtil {
         }
         return false;
     }
+
     // 如果是最后一行，则不需要绘制底部
     public static boolean isLastRaw(RecyclerView parent, int pos, int spanCount,
-                              int childCount)
-    {
+                                    int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager)
-        {
+        if (layoutManager instanceof GridLayoutManager) {
             childCount = childCount - childCount % spanCount;
             if (pos >= childCount)// 如果是最后一行，则不需要绘制底部
                 return true;
-        } else if (layoutManager instanceof StaggeredGridLayoutManager)
-        {
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager)
                     .getOrientation();
             // StaggeredGridLayoutManager 且纵向滚动
-            if (orientation == StaggeredGridLayoutManager.VERTICAL)
-            {
+            if (orientation == StaggeredGridLayoutManager.VERTICAL) {
                 childCount = childCount - childCount % spanCount;
                 // 如果是最后一行，则不需要绘制底部
                 if (pos >= childCount)
@@ -152,39 +151,39 @@ public class CommonUtil {
             // StaggeredGridLayoutManager 且横向滚动
             {
                 // 如果是最后一行，则不需要绘制底部
-                if ((pos + 1) % spanCount == 0)
-                {
+                if ((pos + 1) % spanCount == 0) {
                     return true;
                 }
             }
         }
         return false;
     }
-    public static int getSpanCount(RecyclerView parent)
-    {
+
+    public static int getSpanCount(RecyclerView parent) {
         // 列数
         int spanCount = -1;
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager)
-        {
+        if (layoutManager instanceof GridLayoutManager) {
 
             spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
-        } else if (layoutManager instanceof StaggeredGridLayoutManager)
-        {
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             spanCount = ((StaggeredGridLayoutManager) layoutManager)
                     .getSpanCount();
         }
         return spanCount;
     }
+
     /**
      * 防止过快点击造成多次事件
+     *
      * @return true 是快速点击，不能往下走
-     *          false 不是快速点击
+     * false 不是快速点击
      */
     private static long lastClickTime;
+
     public synchronized static boolean isFastClick() {
         long time = System.currentTimeMillis();
-        if ( time - lastClickTime < 1000) {
+        if (time - lastClickTime < 1000) {
             return true;
         }
         lastClickTime = time;
@@ -194,6 +193,7 @@ public class CommonUtil {
     /**
      * 这是24小时以内（不包含24小时）采用的方法：
      * 2016年7月15日15:48:01
+     *
      * @param dateInt
      * @return 时间格式
      */
@@ -203,29 +203,29 @@ public class CommonUtil {
             dateTime = "00:0" + dateInt;
         } else if (dateInt < 60) {
             dateTime = "00:" + dateInt;
-        } else if (dateInt < (60 * 60 +1)) {//60' * 60 +1
-            int miaoInt = dateInt % 60 ;
+        } else if (dateInt < (60 * 60 + 1)) {//60' * 60 +1
+            int miaoInt = dateInt % 60;
             int fenInt = dateInt / 60;
             //分别判断分钟和秒钟是否大于10，进行赋值；大于10则不需要前面放一个0了
             String fenStr = "";
             String miaoStr = "";
             if (fenInt < 10) {
                 fenStr = "0" + fenInt;
-            }else {
+            } else {
                 fenStr = "" + fenInt;
             }
             if (miaoInt < 10) {
-                miaoStr ="0" + miaoInt;
+                miaoStr = "0" + miaoInt;
             } else {
-                miaoStr ="" + miaoInt;
+                miaoStr = "" + miaoInt;
             }
             dateTime = fenStr + ":" + miaoStr;
-        } else if (dateInt < (60 * 60 * 24 +1)) {//60' * 60' * 24 +1
+        } else if (dateInt < (60 * 60 * 24 + 1)) {//60' * 60' * 24 +1
 
             int shiInt = dateInt / 60 / 60;
 
             dateInt = dateInt - shiInt * 60 * 60;
-            int miaoInt = dateInt % 60 ;
+            int miaoInt = dateInt % 60;
             int fenInt = dateInt / 60;
 
             //分别判断小时，分钟和秒钟是否大于10，进行赋值；大于10则不需要前面放一个0了
@@ -235,25 +235,94 @@ public class CommonUtil {
 
             if (shiInt < 10) {
                 shiStr = "0" + shiInt;//这个不会遇到，因为没有到一小时，不走这里
-            }else {
+            } else {
                 shiStr = "" + shiInt;
             }
             if (fenInt < 10) {
                 fenStr = "0" + fenInt;
-            }else {
+            } else {
                 fenStr = "" + fenInt;
             }
             if (miaoInt < 10) {
-                miaoStr ="0" + miaoInt;
+                miaoStr = "0" + miaoInt;
             } else {
-                miaoStr ="" + miaoInt;
+                miaoStr = "" + miaoInt;
             }
 
-            dateTime =shiStr+":"+ fenStr + ":" + miaoStr;
-        }else  {
+            dateTime = shiStr + ":" + fenStr + ":" + miaoStr;
+        } else {
             dateTime = "时间到停止计时";
         }
 
         return dateTime + "s";
+    }
+//    list.add("Material Design侧滑");
+//    list.add("获取屏幕旋转角度");
+//    list.add("横向滑动fragment");
+//    list.add("handler的内存泄露处理");
+//    list.add("固定解析json字符串");
+//    list.add("textstyle的展示");
+//    list.add("显示通知栏");
+//    list.add("录视频");
+//    list.add("后台录视频");
+//    list.add("测试eventbus");
+//    list.add("测试横向滑动Fragment和侧滑同时使用的冲突问题");
+//    list.add("测试Activity生命周期");
+//    list.add("事件的分发1");
+//    list.add("创建桌面快捷方式");
+//    list.add("测试Service的生命周期");
+//    list.add("自动打开wifi模块");
+//    list.add("显示自定义颜色的进度条");
+
+    /***
+     * 主listview里面的条目
+     * 2016年8月2日17:17:27
+     *
+     * @return
+     */
+    public static List<String> getListMenu() {
+        List<String> list = new ArrayList<>();
+        list.add("Material Design侧滑");
+        list.add("值得研究知识");
+        list.add("基础知识");
+        return list;
+    }
+
+    /***
+     * 学习知识里面的条目
+     * 2016年8月2日18:05:43
+     *
+     * @return
+     */
+    public static List<String> getListStudyKW() {
+        List<String> list = new ArrayList<>();
+        list.add("横向滑动fragment");
+        list.add("handler的内存泄露处理");
+        list.add("录视频");
+        list.add("后台录视频");
+        list.add("测试eventbus");
+        list.add("事件的分发1");
+        list.add("创建桌面快捷方式");
+        return list;
+    }
+
+    /***
+     * 基础知识里面的条目
+     * 2016年8月2日18:05:43
+     *
+     * @return
+     */
+    public static List<String> getListBaseKW() {
+        List<String> list = new ArrayList<>();
+        list.add("获取屏幕旋转角度");
+        list.add("固定解析json字符串");
+        list.add("textstyle的展示");
+        list.add("显示通知栏");
+        list.add("测试横向滑动Fragment和侧滑同时使用的冲突问题");
+        list.add("测试Activity生命周期");
+        list.add("测试Service的生命周期");
+        list.add("自动打开wifi模块");
+        list.add("显示自定义颜色的进度条");
+        return list;
     }
 }

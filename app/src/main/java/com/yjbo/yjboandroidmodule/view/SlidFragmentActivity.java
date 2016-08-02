@@ -83,7 +83,7 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity implements OnRef
             }
         });
         swipeToLoadLayout.setOnRefreshListener(this);
-        swipeToLoadLayout.setOnLoadMoreListener(this);
+//        swipeToLoadLayout.setOnLoadMoreListener(this);
     }
     @Override
     public void onLoadMore() {
@@ -117,7 +117,7 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity implements OnRef
                 Toast.makeText(SlidFragmentActivity.this, "Tab reselected: " + position, Toast.LENGTH_SHORT).show();
             }
         });
-        setSGNextStr("官网说明");
+        setSGNextInt(R.string.more);
     }
 
     @OnClick({R.id.next_public_txt, R.id.tabs})

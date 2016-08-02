@@ -30,6 +30,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration
         a.recycle();
     }
 
+
     @Override
     public void onDraw(Canvas c, RecyclerView parent, State state)
     {

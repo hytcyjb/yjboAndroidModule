@@ -21,6 +21,7 @@ import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
+import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,8 @@ public class BaseKWActivity extends BaseYjboActivity implements OnRefreshListene
         ButterKnife.bind(this);
         setSGBackVisible();
         initSwipeLayout();
-        setSGNextStr("···");
-        setSGNextColor(R.color.white);
+//        setSGNextStr("···");
+//        setSGNextColor(R.color.white);
     }
 
     private void initSwipeLayout() {
@@ -64,9 +65,11 @@ public class BaseKWActivity extends BaseYjboActivity implements OnRefreshListene
         swipeToLoadLayout.setLoadMoreFooterView(footload);
         swipeToLoadLayout.setOnRefreshListener(this);
         swipeToLoadLayout.setOnLoadMoreListener(this);
+        //添加list的分割线
+        swipeTarget.addItemDecoration(new DividerItemDecorationHx(getApplicationContext(), DividerItemDecorationHx.VERTICAL_LIST));
 
-        RecyclerView.LayoutManager layoutManager = null;
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+
         swipeTarget.setLayoutManager(layoutManager);
         swipeToLoadLayout.setRefreshEnabled(true);
         swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {

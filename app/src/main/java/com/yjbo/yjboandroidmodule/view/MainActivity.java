@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -21,8 +22,11 @@ import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.DividerGridItemDecoration;
 import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
+import com.yjbo.yjboandroidmodule.util.view.DividerItemDecoration;
+import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,10 +79,15 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         swipeToLoadLayout.setLoadMoreFooterView(footload);
         swipeToLoadLayout.setOnRefreshListener(this);
         swipeToLoadLayout.setOnLoadMoreListener(this);
+        // 设置item动画
+        swipeTarget.setItemAnimator(new DefaultItemAnimator());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
-        RecyclerView.LayoutManager layoutManager = null;
-        layoutManager = new LinearLayoutManager(this);
         swipeTarget.setLayoutManager(layoutManager);
+
+        //添加list的分割线
+        swipeTarget.addItemDecoration(new DividerItemDecorationHx(getApplicationContext(), DividerItemDecorationHx.VERTICAL_LIST));
+
         swipeToLoadLayout.setRefreshEnabled(true);
         swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

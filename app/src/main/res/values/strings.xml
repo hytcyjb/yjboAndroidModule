@@ -111,4 +111,5 @@
     <string name="build">Build</string>
     <string name="grade">Grade</string>
     <string name="help">Help</string>
+    <string name="more">···</string>
 </resources>

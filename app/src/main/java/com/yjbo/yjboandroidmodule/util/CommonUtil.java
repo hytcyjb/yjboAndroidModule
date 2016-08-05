@@ -2,6 +2,8 @@ package com.yjbo.yjboandroidmodule.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -285,6 +287,7 @@ public class CommonUtil {
         list.add("Material Design侧滑");
         list.add("值得研究知识");
         list.add("基础知识");
+        list.add("缓存网页");
         return list;
     }
 
@@ -324,5 +327,31 @@ public class CommonUtil {
         list.add("自动打开wifi模块");
         list.add("显示自定义颜色的进度条");
         return list;
+    }
+
+
+    /***
+     * 检查网络
+     *
+     * @param context
+     * @return
+     */
+    public static boolean checkNet(Context context) {
+        try {
+            ConnectivityManager connectivity = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity != null) {
+                // 获取网络连接管理的对像
+                NetworkInfo info = connectivity.getActiveNetworkInfo();
+                if (info == null || !info.isAvailable()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

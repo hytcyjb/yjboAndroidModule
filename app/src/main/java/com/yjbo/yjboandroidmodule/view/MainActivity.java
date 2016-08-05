@@ -8,6 +8,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.ClipboardManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.DividerGridItemDecoration;
 import com.yjbo.yjboandroidmodule.util.L;
+import com.yjbo.yjboandroidmodule.util.ShowTipDialog;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecoration;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
@@ -59,6 +61,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
             L.isDebug = true;
             L.i("当前是debug模式");
         }
+
     }
 
     @Override
@@ -69,6 +72,27 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         initSwipeLayout();
         setSGNextStr("···");
         setSGNextColor(R.color.white);
+        dealClip();
+    }
+
+    private void dealClip() {
+        ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+//        clip.setText(payPassword); // 复制
+        final String clipStr = clip.getText()+""; // 粘贴
+        if (clipStr.contains("http")||clipStr.contains("www")){
+            ShowTipDialog.layDialog(MainActivity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
+            ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
+                @Override
+                public void query(String payPassword) {
+                    ShowTipDialog.dimissDia();
+                   String  ipTopStr =  clipStr.substring(0,clipStr.lastIndexOf("/"));
+                    String  ipBottomStr =  clipStr.substring(clipStr.lastIndexOf("/")+1,clipStr.length());
+                    startActivity(new Intent(MainActivity.this, WebView2Activity.class)
+                            .putExtra("ipTopStr", ipTopStr)
+                            .putExtra("ipBottomStr", ipBottomStr));
+                }
+            });
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -117,6 +141,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+
     }
 
     /***
@@ -145,6 +170,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         break;
                     case 2://学习的知识
                         startClass(BaseKWActivity.class, position);
+                        break;
+                    case 3://缓存网页
+                        startClass(WebView2Activity.class, position);
                         break;
                 }
             }

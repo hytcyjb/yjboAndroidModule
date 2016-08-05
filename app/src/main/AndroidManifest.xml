@@ -98,6 +98,7 @@
         <activity android:name=".view.ProgressSimpleActivity" />
         <activity android:name=".view.BaseKWActivity"></activity>
         <activity android:name=".view.StudyKWActivity"></activity>
+        <activity android:name=".view.WebView2Activity"></activity>
     </application>
 
 </manifest>

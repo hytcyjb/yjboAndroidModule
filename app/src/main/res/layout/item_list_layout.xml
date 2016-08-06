@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
-        android:paddingTop="5dp"
+        android:paddingTop="10dp"
         android:layout_marginLeft="10dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="10dp"
         android:text="每个标题"
         android:background="@drawable/waterripple_qianhui_bg"
         android:textColor="@color/black"

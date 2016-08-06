@@ -67,25 +67,13 @@ public abstract class BaseYjboActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     finish();
+                    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
                 }
             });
         }
-        if (nextPublicTxt != null) {
-            nextPublicTxt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//					finish();
-                }
-            });
-        }
-        if (rightNextPublicTxt != null) {
-            rightNextPublicTxt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//					finish();
-                }
-            });
-        }
+        String  titleName = this.getIntent().getStringExtra("titleName");
+        titlePublic.setText(titleName);
+
         setonView();
         setonData();
     }

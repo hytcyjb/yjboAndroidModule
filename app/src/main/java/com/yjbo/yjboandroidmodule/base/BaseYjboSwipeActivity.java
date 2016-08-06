@@ -25,9 +25,9 @@ import com.yjbo.yjboandroidmodule.util.swipeUtil.SwipeBackActivity;
  * 3.setonView：
  * SouGUMainActivity：(某个Activity类)
  * 4.onCreate：
- *
+ * <p/>
  * 二：如果butterknife在setonView()方法内声明了，而不是在setonCreate方法内声明，那么在某个Activity类内
- *      顶部的nextPublicTxt等点击事件都会被
+ * 顶部的nextPublicTxt等点击事件都会被
  * </p>
  * Created by yjbo on 2016/6/6.
  */
@@ -51,11 +51,11 @@ public abstract class BaseYjboSwipeActivity extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setonCreate(savedInstanceState);
-//        try {
-//            getSupportActionBar().hide();
-//        }catch (Exception ex){
-//            ex.printStackTrace();
-//        }
+        try {
+            getSupportActionBar().hide();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         //默认不打开软键盘
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -72,25 +72,12 @@ public abstract class BaseYjboSwipeActivity extends SwipeBackActivity {
                 @Override
                 public void onClick(View view) {
                     finish();
+                    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
                 }
             });
         }
-        if (nextPublicTxt != null) {
-            nextPublicTxt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//					finish();
-                }
-            });
-        }
-        if (rightNextPublicTxt != null) {
-            rightNextPublicTxt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//					finish();
-                }
-            });
-        }
+        String titleName = this.getIntent().getStringExtra("titleName");
+        titlePublic.setText(titleName);
         setonView();
         setonData();
     }

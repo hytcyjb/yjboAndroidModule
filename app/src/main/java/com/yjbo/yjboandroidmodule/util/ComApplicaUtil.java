@@ -113,5 +113,13 @@ public class ComApplicaUtil {
 
 		return strRoot;
 	};
+	/**上传头像的位置 ，下载在News_SAVEPATH中*/
+	public static String Weibao_SAVEPATHfirst = First_SAVEPATH("SouGu_WeiBao/");
+
+	public static String Weibao_SAVEPATH() {
+		String strRoot = ComFILE + "SouGu_WeiBao/";
+		checkFile(strRoot);
+		return strRoot;
+	};
 
 }

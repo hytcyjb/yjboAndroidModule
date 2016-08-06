@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_home"
+            android:icon="@drawable/ic_account_balance_black_48dp"
+            android:title="轮播图" />
+
+
+        <item
+            android:id="@+id/group1"
+            android:title="主要功能">
+            <menu>
+                <item
+                    android:id="@+id/drawer_downloaded"
+                    android:icon="@drawable/ic_build_black_48dp"
+                    android:title="广告栏" />
+                <item
+                    android:id="@+id/drawer_settings"
+                    android:icon="@drawable/ic_favorite_black_48dp"
+                    android:title="github主页" />
+
+            </menu>
+        </item>
+    </group>
+</menu>

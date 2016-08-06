@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.interfa.ItemOnclick;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
 
@@ -47,7 +48,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemTxt.setText(position + "." + list.get(position));
+        holder.itemTxt.setText(list.get(position));
         holder.itemTxt.setTag(position);
     }
 
@@ -67,8 +68,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     L.d("NormalTextViewHolder", "onClick--> position = " + itemTxt.getTag() + "---" + getPosition());
-//                    CommonUtil.show(mContext, "----->" + itemTxt.getTag() + "---" + getPosition());
                     mdialogChoose.pos(Integer.valueOf(itemTxt.getTag() + ""));
+//                   new ItemOnclick().setonItem(Integer.valueOf(itemTxt.getTag() + ""));
                 }
             });
         }
@@ -88,6 +89,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             notifyItemRemoved(position);
             notifyDataSetChanged();
         }
+    }
+    //更新数据
+    public void updateData(List<String> mlist) {
+            list = mlist;
+            notifyDataSetChanged();
     }
 
     private static DialogChoose mdialogChoose;

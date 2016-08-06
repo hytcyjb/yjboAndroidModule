@@ -50,7 +50,6 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * Created by Dmytro Voronkevych on 17/06/2014.
  */
-@SuppressWarnings("unused")
 public class WeakHandler {
     private final Handler.Callback mCallback; // hard reference to Callback. We need to keep callback in memory
     private final ExecHandler mExec;
@@ -73,13 +72,13 @@ public class WeakHandler {
 
     /**
      * Constructor associates this handler with the {@link Looper} for the
-     * current thread and takes a callback interface in which you can handle
+     * current thread and takes a callback interfa in which you can handle
      * messages.
      *
      * If this thread does not have a looper, this handler won't be able to receive messages
      * so an exception is thrown.
      *
-     * @param callback The callback interface in which to handle messages, or null.
+     * @param callback The callback interfa in which to handle messages, or null.
      */
     public WeakHandler(@Nullable Handler.Callback callback) {
         mCallback = callback; // Hard referencing body
@@ -98,10 +97,10 @@ public class WeakHandler {
 
     /**
      * Use the provided {@link Looper} instead of the default one and take a callback
-     * interface in which to handle messages.
+     * interfa in which to handle messages.
      *
      * @param looper The looper, must not be null.
-     * @param callback The callback interface in which to handle messages, or null.
+     * @param callback The callback interfa in which to handle messages, or null.
      */
     public WeakHandler(@NonNull Looper looper, @NonNull Handler.Callback callback) {
         mCallback = callback;

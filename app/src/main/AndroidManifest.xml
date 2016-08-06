@@ -8,15 +8,23 @@
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 使用照相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission  android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!-- 悬浮窗口权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- 创建桌面快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_module"
@@ -32,22 +40,65 @@
         </activity>
         <activity android:name=".view.WifiOpenActivity" />
         <activity android:name=".view.ScreenDirectionActivity" />
-        <activity android:name=".view.SlidFragmentActivity"
-            android:theme="@style/ThemeSwipeBack"/>
+        <activity android:name=".view.SlidFragmentActivity" />
         <activity
             android:name=".view.HandlerOomActivity"
             android:label="@string/title_activity_handler_oom"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.JsonActivity" />
         <activity android:name=".view.TextViewLinkActivity" />
-        <activity android:name=".view.NotificationActivity"
-            android:theme="@style/ThemeSwipeBack"></activity>
-        <activity android:name=".view.WebViewActivity"></activity>
+        <activity android:name=".view.NotificationActivity" />
+        <activity android:name=".view.WebViewActivity" />
         <activity
             android:name=".util.video.TakeVideoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".view.MyCramerActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:process=":com.example.camera.my_cramer"
+            android:screenOrientation="landscape">
+
+            <!-- 设置该界面强制横屏 -->
+            <intent-filter>
+                <action android:name="com.example.camera.MyCramerActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.EventbusActivity" />
+        <activity android:name=".view.ViewPageActivity" />
+
+        <service android:name=".test.testService">
+            <intent-filter>
+                <action android:name="com.yjbo.yjboandroidmodule.service.testService" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".test.testActivity" />
+        <activity
+            android:name=".test.testDialogActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <!-- @android:style/Theme.Dialog -->
+        <activity android:name=".view.ViewGroupActivity" />
+        <!-- 创建桌面快捷方式 -->
+        <activity android:name=".view.ShowContentActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.TestServiceActivity" />
+        <activity
+            android:name=".view.NavigateActivity"
+            android:theme="@style/AppTheme2" />
+        <activity android:name=".view.ProgressSimpleActivity" />
+        <activity android:name=".view.BaseKWActivity"></activity>
+        <activity android:name=".view.StudyKWActivity"></activity>
+        <activity android:name=".view.WebView2Activity"></activity>
     </application>
 
 </manifest>

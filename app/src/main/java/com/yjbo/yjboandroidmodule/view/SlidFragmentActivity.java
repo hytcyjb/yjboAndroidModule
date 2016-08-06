@@ -7,11 +7,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yjbo.yjboandroidmodule.R;
-import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.base.BaseYjboSwipeActivity;
 import com.yjbo.yjboandroidmodule.fragment.FirstFragment;
 import com.yjbo.yjboandroidmodule.fragment.SecondFragment;
@@ -34,7 +40,7 @@ import butterknife.OnClick;
  *
  * @yjbo 2016年6月16日18:15:30
  */
-public class SlidFragmentActivity extends BaseYjboSwipeActivity {
+public class SlidFragmentActivity extends BaseYjboSwipeActivity implements OnRefreshListener, OnLoadMoreListener {
 
     @Bind(R.id.tabs)
     PagerSlidingTabStrip tabs;
@@ -42,7 +48,12 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity {
     ViewPager pager;
     private MyPagerAdapter adapter;
     List<Fragment> listFrag = new ArrayList<Fragment>();
-
+    @Bind(R.id.swipeToLoadLayout)
+    SwipeToLoadLayout swipeToLoadLayout;
+    @Bind(R.id.swipe_target)
+    LinearLayout expressageList;
+    View view = null, view1 = null;
+    LayoutInflater mInflater;
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_slid_fragment);
@@ -51,8 +62,40 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity {
     @Override
     public void setonView() {
         ButterKnife.bind(this);
+        initSwipeLayout();
     }
 
+    private void initSwipeLayout() {
+        mInflater = LayoutInflater.from(this);
+        view = mInflater.inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
+        view1 = mInflater.inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
+        if (view1 != null) {
+            swipeToLoadLayout.setRefreshHeaderView(view1);
+        }
+        if (view != null) {
+            swipeToLoadLayout.setLoadMoreFooterView(view);
+        }
+        //初始化的时候运行一下，
+        swipeToLoadLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeToLoadLayout.setRefreshing(true);
+            }
+        });
+        swipeToLoadLayout.setOnRefreshListener(this);
+//        swipeToLoadLayout.setOnLoadMoreListener(this);
+    }
+    @Override
+    public void onLoadMore() {
+        CommonUtil.show(SlidFragmentActivity.this, "加载更多成功\n和Fragment内部的scrollview冲突");
+        swipeToLoadLayout.setLoadingMore(false);
+    }
+
+    @Override
+    public void onRefresh() {
+        CommonUtil.show(SlidFragmentActivity.this,"刷新成功\n和Fragment内部的scrollview冲突");
+        swipeToLoadLayout.setRefreshing(false);
+    }
     @Override
     public void setonData() {
         FirstFragment firstFragment = new FirstFragment();
@@ -74,7 +117,7 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity {
                 Toast.makeText(SlidFragmentActivity.this, "Tab reselected: " + position, Toast.LENGTH_SHORT).show();
             }
         });
-        setSGNextStr("官网说明");
+        setSGNextInt(R.string.more);
     }
 
     @OnClick({R.id.next_public_txt, R.id.tabs})
@@ -92,7 +135,15 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity {
         }
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+       return super.dispatchTouchEvent(event);
+    }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
         private final String[] TITLES = {"首页", "第二页", "第三页"};
@@ -119,4 +170,8 @@ public class SlidFragmentActivity extends BaseYjboSwipeActivity {
             return listFrag.get(position);
         }
     }
+
+
+
+
 }

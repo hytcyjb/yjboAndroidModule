@@ -1,57 +1,50 @@
+
 package com.yjbo.yjboandroidmodule.util.swipeUtil;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
-
-import com.yjbo.yjboandroidmodule.R;
-
 
 /**
- * Created by Eric on 15/3/3.
+ * all the subClass extends from this class to use swipe-back function
  */
-public class SwipeBackActivity extends AppCompatActivity implements SwipeBackLayout.SwipeBackListener {
-
-    private SwipeBackLayout swipeBackLayout;
-    private ImageView ivShadow;
+public class SwipeBackActivity extends AppCompatActivity implements SwipeBackActivityBase {
+    private SwipeBackActivityHelper mHelper;
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(getContainer());
-        View view = LayoutInflater.from(this).inflate(layoutResID, null);
-        swipeBackLayout.addView(view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mHelper = new SwipeBackActivityHelper(this);
+        mHelper.onActivityCreate();
     }
 
-    private View getContainer() {
-        RelativeLayout container = new RelativeLayout(this);
-        swipeBackLayout = new SwipeBackLayout(this);
-        swipeBackLayout.setOnSwipeBackListener(this);
-        ivShadow = new ImageView(this);
-        ivShadow.setBackgroundColor(getResources().getColor(R.color.white));
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        container.addView(ivShadow, params);
-        container.addView(swipeBackLayout);
-        return container;
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mHelper.onPostCreate();
     }
 
-    public void setDragEdge(SwipeBackLayout.DragEdge dragEdge) {
-        swipeBackLayout.setDragEdge(dragEdge);
+    @Override
+    public View findViewById(int id) {
+        View v = super.findViewById(id);
+        if (v == null && mHelper != null)
+            return mHelper.findViewById(id);
+        return v;
     }
 
+    @Override
     public SwipeBackLayout getSwipeBackLayout() {
-        return swipeBackLayout;
+        return mHelper.getSwipeBackLayout();
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
-    public void onViewPositionChanged(float fractionAnchor, float fractionScreen) {
-        /*最小版本11才有效果*/
-        ivShadow.setAlpha(1 - fractionScreen);
+    public void setSwipeBackEnable(boolean enable) {
+        getSwipeBackLayout().setEnableGesture(enable);
     }
 
+    @Override
+    public void scrollToFinishActivity() {
+        Utils.convertActivityToTranslucent(this);
+        getSwipeBackLayout().scrollToFinishActivity();
+    }
 }

@@ -1,7 +1,7 @@
 package com.example;
 
 /**
- * @description: <æè¿°å½“å‰ç‰ˆæœ¬åŠŸèƒ½>
+ * @description: <ÃèÊöµ±Ç°°æ±¾¹¦ÄÜ>
  * <p>
  * </p>
  * @author: yjbo
@@ -20,17 +20,23 @@ public class sss {
         }
         System.out.println("--00-" + x);
         System.out.println("-22----");
+
+        String activityStr = "HomeMainActivity";
+        if (!"HomeMainActivity".equals(activityStr)
+                && !"SouGUMainActivity".equals(activityStr)) {
+            System.out.println("--00-" + activityStr);
+        }
     }
 
     /***
-     * å°†Stringå‹è½¬æ¢æˆdoubleå‹
+     * ½«StringĞÍ×ª»»³ÉdoubleĞÍ
      * @param s
      * @return double
      */
     public static double stringToDouble(String s) {
         double x = 0;
         try {
-             x = Double.valueOf(s);
+            x = Double.valueOf(s);
         }catch (Exception ex){
             ex.printStackTrace();
         }

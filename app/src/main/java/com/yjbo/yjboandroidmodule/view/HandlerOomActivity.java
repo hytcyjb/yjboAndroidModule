@@ -66,10 +66,6 @@ public class HandlerOomActivity extends AppCompatActivity {
                 }
             });
         }
-        Message message = new Message();
-        message.obj = "很好";
-        message.what = 0;
-        weakHandler.sendMessage(message);
 
         Message message1 = new Message();
         message1.obj = "很好";
@@ -78,13 +74,13 @@ public class HandlerOomActivity extends AppCompatActivity {
         weakHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-               String  colorAccent = CommonUtil.colorToString(getResources().getColor(R.color.colorAccent));
-               String  colorPrimary = CommonUtil.colorToString(getResources().getColor(R.color.colorPrimary));
+                String colorAccent = CommonUtil.colorToString(getResources().getColor(R.color.colorAccent));
+                String colorPrimary = CommonUtil.colorToString(getResources().getColor(R.color.colorPrimary));
                 String x = "111";
                 txtShowHandler.setText(Html.fromHtml(String.format("<font size='%s' color='%s'>%s</font>" +
                         "<font size='%s' color='%s'>&nbsp;&nbsp;&nbsp;" + "<br />以及博客上课" +
-                        "</font>",5,colorAccent,"yjb"+x,500,colorPrimary)));
-                String num = txtShowHandler.getText() +"";
+                        "</font>", 5, colorAccent, "yjb" + x, 500, colorPrimary)));
+                String num = txtShowHandler.getText() + "";
                 SpannableString spannableString = new SpannableString(num);
                 spannableString.setSpan(new RelativeSizeSpan(0.7f), num.length() - 1, num.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 txtShowHandler.setText(Html.fromHtml(String.format(num)));
@@ -103,22 +99,17 @@ public class HandlerOomActivity extends AppCompatActivity {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case 0:
-                    txtShowHandler.setText("WeakHandler，0第一个显示的" + msg.obj);
-
-                    break;
                 case 1:
-                    txtShowHandler.setText(txtShowHandler.getText()+"\n"+"WeakHandler，1第一个显示的" + msg.obj);
-                    break;
-                case 2:
-                    txtShowHandler.setText("weakHandler.obtainMessage();"+msg.obj);
+                    txtShowHandler.setText(txtShowHandler.getText() + "\n" + "WeakHandler，1第一个显示的" + msg.obj);
                     break;
             }
             return false;
         }
     });
 
-    @OnClick(R.id.txt_show_handler)
-    public void onClick() {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        weakHandler.removeCallbacksAndMessages(null);
     }
 }

@@ -11,13 +11,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 使用照相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
+    <!-- 访问闪光灯,Android开发网提示HTC Dream不包含闪光灯(Allows access to the flashlight ) -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <!-- 悬浮窗口权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -96,9 +97,10 @@
             android:name=".view.NavigateActivity"
             android:theme="@style/AppTheme2" />
         <activity android:name=".view.ProgressSimpleActivity" />
-        <activity android:name=".view.BaseKWActivity"></activity>
-        <activity android:name=".view.StudyKWActivity"></activity>
-        <activity android:name=".view.WebView2Activity"></activity>
+        <activity android:name=".view.BaseKWActivity" />
+        <activity android:name=".view.StudyKWActivity" />
+        <activity android:name=".view.WebView2Activity" />
+        <activity android:name=".view.Webview3Activity"></activity>
     </application>
 
 </manifest>

@@ -288,6 +288,7 @@ public class CommonUtil {
         list.add("值得研究知识");
         list.add("基础知识");
         list.add("缓存网页");
+        list.add("缓存网页2");
         return list;
     }
 

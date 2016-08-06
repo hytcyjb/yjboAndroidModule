@@ -31,6 +31,8 @@ dependencies {
     compile 'com.kaopiz:kprogresshud:1.0.1'
     compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.2'
+
     /*进度条，对话框*/
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
+    
 }

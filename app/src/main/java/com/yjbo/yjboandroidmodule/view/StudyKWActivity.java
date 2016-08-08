@@ -16,6 +16,7 @@ import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.StaticStr;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
 
@@ -125,7 +126,7 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
     @Override
     public void setonData() {
         listAdapter = new ListAdapter();
-        list = CommonUtil.getListStudyKW();
+        list = StaticStr.getListStudyKW();
         listAdapter.bindData(list, StudyKWActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }

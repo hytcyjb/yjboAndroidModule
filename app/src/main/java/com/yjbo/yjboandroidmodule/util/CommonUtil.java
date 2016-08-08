@@ -276,59 +276,7 @@ public class CommonUtil {
 //    list.add("自动打开wifi模块");
 //    list.add("显示自定义颜色的进度条");
 
-    /***
-     * 主listview里面的条目
-     * 2016年8月2日17:17:27
-     *
-     * @return
-     */
-    public static List<String> getListMenu() {
-        List<String> list = new ArrayList<>();
-        list.add("Material Design侧滑");
-        list.add("值得研究知识");
-        list.add("基础知识");
-        list.add("缓存网页");
-        list.add("缓存网页2");
-        return list;
-    }
 
-    /***
-     * 学习知识里面的条目
-     * 2016年8月2日18:05:43
-     *
-     * @return
-     */
-    public static List<String> getListStudyKW() {
-        List<String> list = new ArrayList<>();
-        list.add("横向滑动fragment");
-        list.add("handler的内存泄露处理");
-        list.add("录视频");
-        list.add("后台录视频");
-        list.add("测试eventbus");
-        list.add("事件的分发1");
-        list.add("创建桌面快捷方式");
-        return list;
-    }
-
-    /***
-     * 基础知识里面的条目
-     * 2016年8月2日18:05:43
-     *
-     * @return
-     */
-    public static List<String> getListBaseKW() {
-        List<String> list = new ArrayList<>();
-        list.add("获取屏幕旋转角度");
-        list.add("固定解析json字符串");
-        list.add("textstyle的展示");
-        list.add("显示通知栏");
-        list.add("测试横向滑动Fragment和侧滑同时使用的冲突问题");
-        list.add("测试Activity生命周期");
-        list.add("测试Service的生命周期");
-        list.add("自动打开wifi模块");
-        list.add("显示自定义颜色的进度条");
-        return list;
-    }
 
 
     /***

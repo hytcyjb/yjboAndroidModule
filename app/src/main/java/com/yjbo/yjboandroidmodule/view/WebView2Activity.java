@@ -55,6 +55,12 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/****
+ * 这个显示webview是有问题的
+ *
+ * @author yjbo
+ *         2016年8月8日11:52:37
+ */
 public class WebView2Activity extends BaseYjboSwipeActivity {
 
     @Bind(R.id.webview)

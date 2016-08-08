@@ -14,10 +14,10 @@ import retrofit2.http.Path;
  */
 public interface HttpService {
     public final static String baseHttp = "http://lbs.sougu.net.cn/";
-    public final static String baseHttp2 = "http://www.jianshu.com/p/7dcfd243b1df";
+    public final static String baseHttp2 = "http://www.jianshu.com/";//p/7dcfd243b1df
 
 
-    //缓存网页http://www.jianshu.com/p/7dcfd243b1df
+    //缓存网页http://www.jianshu.com/p/7dcfd243b1df   @Path("ip") String ip  "{ip}"
     @GET("{ip}")
     Call<okhttp3.ResponseBody> getFirstBlog10(@Path("ip") String ip);
 

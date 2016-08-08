@@ -24,10 +24,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.base.BaseYjboSwipeActivity;
 import com.yjbo.yjboandroidmodule.interfa.HttpService;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.ShowTipDialog;
 import com.yjbo.yjboandroidmodule.util.WebViewHelper;
 
@@ -52,20 +54,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-//import okhttp3.Cache;
-//import okhttp3.CacheControl;
-//import okhttp3.Interceptor;
-//import okhttp3.OkHttpClient;
-//import okhttp3.Request;
-//import okhttp3.Response;
-//import okhttp3.ResponseBody;
-//import okhttp3.logging.HttpLoggingInterceptor;
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Retrofit;
-//import retrofit2.converter.gson.GsonConverterFactory;
-//import yy.com.yjboretrofit.R;
-//import yy.com.yjboretrofit.interf.HttpService;
 
 public class WebView2Activity extends BaseYjboSwipeActivity {
 
@@ -77,8 +65,10 @@ public class WebView2Activity extends BaseYjboSwipeActivity {
     private final static int FILECHOOSER_RESULTCODE = 1;// 表单的结果回调</span>
     private Uri imageUri;
     String titleStr = "";
-    String ipBottomStr = "https://www.baidu.com/";
-    String ipTopStr = "";
+    String ipTopStr = TMP_URL;
+    String ipBottomStr = "";
+    static int maxAge = 6; // 在线缓存在1分钟内可读取
+
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_view_2);
@@ -92,6 +82,7 @@ public class WebView2Activity extends BaseYjboSwipeActivity {
     @Override
     public void setonData() {
         setSGNextStr("刷新");
+        setSGTitleStr("只是缓存文字图片，不能点击");
         setSGNextDrawablGone();
     }
 
@@ -100,31 +91,38 @@ public class WebView2Activity extends BaseYjboSwipeActivity {
         super.onStart();
         String ipTopStr1 = this.getIntent().getStringExtra("ipTopStr");
         String ipBottomStr1 = this.getIntent().getStringExtra("ipBottomStr");
-        if (!CommonUtil.isNull(ipTopStr1)){
+
+        L.e("==1==" + ipTopStr1 + "----" + ipBottomStr1);
+        if (!CommonUtil.isNull(ipTopStr1)) {
             ipTopStr = ipTopStr1;
             ipBottomStr = ipBottomStr1;
             initGet();
-            setWeb();
-        }else {
+        } else {
             ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 //        clip.setText(payPassword); // 复制
             final String clipStr = clip.getText() + ""; // 粘贴
-            if (clipStr.contains("http") || clipStr.contains("www")) {
-                ShowTipDialog.layDialog(WebView2Activity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
-                ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
-                    @Override
-                    public void query(String payPassword) {
-                        ShowTipDialog.dimissDia();
-                        ipTopStr = clipStr.substring(0, clipStr.lastIndexOf("/"));
-                        ipBottomStr = clipStr.substring(clipStr.lastIndexOf("/") + 1, clipStr.length());
-                        initGet();
-                    }
-                });
-            }else {
+            L.e("==3==" + ipTopStr + "----" + ipBottomStr);
+            if (!CommonUtil.isNull(clipStr)) {
+                if (clipStr.contains("http") || clipStr.contains("www")) {
+                    ShowTipDialog.layDialog(WebView2Activity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
+                    ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
+                        @Override
+                        public void query(String payPassword) {
+                            ShowTipDialog.dimissDia();
+                            ipTopStr = clipStr.substring(0, clipStr.lastIndexOf("/") + 1);
+                            ipBottomStr = clipStr.substring(clipStr.lastIndexOf("/") + 1, clipStr.length());
+                            initGet();
+                        }
+                    });
+                } else {
+                    initGet();
+                }
+            } else {
                 initGet();
             }
-            setWeb();
         }
+        setWeb();
+        L.e("==2==" + ipTopStr + "----" + ipBottomStr);
     }
 
     @Override
@@ -217,7 +215,7 @@ public class WebView2Activity extends BaseYjboSwipeActivity {
                 .addInterceptor(httpLoggingInterceptor)
                 .addNetworkInterceptor(interceptor)
                 .build();
-
+        L.e("==4==" + ipTopStr + "----" + ipBottomStr);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ipTopStr)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -236,6 +234,7 @@ public class WebView2Activity extends BaseYjboSwipeActivity {
                     mWebView.loadDataWithBaseURL(null, WebViewHelper.getWebViewHtml(response.body().string() + ""), "text/html", "UTF-8", null);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    mWebView.loadDataWithBaseURL(null, WebViewHelper.getWebViewHtml("异常报错"), "text/html", "UTF-8", null);
                 }
             }
 
@@ -250,7 +249,6 @@ public class WebView2Activity extends BaseYjboSwipeActivity {
      * 拦截器，保存缓存的方法
      * 2016年7月29日11:22:47
      */
-    static int maxAge = 60*60*10; // 在线缓存在1分钟内可读取
     Interceptor interceptor = new Interceptor() {
 
         @Override
@@ -404,7 +402,9 @@ public class WebView2Activity extends BaseYjboSwipeActivity {
         switch (view.getId()) {
             case R.id.right_next_public_txt:
                 break;
-            case R.id.next_public_txt:
+            case R.id.next_public_txt://刷新
+                initGet();
+                setWeb();
                 break;
         }
     }

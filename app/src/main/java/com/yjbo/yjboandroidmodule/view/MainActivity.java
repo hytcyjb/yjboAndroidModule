@@ -79,19 +79,22 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
         ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 //        clip.setText(payPassword); // 复制
         final String clipStr = clip.getText()+""; // 粘贴
-        if (clipStr.contains("http")||clipStr.contains("www")){
-            ShowTipDialog.layDialog(MainActivity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
-            ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
-                @Override
-                public void query(String payPassword) {
-                    ShowTipDialog.dimissDia();
-                   String  ipTopStr =  clipStr.substring(0,clipStr.lastIndexOf("/"));
-                    String  ipBottomStr =  clipStr.substring(clipStr.lastIndexOf("/")+1,clipStr.length());
-                    startActivity(new Intent(MainActivity.this, WebView2Activity.class)
-                            .putExtra("ipTopStr", ipTopStr)
-                            .putExtra("ipBottomStr", ipBottomStr));
-                }
-            });
+        if (!CommonUtil.isNull(clipStr)) {
+            if (clipStr.contains("http") || clipStr.contains("www")) {
+                ShowTipDialog.layDialog(MainActivity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
+                ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
+                    @Override
+                    public void query(String payPassword) {
+                        ShowTipDialog.dimissDia();
+                        String ipTopStr = clipStr.substring(0, clipStr.lastIndexOf("/") + 1);
+                        String ipBottomStr = clipStr.substring(clipStr.lastIndexOf("/") + 1, clipStr.length());
+                        L.e("==0==" + ipTopStr + "----" + ipBottomStr);
+                        startActivity(new Intent(MainActivity.this, WebView2Activity.class)
+                                .putExtra("ipTopStr", ipTopStr)
+                                .putExtra("ipBottomStr", ipBottomStr));
+                    }
+                });
+            }
         }
     }
 
@@ -173,6 +176,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         break;
                     case 3://缓存网页
                         startClass(WebView2Activity.class, position);
+                        break;
+                    case 4://缓存网页
+                        startClass(Webview3Activity.class, position);
                         break;
                 }
             }

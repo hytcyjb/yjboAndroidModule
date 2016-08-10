@@ -2,23 +2,33 @@ package com.yjbo.yjboandroidmodule.view;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.ClipboardManager;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.base.BaseYjboSwipeActivity;
+import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.KProgressDialog;
+import com.yjbo.yjboandroidmodule.util.L;
+import com.yjbo.yjboandroidmodule.util.ShowTipDialog;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 引用：http://www.open-open.com/lib/view/open1392188052301.html
@@ -46,25 +56,63 @@ public class Webview3Activity extends BaseYjboSwipeActivity {
     private static final String APP_CACAHE_DIRNAME = "/webcache";
     @Bind(R.id.webview)
     WebView mWebView;
-    private String url ="https://www.baidu.com/";
+    private String url = "https://www.baidu.com/";
 
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_webview3);
-
+        KProgressDialog.create(Webview3Activity.this);
     }
 
     @Override
     public void setonView() {
         ButterKnife.bind(this);
         setSGTitleStr("有点击事件的");
+        setSGNextStr("···");
+        setSGNextColor(R.color.white);
     }
 
     @Override
     public void setonData() {
 //url:http://m.dianhua.cn/detail/31ccb426119d3c9eaa794df686c58636121d38bc?apikey=jFaWGVHdFVhekZYWTBWV1ZHSkZOVlJWY&app=com.yulore.yellowsdk_ios&uid=355136051337627
 //        url = "http://m.dianhua.cn/detail/31ccb426119d3c9eaa794df686c58636121d38bc?apikey=jFaWGVHdFVhekZYWTBWV1ZHSkZOVlJWY&app=com.yulore.yellowsdk_ios&uid=355136051337627";
-        findView();
+//        findView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        KProgressDialog.show("加载中...");
+
+        String ipTopStr1 = this.getIntent().getStringExtra("ipTopStr");
+
+        L.e("==1==" + ipTopStr1);
+        if (!CommonUtil.isNull(ipTopStr1)) {
+            url = ipTopStr1;
+            findView();
+        } else {
+            ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+//        clip.setText(payPassword); // 复制
+            final String clipStr = clip.getText() + ""; // 粘贴
+            if (!CommonUtil.isNull(clipStr)) {
+                if (clipStr.contains("http") || clipStr.contains("www")) {
+                    ShowTipDialog.layDialog(Webview3Activity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
+                    ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
+                        @Override
+                        public void query(String payPassword) {
+                            ShowTipDialog.dimissDia();
+                            url = clipStr;
+                            findView();
+                        }
+                    });
+                } else {
+                    findView();
+                }
+            } else {
+                findView();
+            }
+        }
     }
 
     @Override
@@ -100,7 +148,6 @@ public class Webview3Activity extends BaseYjboSwipeActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
 
                 Log.e(TAG, "onPageStarted");
-
 //                rl_loading.setVisibility(View.VISIBLE); // 显示加载界面
             }
 
@@ -115,13 +162,14 @@ public class Webview3Activity extends BaseYjboSwipeActivity {
 //                tv_topbar_title.setVisibility(View.VISIBLE);
 //
 //                rl_loading.setVisibility(View.GONE); // 隐藏加载界面
+                KProgressDialog.dismiss();
             }
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 
 //                rl_loading.setVisibility(View.GONE); // 隐藏加载界面
-
+                KProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "加载失败",
                         Toast.LENGTH_LONG).show();
             }
@@ -185,7 +233,7 @@ public class Webview3Activity extends BaseYjboSwipeActivity {
      * 清除WebView缓存
      */
     public void clearWebViewCache() {
-
+        KProgressDialog.show("加载中...");
         //清理Webview缓存数据库
         try {
             deleteDatabase("webview.db");
@@ -209,6 +257,7 @@ public class Webview3Activity extends BaseYjboSwipeActivity {
         if (appCacheDir.exists()) {
             deleteFile(appCacheDir);
         }
+        KProgressDialog.dismiss();
     }
 
     /**
@@ -235,4 +284,25 @@ public class Webview3Activity extends BaseYjboSwipeActivity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (mWebView.canGoBack() && keyCode == KeyEvent.KEYCODE_BACK) {
+            mWebView.goBack();
+            return true;
+        } else {
+            this.finish();
+        }
+        return false;
+    }
+
+    @OnClick({R.id.next_public_txt, R.id.title_public})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.next_public_txt:
+                clearWebViewCache();
+                break;
+            case R.id.title_public:
+                break;
+        }
+    }
 }

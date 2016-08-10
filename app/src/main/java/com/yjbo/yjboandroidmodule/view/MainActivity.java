@@ -86,12 +86,11 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     @Override
                     public void query(String payPassword) {
                         ShowTipDialog.dimissDia();
-                        String ipTopStr = clipStr.substring(0, clipStr.lastIndexOf("/") + 1);
-                        String ipBottomStr = clipStr.substring(clipStr.lastIndexOf("/") + 1, clipStr.length());
-                        L.e("==0==" + ipTopStr + "----" + ipBottomStr);
-                        startActivity(new Intent(MainActivity.this, WebView2Activity.class)
-                                .putExtra("ipTopStr", ipTopStr)
-                                .putExtra("ipBottomStr", ipBottomStr));
+//                        String ipTopStr = clipStr.substring(0, clipStr.lastIndexOf("/") + 1);
+//                        String ipBottomStr = clipStr.substring(clipStr.lastIndexOf("/") + 1, clipStr.length());
+//                        L.e("==0==" + ipTopStr + "----" + ipBottomStr);
+                        startActivity(new Intent(MainActivity.this, Webview3Activity.class)
+                                .putExtra("ipTopStr", clipStr));
                     }
                 });
             }
@@ -175,9 +174,6 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         startClass(BaseKWActivity.class, position);
                         break;
                     case 3://缓存网页
-                        startClass(WebView2Activity.class, position);
-                        break;
-                    case 4://缓存网页
                         startClass(Webview3Activity.class, position);
                         break;
                 }
@@ -188,6 +184,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     private void startClass(Class<?> cls, int pos) {
         String titleName = list.get(pos);
         startActivity(new Intent(MainActivity.this, cls).putExtra("titleName", titleName));
+        overridePendingTransition(R.anim.slide_left_out,R.anim.slide_right_in);
     }
 
     @Override

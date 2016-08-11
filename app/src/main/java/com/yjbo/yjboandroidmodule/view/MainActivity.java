@@ -174,8 +174,8 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     case 2://学习的知识
                         startClass(BaseKWActivity.class, position);
                         break;
-                    case 3://缓存网页
-                        startClass(Webview3Activity.class, position);
+                    case 3://缓存网页列表
+                        startClass(ShowHttpListActivity.class, position);
                         break;
                 }
             }
@@ -185,7 +185,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     private void startClass(Class<?> cls, int pos) {
         String titleName = list.get(pos);
         startActivity(new Intent(MainActivity.this, cls).putExtra("titleName", titleName));
-        overridePendingTransition(R.anim.slide_left_out,R.anim.slide_right_in);
+        overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
     }
 
     @Override

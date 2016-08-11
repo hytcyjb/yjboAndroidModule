@@ -101,6 +101,7 @@
         <activity android:name=".view.StudyKWActivity" />
         <activity android:name=".view.WebView2Activity" />
         <activity android:name=".view.Webview3Activity"></activity>
+        <activity android:name=".view.ShowHttpListActivity"></activity>
     </application>
 
 </manifest>

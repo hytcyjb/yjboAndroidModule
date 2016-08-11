@@ -26,6 +26,7 @@ import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.DividerGridItemDecoration;
 import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.ShowTipDialog;
+import com.yjbo.yjboandroidmodule.util.StaticStr;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecoration;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
@@ -190,7 +191,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonData() {
         listAdapter = new ListAdapter();
-        list = CommonUtil.getListMenu();
+        list = StaticStr.getListMenu();
         listAdapter.bindData(list, MainActivity.this);
         swipeTarget.setAdapter(listAdapter);
     }

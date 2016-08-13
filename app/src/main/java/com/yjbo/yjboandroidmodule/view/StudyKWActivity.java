@@ -49,8 +49,9 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
     @Override
     public void setonView() {
         ButterKnife.bind(this);
-        setSGBackVisible();
+        setSGBackStr("主页");
         initSwipeLayout();
+
 //        setSGNextStr("···");
 //        setSGNextColor(R.color.white);
     }

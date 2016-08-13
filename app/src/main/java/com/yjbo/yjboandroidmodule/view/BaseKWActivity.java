@@ -53,7 +53,7 @@ public class BaseKWActivity extends BaseYjboActivity implements OnRefreshListene
     @Override
     public void setonView() {
         ButterKnife.bind(this);
-        setSGBackVisible();
+        setSGBackStr("主页");
         initSwipeLayout();
 //        setSGNextStr("···");
 //        setSGNextColor(R.color.white);

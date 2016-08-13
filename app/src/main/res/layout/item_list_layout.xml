@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
         android:paddingTop="10dp"
@@ -15,8 +15,8 @@
         android:background="@drawable/waterripple_qianhui_bg"
         android:textColor="@color/black"
         android:textSize="20dp"
-        android:singleLine="true"
-        android:maxEms="15"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:id="@+id/item_txt" />
     <LinearLayout
         android:layout_width="match_parent"

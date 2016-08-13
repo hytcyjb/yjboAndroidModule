@@ -3,7 +3,7 @@
     android:id="@+id/public_body"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#59a6dc">
+    android:background="#303F9F">
 
     <TextView
         android:id="@+id/back_public_txt"

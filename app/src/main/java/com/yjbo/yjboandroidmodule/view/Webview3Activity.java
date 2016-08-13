@@ -71,8 +71,8 @@ public class Webview3Activity extends BaseYjboSwipeActivity {
     @Override
     public void setonView() {
         ButterKnife.bind(this);
-        setSGTitleStr("有点击事件的");
-        setSGNextStr("···");
+        setSGTitleStr("网页详情");
+        setSGNextStr("分享");
         setSGNextColor(R.color.white);
         url = this.getIntent().getStringExtra("ipTopStr");
         httpsDBManager = new HttpsDBManager(Webview3Activity.this);

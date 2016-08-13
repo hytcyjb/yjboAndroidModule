@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.entity.HttpUrlClass;
 import com.yjbo.yjboandroidmodule.util.L;
 
 import java.util.List;
@@ -25,10 +27,10 @@ import butterknife.ButterKnife;
  */
 public class HttpListAdapter extends RecyclerView.Adapter<HttpListAdapter.ViewHolder> {
 
-    private List<String> list;
+    private List<HttpUrlClass> list;
     private Context mContext;
 
-    public void bindData(List<String> list, Context mContext) {
+    public void bindData(List<HttpUrlClass> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
         notifyDataSetChanged();
@@ -44,8 +46,9 @@ public class HttpListAdapter extends RecyclerView.Adapter<HttpListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemTxt.setText(list.get(position));
-        holder.itemTxt.setTag(position);
+        holder.itemTxt.setText(list.get(position).getHttp_url());
+        holder.timeTxt.setText(list.get(position).getTime());
+        holder.itemLayout.setTag(position);
     }
 
     @Override
@@ -54,40 +57,29 @@ public class HttpListAdapter extends RecyclerView.Adapter<HttpListAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.item_layout)
+        LinearLayout itemLayout;
         @Bind(R.id.item_txt)
         TextView itemTxt;
+        @Bind(R.id.time_txt)
+        TextView timeTxt;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemTxt.setOnClickListener(new View.OnClickListener() {
+            itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    L.d("NormalTextViewHolder", "onClick--> position = " + itemTxt.getTag() + "---" + getPosition());
-                    mdialogChoose.pos(Integer.valueOf(itemTxt.getTag() + ""));
+                    L.d("NormalTextViewHolder", "onClick--> position = " + itemLayout.getTag() + "---" + getPosition());
+                    mdialogChoose.pos(Integer.valueOf(itemLayout.getTag() + ""));
 //                   new ItemOnclick().setonItem(Integer.valueOf(itemTxt.getTag() + ""));
                 }
             });
         }
     }
 
-    //添加数据的方法
-    public void addData(int position, String str) {
-        list.add(position, str);
-        notifyItemInserted(position);
-        notifyDataSetChanged();
-    }
-
-    //删除数据的方法
-    public void removeData(int position) {
-        if ("你好呀，字符进来了".equals(list.get(position))) {
-            list.remove(position);
-            notifyItemRemoved(position);
-            notifyDataSetChanged();
-        }
-    }
     //更新数据
-    public void updateData(List<String> mlist) {
+    public void updateData(List<HttpUrlClass> mlist) {
             list = mlist;
             notifyDataSetChanged();
     }

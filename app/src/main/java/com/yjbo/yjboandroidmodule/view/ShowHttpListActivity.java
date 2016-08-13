@@ -20,6 +20,7 @@ import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.HttpListAdapter;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.base.BaseYjboSwipeActivity;
 import com.yjbo.yjboandroidmodule.db.HttpsDBManager;
 import com.yjbo.yjboandroidmodule.entity.HttpUrlClass;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
@@ -39,7 +40,7 @@ import butterknife.OnClick;
  * @author yjbo
  * @qq：1457521527
  */
-public class ShowHttpListActivity extends BaseYjboActivity implements OnRefreshListener, OnLoadMoreListener {
+public class ShowHttpListActivity extends BaseYjboSwipeActivity implements OnRefreshListener, OnLoadMoreListener {
 
     @Bind(R.id.swipe_target)
     RecyclerView swipeTarget;
@@ -48,7 +49,7 @@ public class ShowHttpListActivity extends BaseYjboActivity implements OnRefreshL
     HttpListAdapter listAdapter;
     @Bind(R.id.top_btn)
     Button topBtn;
-    private List<String> list = new ArrayList<>();
+    private List<HttpUrlClass> list = new ArrayList<>();
     HttpsDBManager httpsDBManager = null;
 
     @Override
@@ -60,6 +61,7 @@ public class ShowHttpListActivity extends BaseYjboActivity implements OnRefreshL
     @Override
     public void setonView() {
         ButterKnife.bind(this);
+        setSGBackStr("主页");
         setSGTitleStr("缓存http网页列表");
         initSwipeLayout();
         setSGNextStr("缓存列表");
@@ -68,7 +70,7 @@ public class ShowHttpListActivity extends BaseYjboActivity implements OnRefreshL
     }
 
 
-    @TargetApi(Build.VERSION_CODES.M)
+//    @TargetApi(Build.VERSION_CODES.M)
     private void initSwipeLayout() {
         View hearload = LayoutInflater.from(this).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
         View footload = LayoutInflater.from(this).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
@@ -98,11 +100,11 @@ public class ShowHttpListActivity extends BaseYjboActivity implements OnRefreshL
                 }
             }
         });
-        swipeTarget.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-            }
-        });
+//        swipeTarget.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//            }
+//        });
         swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -140,7 +142,7 @@ public class ShowHttpListActivity extends BaseYjboActivity implements OnRefreshL
     }
 
     private void startClass(Class<?> cls, int pos) {
-        String ipTopStr = list.get(pos);
+        String ipTopStr = list.get(pos).getHttp_url();
         startActivity(new Intent(ShowHttpListActivity.this, cls).putExtra("ipTopStr", ipTopStr));
     }
 
@@ -152,14 +154,10 @@ public class ShowHttpListActivity extends BaseYjboActivity implements OnRefreshL
         swipeTarget.setAdapter(listAdapter);
     }
 
-    private List<String> queryHttpsDb() {
-        List<String> listdb = new ArrayList<>();
+    private List<HttpUrlClass> queryHttpsDb() {
         List<HttpUrlClass> listdb2 = new ArrayList<>();
         listdb2 = httpsDBManager.query();
-        for (int i = 0; i < listdb2.size(); i++) {
-            listdb.add(listdb2.get(i).getHttp_url());
-        }
-        return listdb;
+        return listdb2;
     }
 
     @Override

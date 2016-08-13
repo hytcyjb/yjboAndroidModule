@@ -36,6 +36,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:text="提示内容"
+            android:maxLength="100"
             android:textColor="@color/black"
             android:textSize="20dp" />
 

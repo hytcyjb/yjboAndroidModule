@@ -64,8 +64,8 @@ public class ShowHttpListActivity extends BaseYjboSwipeActivity implements OnRef
         setSGBackStr("主页");
         setSGTitleStr("缓存http网页列表");
         initSwipeLayout();
-        setSGNextStr("缓存列表");
-        setSGNextColor(R.color.red);
+//        setSGNextStr("缓存列表");
+//        setSGNextColor(R.color.red);
         httpsDBManager = new HttpsDBManager(this);
     }
 

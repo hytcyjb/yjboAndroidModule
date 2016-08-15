@@ -11,10 +11,35 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //打包出固定签名的包http://www.codes51.com/itwd/1160642.html
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
+            //是否混淆
             minifyEnabled false
+//            zipAlignEnabled true
+            // 移除无用的resource文件
+//            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为XXXX_v1.0_2016-01-15_wandoujia.apk
+                        def fileName = "yjboandroidmodule.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+
+                    }
+                }
+            }
+
         }
     }
 }

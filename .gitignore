@@ -1,19 +1,15 @@
 *.iml
 .gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
+.idea
+/app/build
+/app/src/androidTest
+/app/src/test
 /build
-/captures
- .idea/compiler.xml
- .idea/encodings.xml
- .idea/gradle.xml
- .idea/inspectionProfiles/Project_Default.xml
- .idea/inspectionProfiles/profiles_settings.xml
- .idea/misc.xml
-.idea/modules.xml
-   .idea/runConfigurations.xml
-/app
-    .idea/vcs.xml
+/gradle
+/local.properties
+/settings.gradle
+/gradlew
+/gradlew.bat
+/gradle.properties
+
 

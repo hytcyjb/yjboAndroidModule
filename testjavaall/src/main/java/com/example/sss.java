@@ -1,16 +1,17 @@
 package com.example;
 
 /**
- * @description: <ÃèÊöµ±Ç°°æ±¾¹¦ÄÜ>
+ * @description: <ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½æ±¾ï¿½ï¿½ï¿½ï¿½>
  * <p>
  * </p>
  * @author: yjbo
  * @date: 2016-07-03 15:53
  */
 public class sss {
-
+    static int i;
     public static void main(String[] args) {
 
+        System.out.print("===="+i);
         double x = stringToDouble("01.555");
 
         if (x == 0) {
@@ -29,7 +30,7 @@ public class sss {
     }
 
     /***
-     * ½«StringÐÍ×ª»»³ÉdoubleÐÍ
+     * ï¿½ï¿½Stringï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½doubleï¿½ï¿½
      * @param s
      * @return double
      */

@@ -17,6 +17,7 @@ import android.widget.Button;
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.yjbo.mvp.PictureActivity.views.PicMainActivity;
 import com.yjbo.yjboandroidmodule.BuildConfig;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
@@ -87,9 +88,6 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     @Override
                     public void query(String payPassword) {
                         ShowTipDialog.dimissDia();
-//                        String ipTopStr = clipStr.substring(0, clipStr.lastIndexOf("/") + 1);
-//                        String ipBottomStr = clipStr.substring(clipStr.lastIndexOf("/") + 1, clipStr.length());
-//                        L.e("==0==" + ipTopStr + "----" + ipBottomStr);
                         startActivity(new Intent(MainActivity.this, Webview3Activity.class)
                                 .putExtra("ipTopStr", clipStr));
                     }
@@ -157,7 +155,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     protected void onStart() {
         super.onStart();
-
+        dealClip();
         listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
             @Override
             public void pos(int position) {
@@ -176,6 +174,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         break;
                     case 3://缓存网页列表
                         startClass(ShowHttpListActivity.class, position);
+                        break;
+                    case 4://图片加载框架
+                        startClass(PicMainActivity.class, position);
                         break;
                 }
             }

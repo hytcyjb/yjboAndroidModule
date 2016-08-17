@@ -103,7 +103,9 @@
         <activity android:name=".view.WebView2Activity" />
         <activity android:name=".view.Webview3Activity" />
         <activity android:name=".view.ShowHttpListActivity" />
-        <activity android:name="com.yjbo.mvp.PictureActivity.views.PicMainActivity"></activity>
+        <activity android:name="com.yjbo.mvp.PictureActivity.views.PicMainActivity" />
+        <activity android:name="com.yjbo.mvp.PictureActivity.views.ShowPicListActivity" />
+        <activity android:name="com.yjbo.mvp.PictureActivity.views.PicDetialActivity"></activity>
     </application>
 
 </manifest>

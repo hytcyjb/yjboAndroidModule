@@ -1,5 +1,6 @@
 package com.yjbo.mvp.PictureActivity.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,13 +14,11 @@ import android.view.View;
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
-import com.yjbo.yjboandroidmodule.BuildConfig;
+import com.yjbo.mvp.PictureActivity.adapter.ImageListAdapter;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
-import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.base.BaseYjboSwipeActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
-import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.StaticStr;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
 import com.yjbo.yjboandroidmodule.view.BaseKWActivity;
@@ -33,17 +32,24 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshListener, OnLoadMoreListener {
+/***
+ * 引用：http://www.jianshu.com/p/31c82862ef19
+ * 显示加载图片的列表
+ * 2016年8月17日18:47:26
+ *
+ * @author yjbo
+ */
+public class ShowPicListActivity extends BaseYjboSwipeActivity implements OnRefreshListener, OnLoadMoreListener {
     @Bind(R.id.swipe_target)
     RecyclerView swipeTarget;
     @Bind(R.id.swipeToLoadLayout)
     SwipeToLoadLayout swipeToLoadLayout;
-    ListAdapter listAdapter;
+    ImageListAdapter listAdapter;
     private List<String> list = new ArrayList<>();
 
     @Override
     public void setonCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_pic_main);
+        setContentView(R.layout.activity_show_pic_list);
     }
 
     @Override
@@ -55,37 +61,26 @@ public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshL
 
     @Override
     public void setonData() {
-        listAdapter = new ListAdapter();
-        list = StaticStr.getListPicMain();
-        listAdapter.bindData(list, PicMainActivity.this);
+        listAdapter = new ImageListAdapter();
+        list = StaticStr.getListPic();
+        listAdapter.bindData(list, ShowPicListActivity.this,0);
         swipeTarget.setAdapter(listAdapter);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
-        listAdapter.SetonDialogChoose(new ListAdapter.DialogChoose() {
+        listAdapter.SetonDialogChoose(new ImageListAdapter.DialogChoose() {
             @Override
             public void pos(int position) {
                 if (CommonUtil.isFastClick()) {
                     return;
                 }
-                switch (position) {
-                    case 0:// "glide图片加载框架"
-                        startClass(ShowPicListActivity.class, position);
-                        break;
-                    case 1://"Picasso图片加载框架"
-                        startClass(StudyKWActivity.class, position);
-                        break;
-                    case 2://"Universal-Image-Loader图片加载框架"
-                        startClass(BaseKWActivity.class, position);
-                        break;
-                    case 3://"ImageLoad图片加载框架"
-                        startClass(ShowHttpListActivity.class, position);
-                        break;
-                }
+                CommonUtil.show(ShowPicListActivity.this,"点击了"+position);
             }
         });
     }
+
     private void initSwipeLayout() {
         View hearload = LayoutInflater.from(this).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
         View footload = LayoutInflater.from(this).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
@@ -128,9 +123,10 @@ public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshL
         });
 
     }
+
     private void startClass(Class<?> cls, int pos) {
         String titleName = list.get(pos);
-        startActivity(new Intent(PicMainActivity.this, cls).putExtra("titleName", titleName));
+        startActivity(new Intent(ShowPicListActivity.this, cls).putExtra("titleName", titleName));
         overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
     }
 
@@ -149,5 +145,5 @@ public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshL
         swipeToLoadLayout.setRefreshing(false);
         swipeToLoadLayout.setLoadingMore(false);
     }
-
 }
+

@@ -76,4 +76,6 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     //引入glide加载图片的方法
     compile 'com.github.bumptech.glide:glide:3.6.0'
+    //引入picasso加载图片的方法
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

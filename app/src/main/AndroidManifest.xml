@@ -105,7 +105,8 @@
         <activity android:name=".view.ShowHttpListActivity" />
         <activity android:name="com.yjbo.mvp.PictureActivity.views.PicMainActivity" />
         <activity android:name="com.yjbo.mvp.PictureActivity.views.ShowPicListActivity" />
-        <activity android:name="com.yjbo.mvp.PictureActivity.views.PicDetialActivity"></activity>
+        <activity android:name="com.yjbo.mvp.PictureActivity.views.PicDetialActivity"
+            android:theme="@style/AppTheme3"></activity>
     </application>
 
 </manifest>

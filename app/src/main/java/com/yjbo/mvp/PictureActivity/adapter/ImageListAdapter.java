@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.util.L;
 
@@ -51,11 +52,15 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.itemTxt.setText(list.get(position));
         holder.itemLayout.setTag(position);
-        if (mkind == 0) {
-            if (position < list.size()) {
-                L.i("--图片的路径--"+position+"=="+list.get(position));
+        if (position < list.size()) {
+            if (mkind == 0) {
+                L.i("--图片的路径--" + position + "==" + list.get(position));
                 Glide
                         .with(mContext)
+                        .load(list.get(position))
+                        .into(holder.iconImage);
+            } else if (mkind == 1) {
+                Picasso.with(mContext)
                         .load(list.get(position))
                         .into(holder.iconImage);
             }

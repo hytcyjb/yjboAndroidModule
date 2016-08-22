@@ -26,6 +26,7 @@ import com.yjbo.yjboandroidmodule.view.BaseKWActivity;
 import com.yjbo.yjboandroidmodule.view.NavigateActivity;
 import com.yjbo.yjboandroidmodule.view.ShowHttpListActivity;
 import com.yjbo.yjboandroidmodule.view.StudyKWActivity;
+import com.yjbo.yjboandroidmodule.view.Webview3Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,6 @@ public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshL
     @Override
     public void setonView() {
         ButterKnife.bind(this);
-        setSGBackVisible();
         initSwipeLayout();
     }
 
@@ -74,13 +74,12 @@ public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshL
                         startClass(ShowPicListActivity.class, position);
                         break;
                     case 1://"Picasso图片加载框架"
-                        startClass(StudyKWActivity.class, position);
+                        startClass(ShowPicListActivity.class, position);
                         break;
                     case 2://"Universal-Image-Loader图片加载框架"
-                        startClass(BaseKWActivity.class, position);
-                        break;
-                    case 3://"ImageLoad图片加载框架"
-                        startClass(ShowHttpListActivity.class, position);
+                        startActivity(new Intent(PicMainActivity.this, Webview3Activity.class)
+                                .putExtra("titleName", "Universal-Image-Loader的github地址")
+                                .putExtra("ipTopStr", "https://github.com/nostra13/Android-Universal-Image-Loader"));
                         break;
                 }
             }
@@ -130,7 +129,7 @@ public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshL
     }
     private void startClass(Class<?> cls, int pos) {
         String titleName = list.get(pos);
-        startActivity(new Intent(PicMainActivity.this, cls).putExtra("titleName", titleName));
+        startActivity(new Intent(PicMainActivity.this, cls).putExtra("titleName", titleName).putExtra("pos", pos));
         overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
     }
 

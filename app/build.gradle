@@ -60,22 +60,25 @@ dependencies {
     compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.2'
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
     compile 'de.greenrobot:eventbus:3.0.0-beta1'
-
     //添加了rxjava的三方类
-    compile 'io.reactivex:rxjava:1.0.9'//最小版本是9
+    compile 'io.reactivex:rxjava:1.0.9'
+    //最小版本是9
     compile 'io.reactivex:rxandroid:0.24.0'
-    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'//最小版本是14---这是控件点击事件用的，RxView
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    //最小版本是14---这是控件点击事件用的，RxView
     //网络请求部分
-    compile 'com.google.code.gson:gson:2.5' // gson
-    compile "com.squareup.retrofit2:retrofit:2.0.2"
-    compile "com.squareup.retrofit2:converter-gson:2.0.2"
+    compile 'com.google.code.gson:gson:2.5'
+    // gson
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-
     compile 'com.squareup.okhttp:okhttp:2.6.0'
-
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     //引入glide加载图片的方法
     compile 'com.github.bumptech.glide:glide:3.6.0'
     //引入picasso加载图片的方法
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile files('src/main/java/libs/hyphenatechat_3.1.4.jar')
+    compile files('src/main/libs/hyphenatechat_3.1.4.jar')
+    //添加了环信聊天的lib包：hyphenatechat_3.1.4.jar ，还有2个.so文件：armeabi  libhyphenate.so  libhyphenate_av.so
 }

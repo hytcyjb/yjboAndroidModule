@@ -11,6 +11,7 @@ import android.view.View;
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.yjbo.mvp.PictureActivity.views.PicMainActivity;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
@@ -112,6 +113,12 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
                         break;
                     case 6://创建桌面快捷方式
                         startClass(ShowContentActivity.class, position);
+                        break;
+                    case 7://缓存网页列表
+                        startClass(ShowHttpListActivity.class, position);
+                        break;
+                    case 8://图片加载框架
+                        startClass(PicMainActivity.class, position);
                         break;
                 }
             }

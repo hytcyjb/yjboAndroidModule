@@ -199,7 +199,7 @@ public class HttpsDBManager {
 
     /**
      * query all persons, return cursor
-     *
+     * 查询该数据库的表里面，有没有已经存在该条httpurl了
      * @return Cursor
      */
     public Cursor queryTheCursorByhashcode(String http_url_hashcode) {

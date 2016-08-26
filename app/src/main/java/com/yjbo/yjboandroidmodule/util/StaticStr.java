@@ -24,8 +24,6 @@ public class StaticStr {
         list.add("Material Design侧滑");
         list.add("值得研究知识");
         list.add("基础知识");
-        list.add("缓存网页列表");
-        list.add("图片加载框架");
         return list;
     }
 
@@ -44,6 +42,8 @@ public class StaticStr {
         list.add("测试eventbus");
         list.add("事件的分发1");
         list.add("创建桌面快捷方式");
+        list.add("缓存网页列表");
+        list.add("图片加载框架");
         return list;
     }
     /***

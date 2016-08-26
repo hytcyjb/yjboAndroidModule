@@ -22,6 +22,7 @@ import com.yjbo.yjboandroidmodule.BuildConfig;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.db.HttpsDBManager;
 import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.DividerGridItemDecoration;
@@ -55,6 +56,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Bind(R.id.top_btn)
     Button topBtn;
     private List<String> list = new ArrayList<>();
+    HttpsDBManager httpsDBManager = null;
 
     @Override
     public void setonCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     @Override
     public void setonView() {
         ButterKnife.bind(this);
+        httpsDBManager = new HttpsDBManager(this);
         setSGBackVisible();
         setSGTitleStr("各知识模块知识总结");
         initSwipeLayout();
@@ -80,23 +83,25 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     private void dealClip() {
         ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 //        clip.setText(payPassword); // 复制
-        final String clipStr = clip.getText()+""; // 粘贴
+        final String clipStr = clip.getText() + ""; // 粘贴
         if (!CommonUtil.isNull(clipStr)) {
             if (clipStr.contains("http") || clipStr.contains("www")) {
-                ShowTipDialog.layDialog(MainActivity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
-                ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
-                    @Override
-                    public void query(String payPassword) {
-                        ShowTipDialog.dimissDia();
-                        startActivity(new Intent(MainActivity.this, Webview3Activity.class)
-                                .putExtra("ipTopStr", clipStr));
-                    }
-                });
+                if (httpsDBManager.queryTheCursorByhashcode(clipStr.hashCode() + "").getCount() == 0) {
+                    ShowTipDialog.layDialog(MainActivity.this, "是否打开网页", clipStr, "显示", "确定", "取消", true);
+                    ShowTipDialog.SetonDialog(new ShowTipDialog.DialogChoose() {
+                        @Override
+                        public void query(String payPassword) {
+                            ShowTipDialog.dimissDia();
+                            startActivity(new Intent(MainActivity.this, Webview3Activity.class)
+                                    .putExtra("ipTopStr", clipStr));
+                        }
+                    });
+                }
             }
         }
     }
 
-//    @TargetApi(Build.VERSION_CODES.M)
+    //    @TargetApi(Build.VERSION_CODES.M)
     private void initSwipeLayout() {
         View hearload = LayoutInflater.from(this).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
         View footload = LayoutInflater.from(this).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
@@ -148,7 +153,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     /***
      * 因为回调了这个，不然点击事件会继续使用之前的点击事件
      * //防止退出之后还对别的点击事件有影响---listAdapter.SetonDialogChoose(null); 这个方法都是错误的，因为这样之后，别的用到该接口就报空指针
-     *
+     * <p/>
      * 所以在onStart方法里面写，第一次调用，onrestart之后还调用，就可以了
      * 2016年8月2日18:32:17
      */
@@ -171,12 +176,6 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         break;
                     case 2://学习的知识
                         startClass(BaseKWActivity.class, position);
-                        break;
-                    case 3://缓存网页列表
-                        startClass(ShowHttpListActivity.class, position);
-                        break;
-                    case 4://图片加载框架
-                        startClass(PicMainActivity.class, position);
                         break;
                 }
             }

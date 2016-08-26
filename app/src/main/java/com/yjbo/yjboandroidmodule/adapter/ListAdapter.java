@@ -49,6 +49,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.itemTxt.setText(list.get(position));
+//        if (position == 1){
+//            holder.itemTxt.setTextColor(mContext.getResources().getColor(R.color.red));
+//        }
         holder.itemTxt.setTag(position);
     }
 

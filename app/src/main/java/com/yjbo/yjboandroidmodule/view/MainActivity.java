@@ -177,6 +177,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                     case 2://学习的知识
                         startClass(BaseKWActivity.class, position);
                         break;
+                    case 3://环信聊天
+                        startClass(BaseKWActivity.class, position);
+                        break;
                 }
             }
         });

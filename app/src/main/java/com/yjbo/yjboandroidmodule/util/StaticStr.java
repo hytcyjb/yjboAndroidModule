@@ -24,6 +24,7 @@ public class StaticStr {
         list.add("Material Design侧滑");
         list.add("值得研究知识");
         list.add("基础知识");
+        list.add("环信聊天");
         return list;
     }
 

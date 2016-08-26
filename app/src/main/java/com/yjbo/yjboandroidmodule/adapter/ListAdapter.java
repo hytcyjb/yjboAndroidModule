@@ -48,10 +48,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemTxt.setText(list.get(position));
-//        if (position == 1){
-//            holder.itemTxt.setTextColor(mContext.getResources().getColor(R.color.red));
-//        }
+        String str = list.get(position);
+        holder.itemTxt.setText(str);
+        if (str.contains("值得研究知识") || str.contains("缓存网页列表") || str.contains("图片加载框架")) {
+            holder.itemTxt.setTextColor(mContext.getResources().getColor(R.color.red));
+        }
         holder.itemTxt.setTag(position);
     }
 
@@ -93,10 +94,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             notifyDataSetChanged();
         }
     }
+
     //更新数据
     public void updateData(List<String> mlist) {
-            list = mlist;
-            notifyDataSetChanged();
+        list = mlist;
+        notifyDataSetChanged();
     }
 
     private static DialogChoose mdialogChoose;

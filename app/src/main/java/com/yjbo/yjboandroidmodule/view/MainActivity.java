@@ -17,12 +17,13 @@ import android.widget.Button;
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
-import com.yjbo.mvp.PictureActivity.views.PicMainActivity;
 import com.yjbo.yjboandroidmodule.BuildConfig;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
 import com.yjbo.yjboandroidmodule.db.HttpsDBManager;
+import com.yjbo.yjboandroidmodule.db.PersonDBManager;
+import com.yjbo.yjboandroidmodule.entity.PersonClass;
 import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.DividerGridItemDecoration;
@@ -33,7 +34,9 @@ import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecoration;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -57,6 +60,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     Button topBtn;
     private List<String> list = new ArrayList<>();
     HttpsDBManager httpsDBManager = null;
+    PersonDBManager personDBManager = null;
 
     @Override
     public void setonCreate(Bundle savedInstanceState) {
@@ -72,6 +76,7 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
     public void setonView() {
         ButterKnife.bind(this);
         httpsDBManager = new HttpsDBManager(this);
+        personDBManager = new PersonDBManager(getApplicationContext());
         setSGBackVisible();
         setSGTitleStr("各知识模块知识总结");
         initSwipeLayout();
@@ -178,6 +183,24 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
                         startClass(BaseKWActivity.class, position);
                         break;
                     case 3://环信聊天
+//                        SimpleDateFormat format = new SimpleDateFormat("yyyyMMDDHHMMSS");
+//                        String dateStr = format.format(new Date());
+//                        if (!CommonUtil.isNull(personDBManager.query().get(0).getPid())) {//证明已经注册过了
+//                            //注册失败会抛出HyphenateException
+//                            try {
+//                                EMClient.getInstance().createAccount(dateStr, "123");//同步方法
+//                                CommonUtil.show(getApplicationContext(), "注册成功：账号名：" + dateStr + ",密码：123");
+//
+//                                PersonClass personClass = new PersonClass();
+//                                personClass.setPid(dateStr);
+//                                personClass.setPregister_hx_time(dateStr);
+//                                personDBManager.add(personClass, dateStr);
+//
+//                            } catch (HyphenateException e) {
+//                                e.printStackTrace();
+//                                CommonUtil.show(getApplicationContext(), "注册失败，请稍后重新注册");
+//                            }
+//                        }
                         startClass(BaseKWActivity.class, position);
                         break;
                 }

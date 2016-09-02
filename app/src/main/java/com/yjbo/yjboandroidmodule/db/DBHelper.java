@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "yjboyy.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	private static SQLiteDatabase db;
 	public DBHelper(Context context) {
 		//CursorFactory设置为null,使用默认值
@@ -32,6 +32,15 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ "share_num varchar,"//分享次数
 				+ "other varchar)";//其他
 		db.execSQL(createHttpDB); //登录用户表
+		String createPersonDB="CREATE TABLE IF NOT EXISTS yjbo_person "+
+				"(_id INTEGER PRIMARY KEY AUTOINCREMENT,"//数字，自增
+				+ "pname varchar,"//人的姓名
+				+ "pid varchar,"//人的id，编号
+				+ "pregister_time varchar,"//人的注册app时间
+				+ "pregister_hx_time varchar,"//人的注册环信时间
+				+ "psign varchar,"//人的个性签名时间
+				+ "other varchar)";//其他
+		db.execSQL(createPersonDB); //登录用户表
 
 	}
 	/**
@@ -42,6 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		DBHelper helper = new DBHelper(context);
 		db = helper.getWritableDatabase();
 		db.delete("yjbo_https", null, null);//2
+		db.delete("yjbo_person", null, null);//2
 
 	}
 

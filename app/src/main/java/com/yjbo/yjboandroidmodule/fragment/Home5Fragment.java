@@ -70,8 +70,8 @@ public class Home5Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_5_page, container, false);
         ButterKnife.bind(this, view);
         mNodeId = getArguments().getString("mNodeId");
-        KProgressDialog.create(mactivity);
-        KProgressDialog.show("正在加载..." + mNodeId);
+//        KProgressDialog.create(mactivity);
+//        KProgressDialog.show("正在加载..." + mNodeId);
         L.i("onCreateView"+ mNodeId);
         init();
         return view;
@@ -81,7 +81,7 @@ public class Home5Fragment extends Fragment {
         weakHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                KProgressDialog.dismiss();
+//                KProgressDialog.dismiss();
                 childText.setText(mNodeId);
             }
         },1000);
@@ -148,6 +148,7 @@ public class Home5Fragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
         KProgressDialog.dismiss();
+        weakHandler.removeCallbacksAndMessages(null);
         L.i("onDestroyView" + mNodeId);
     }
 }

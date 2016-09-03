@@ -132,7 +132,7 @@ public class Home5Fragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        L.i("onPause");
+        L.i("onPause"+ mNodeId);
 //        mPagerAdapter.stop();
     }
 
@@ -148,5 +148,6 @@ public class Home5Fragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
         KProgressDialog.dismiss();
+        L.i("onDestroyView" + mNodeId);
     }
 }

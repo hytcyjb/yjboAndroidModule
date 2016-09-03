@@ -123,6 +123,9 @@ public class BaseKWActivity extends BaseYjboActivity implements OnRefreshListene
                     case 8://显示自定义颜色的进度条
                         startClass(ProgressSimpleActivity.class, position);
                         break;
+                    case 9://密码框
+                        startClass(PassWordActivity.class, position);
+                        break;
                 }
             }
         });

@@ -26,6 +26,7 @@ import com.yjbo.yjboandroidmodule.fragment.Home3Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home4Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home5Fragment;
 import com.yjbo.yjboandroidmodule.fragment.HomePageFragment;
+import com.yjbo.yjboandroidmodule.fragment.HomePicAddFragment;
 import com.yjbo.yjboandroidmodule.fragment.HomePicFlagFragment;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
@@ -192,6 +193,9 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.drawer_pic_frag:
                 navigationFragment = new HomePicFlagFragment();
+                break;
+            case R.id.drawer_pic_add:
+                navigationFragment = new HomePicAddFragment();
                 break;
         }
         return navigationFragment;

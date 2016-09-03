@@ -79,6 +79,7 @@ public class StaticStr {
         list.add("测试Service的生命周期");
         list.add("自动打开wifi模块");
         list.add("显示自定义颜色的进度条");
+        list.add("密码框");
         return list;
     }
     /***

@@ -44,14 +44,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yjbo.yjboandroidmodule.R;
-import com.yjbo.yjboandroidmodule.util.NoPreloadViewPager.OnPageChangeListener;
 
 /****
- * 修改viewpage的
+ * 没有修改viewpage的
  * 2016年9月3日15:18:39
  * @author yjbo
  */
-public class PagerSlidingFirst extends HorizontalScrollView {
+public class PagerSlidingAdd extends HorizontalScrollView {
 
     public static final int DEF_VALUE_TAB_TEXT_ALPHA = 150;
     private static final int[] ANDROID_ATTRS = new int[]{
@@ -72,25 +71,10 @@ public class PagerSlidingFirst extends HorizontalScrollView {
 
     private final PagerAdapterObserver mAdapterObserver = new PagerAdapterObserver();
     //修改了原生态的了
-    private final OnPageChangeListener mPageListener = new OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
+    private final PageListener mPageListener = new PageListener();
     private OnTabReselectedListener mTabReselectedListener = null;
-    public OnPageChangeListener mDelegatePageListener;
-    private NoPreloadViewPager mPager;
+    public ViewPager.OnPageChangeListener mDelegatePageListener;
+    private ViewPager mPager;
 
     private int mTabCount;
 
@@ -130,17 +114,17 @@ public class PagerSlidingFirst extends HorizontalScrollView {
 
     //private int mTabBackgroundResId = R.drawable.icon_login_company_id;
     Context mcontext = null;
-    public PagerSlidingFirst(Context context) {
+    public PagerSlidingAdd(Context context) {
         this(context, null);
         mcontext = context;
     }
 
-    public PagerSlidingFirst(Context context, AttributeSet attrs) {
+    public PagerSlidingAdd(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         mcontext = context;
     }
 
-    public PagerSlidingFirst(Context context, AttributeSet attrs, int defStyle) {
+    public PagerSlidingAdd(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mcontext = context;
         setFillViewport(true);
@@ -237,7 +221,7 @@ public class PagerSlidingFirst extends HorizontalScrollView {
         setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), bottomMargin);
     }
 
-    public void setViewPager(NoPreloadViewPager pager) {
+    public void setViewPager(ViewPager pager) {
         this.mPager = pager;
         if (pager.getAdapter() == null) {
             throw new IllegalStateException("ViewPager does not have adapter instance.");
@@ -469,11 +453,11 @@ public class PagerSlidingFirst extends HorizontalScrollView {
         this.mTabReselectedListener = tabReselectedListener;
     }
 
-    public void setOnPageChangeListener(OnPageChangeListener listener) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
         this.mDelegatePageListener = listener;
     }
 
-    private class PageListener implements OnPageChangeListener {
+    private class PageListener implements ViewPager.OnPageChangeListener {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

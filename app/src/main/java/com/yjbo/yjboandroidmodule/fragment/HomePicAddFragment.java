@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.NewHomepagerAdapter;
 import com.yjbo.yjboandroidmodule.util.NoPreloadViewPager;
+import com.yjbo.yjboandroidmodule.util.PagerSlidingAdd;
 import com.yjbo.yjboandroidmodule.util.PagerSlidingFirst;
 
 import java.util.ArrayList;
@@ -23,20 +24,19 @@ import butterknife.ButterKnife;
 
 /**
  * 图片标签，新闻
- * 不让其预加载
- * http://blog.csdn.net/qq_21898059/article/details/51453938
+ * 普通的预加载 viewPager.setOffscreenPageLimit(0);
  * 2016年9月3日09:57:043
  *
  * @author yjbo
  */
-public class HomePicFlagFragment extends Fragment {
+public class HomePicAddFragment extends Fragment {
 
     private final List<String> mHeroes = new ArrayList<>();
     Activity mactivity;
     @Bind(R.id.home_tabLayout)
-    PagerSlidingFirst home_tabLayout;
+    PagerSlidingAdd home_tabLayout;
     @Bind(R.id.home_viewpager)
-    NoPreloadViewPager viewPager;
+    ViewPager viewPager;
     private FragmentManager fragmentManager;
 
     @Override
@@ -45,14 +45,14 @@ public class HomePicFlagFragment extends Fragment {
         mactivity = activity;
     }
 
-    public HomePicFlagFragment() {
+    public HomePicAddFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_picflag_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_picadd_page, container, false);
         ButterKnife.bind(this, view);
         /***
          *
@@ -60,8 +60,7 @@ public class HomePicFlagFragment extends Fragment {
          *    所以只要设置viewPager setOffscreenPageLimit即可避免这个问题。
          *    viewPager.setOffscreenPageLimit(3);表示三个界面之间来回切换都不会重新加载
          */
-        viewPager.setOffscreenPageLimit(0);
-//      viewPager.setOffscreenPageLimit(0);
+        viewPager.setOffscreenPageLimit(3);
         fragmentManager = getFragmentManager();
         init();
         return view;

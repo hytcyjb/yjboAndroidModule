@@ -24,7 +24,9 @@ import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.fragment.Home2Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home3Fragment;
 import com.yjbo.yjboandroidmodule.fragment.Home4Fragment;
+import com.yjbo.yjboandroidmodule.fragment.Home5Fragment;
 import com.yjbo.yjboandroidmodule.fragment.HomePageFragment;
+import com.yjbo.yjboandroidmodule.fragment.HomePicFlagFragment;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.picture.AvatarImageView;
@@ -188,13 +190,9 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             case R.id.drawer_downloaded:
                 navigationFragment = new Home4Fragment();
                 break;
-//            case R.id.drawer_settings:
-//                Intent minten = new Intent(NavigateActivity.this, WebViewActivity.class);
-//                minten.putExtra("url", "https://github.com/hytcyjb/yjboAndroidModule");
-//                minten.putExtra("titleStr", "github主页");
-//                startActivity(minten);
-//                overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
-//                break;
+            case R.id.drawer_pic_frag:
+                navigationFragment = new HomePicFlagFragment();
+                break;
         }
         return navigationFragment;
     }
@@ -212,6 +210,9 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.drawer_downloaded:
                 string = "广告标题：Home4Fragment";
+                break;
+            case R.id.drawer_pic_frag:
+                string = "图片标签";
                 break;
             case R.id.drawer_settings:
                 string = "github主页";

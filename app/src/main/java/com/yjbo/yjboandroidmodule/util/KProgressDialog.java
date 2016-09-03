@@ -17,16 +17,24 @@ public class KProgressDialog {
     }
 
     public static void show(String str) {
-        if (CommonUtil.isNull(str)) {
-            str = "正在加载中...";
+        if (isShowing()) {
+            if (CommonUtil.isNull(str)) {
+                str = "正在加载中...";
+            }
+            kProg.setLabel(str)
+                    .show();
         }
-        kProg.setLabel(str)
-                .show();
     }
 
     public static void dismiss() {
         if (kProg != null) {
             kProg.dismiss();
         }
+    }
+    public static boolean isShowing() {
+        if (kProg != null) {
+            kProg.dismiss();
+        }
+        return true;
     }
 }

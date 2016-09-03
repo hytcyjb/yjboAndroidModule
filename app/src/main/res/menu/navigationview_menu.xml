@@ -18,6 +18,10 @@
                     android:icon="@drawable/ic_build_black_48dp"
                     android:title="广告栏" />
                 <item
+                    android:id="@+id/drawer_pic_frag"
+                    android:icon="@drawable/ic_favorite_black_48dp"
+                    android:title="图片标签" />
+                <item
                     android:id="@+id/drawer_settings"
                     android:icon="@drawable/ic_favorite_black_48dp"
                     android:title="github主页" />

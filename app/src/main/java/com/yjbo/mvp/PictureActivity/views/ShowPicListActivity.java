@@ -147,12 +147,6 @@ public class ShowPicListActivity extends BaseYjboSwipeActivity implements OnRefr
         swipeToLoadLayout.setLoadingMore(false);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.next_public_txt})
     public void onClick(View view) {

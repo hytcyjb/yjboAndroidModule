@@ -2,18 +2,34 @@ package com.yjbo.yjboandroidmodule.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.yjbo.mvp.PictureActivity.adapter.ImageListAdapter;
+import com.yjbo.mvp.PictureActivity.views.PicDetialActivity;
+import com.yjbo.mvp.PictureActivity.views.ShowPicListActivity;
 import com.yjbo.yjboandroidmodule.R;
+import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.entity.CharacterClass;
+import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.KProgressDialog;
 import com.yjbo.yjboandroidmodule.util.L;
+import com.yjbo.yjboandroidmodule.util.StaticStr;
 import com.yjbo.yjboandroidmodule.util.WeakHandler;
+import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
+import com.yjbo.yjboandroidmodule.view.Webview3Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,20 +43,19 @@ import butterknife.ButterKnife;
  *
  * @author yjbo
  */
-public class Home5Fragment extends Fragment {
+public class Home5Fragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
 
-    //    @Bind(R.id.viewPager)
-//    ViewPager viewPager;
-//    @Bind(R.id.indicators)
-//    LinearLayout indicators;
-//    private RecyclerView recyclerView;
-//    LoopViewPagerAdapter mPagerAdapter;
-    private final List<CharacterClass> mHeroes = new ArrayList<>();
+    @Bind(R.id.swipe_target)
+    RecyclerView swipeTarget;
+    @Bind(R.id.swipeToLoadLayout)
+    SwipeToLoadLayout swipeToLoadLayout;
+    ImageListAdapter listAdapter;
+    private List<String> list = new ArrayList<>();
+
     Activity mactivity;
     String mNodeId = "";
-    @Bind(R.id.child_text)
-    TextView childText;
     WeakHandler weakHandler = new WeakHandler();
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -59,7 +74,7 @@ public class Home5Fragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString("mNodeId", nodeId);
         homePageChildFragment.setArguments(bundle);
-        L.i("newInstance"+nodeId);
+        L.i("newInstance" + nodeId);
         return homePageChildFragment;
     }
 
@@ -72,56 +87,92 @@ public class Home5Fragment extends Fragment {
         mNodeId = getArguments().getString("mNodeId");
 //        KProgressDialog.create(mactivity);
 //        KProgressDialog.show("正在加载..." + mNodeId);
-        L.i("onCreateView"+ mNodeId);
-        init();
+        L.i("onCreateView" + mNodeId);
+//        init();
+        initSwipeLayout();
+        setonData();
         return view;
     }
 
     private void init() {
-        weakHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-//                KProgressDialog.dismiss();
-                childText.setText(mNodeId);
-            }
-        },1000);
+//        weakHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+////                KProgressDialog.dismiss();
+//                childText.setText(mNodeId);
+//            }
+//        },1000);
     }
 
-//    private void init() {
-//        mPagerAdapter = new LoopViewPagerAdapter(viewPager, indicators);
-//        viewPager.setAdapter(mPagerAdapter);
-//
-//        viewPager.addOnPageChangeListener(mPagerAdapter);
-//        //全局设置viewpage的背景色
-////        viewPager.setBackgroundDrawable(getResources().getDrawable(R.mipmap.bg_viewpager));
-//
-//        CharacterClass characterClass = new CharacterClass();
-//        characterClass.setAvatar(R.drawable.roll_viewpage1);
-//        characterClass.setName("1");
-//        mHeroes.add(characterClass);
-//
-//        characterClass = new CharacterClass();
-//        characterClass.setAvatar(R.drawable.roll_viewpage2);
-//        characterClass.setName("2");
-//        mHeroes.add(characterClass);
-//
-//        characterClass = new CharacterClass();
-//        characterClass.setAvatar(R.drawable.roll_viewpage3);
-//        characterClass.setName("3");
-//        mHeroes.add(characterClass);
-//
-//        characterClass = new CharacterClass();
-//        characterClass.setAvatar(R.drawable.roll_viewpage4);
-//        characterClass.setName("4");
-//        mHeroes.add(characterClass);
-//
-//        characterClass = new CharacterClass();
-//        characterClass.setAvatar(R.drawable.roll_viewpage5);
-//        characterClass.setName("5");
-//        mHeroes.add(characterClass);
-//
-//        mPagerAdapter.setList(mactivity, mHeroes);
-//    }
+    public void setonData() {
+        listAdapter = new ImageListAdapter();
+        list = StaticStr.getListPic();
+        listAdapter.bindData(list, mactivity, 1);
+        swipeTarget.setAdapter(listAdapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        listAdapter.SetonDialogChoose(new ImageListAdapter.DialogChoose() {
+            @Override
+            public void pos(int position) {
+                if (CommonUtil.isFastClick()) {
+                    return;
+                }
+                CommonUtil.show(mactivity,"---"+position+"==当前页面=="+mNodeId);
+            }
+        });
+    }
+
+    private void initSwipeLayout() {
+        View hearload = LayoutInflater.from(mactivity).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
+        View footload = LayoutInflater.from(mactivity).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
+        swipeToLoadLayout.setRefreshHeaderView(hearload);
+        swipeToLoadLayout.setLoadMoreFooterView(footload);
+        swipeToLoadLayout.setOnRefreshListener(this);
+        swipeToLoadLayout.setOnLoadMoreListener(this);
+        // 设置item动画
+        swipeTarget.setItemAnimator(new DefaultItemAnimator());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mactivity);
+
+        swipeTarget.setLayoutManager(layoutManager);
+
+        //添加list的分割线
+        swipeTarget.addItemDecoration(new DividerItemDecorationHx(mactivity, DividerItemDecorationHx.VERTICAL_LIST));
+
+        swipeToLoadLayout.setRefreshEnabled(true);
+        swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int spanCount = CommonUtil.getSpanCount(recyclerView);
+                    int childCount = recyclerView.getAdapter().getItemCount();
+                    if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                        swipeToLoadLayout.setLoadingMore(true);
+                    }
+                }
+            }
+        });
+        swipeTarget.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
+    }
+
+    private void startClass(Class<?> cls, int pos) {
+        String titleName = list.get(pos);
+        startActivity(new Intent(mactivity, cls).putExtra("titleName", titleName).putExtra("pos", pos));
+        mactivity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+    }
 
     @Override
     public void onResume() {
@@ -130,9 +181,25 @@ public class Home5Fragment extends Fragment {
     }
 
     @Override
+    public void onLoadMore() {
+        loadover();
+    }
+
+    @Override
+    public void onRefresh() {
+        loadover();
+    }
+
+    //刷新结束
+    private void loadover() {
+        swipeToLoadLayout.setRefreshing(false);
+        swipeToLoadLayout.setLoadingMore(false);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        L.i("onPause"+ mNodeId);
+        L.i("onPause" + mNodeId);
 //        mPagerAdapter.stop();
     }
 

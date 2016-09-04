@@ -310,24 +310,23 @@ public class PagerSlidingFirst extends HorizontalScrollView {
                         tab_title.setText(tab_title.getText().toString().toUpperCase(getResources().getConfiguration().locale));
                     }
                 }
-                if(tab_title.isSelected()){
-                //    LogUtils.i("---选中---" + i);
-                //  tab_title.setTextColor(Color.parseColor("#ffffff"));
-                    tab_title.setTextColor(Color.RED);
-                    this.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics()));
-                //  tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,mcontext.getResources().getDimension(R.dimen.honor_card_awesome_item_head_size));
-                    tab_title.setTextSize(16);
-                    TextPaint tp = tab_title.getPaint();
-                    tp.setFakeBoldText(true);
-                }else{
-                //    LogUtils.i("---未选中---" + i);
-                    //tab_title.setTextColor(mTabTextColor);
-                    this.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics()));
-                    tab_title.setTextColor(getResources().getColor(R.color.white));
-                    tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabTextSize);
-                    TextPaint tp = tab_title.getPaint();
-                    tp.setFakeBoldText(false);
-                }
+//                if(tab_title.isSelected()){
+//                //    LogUtils.i("---选中---" + i);
+//                //  tab_title.setTextColor(Color.parseColor("#ffffff"));
+//                    tab_title.setTextColor(Color.RED);
+//                    this.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics()));
+//                    tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mcontext.getResources().getDimension(R.dimen.item_icon_simle_size));
+//                    TextPaint tp = tab_title.getPaint();
+//                    tp.setFakeBoldText(true);
+//                }else{
+//                //    LogUtils.i("---未选中---" + i);
+//                    //tab_title.setTextColor(mTabTextColor);
+//                    this.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics()));
+//                    tab_title.setTextColor(getResources().getColor(R.color.white));
+//                    tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabTextSize);
+//                    TextPaint tp = tab_title.getPaint();
+//                    tp.setFakeBoldText(false);
+//                }
             }
         }
     }
@@ -540,7 +539,8 @@ public class PagerSlidingFirst extends HorizontalScrollView {
             if (tab_title != null) {
                 tab_title.setSelected(false);
 //                L.i("--select-未选中---");
-                setTextColor(mTabTextColor);
+                tab_title.setTextColor(mTabTextColor);
+                tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabTextSize);
                 TextPaint tp = tab_title.getPaint();
                 tp.setFakeBoldText(false);
             }
@@ -554,7 +554,8 @@ public class PagerSlidingFirst extends HorizontalScrollView {
             if (tab_title != null) {
                 tab_title.setSelected(true);
 //                L.i("--select-选中---");
-                tab_title.setTextColor(Color.parseColor("#ffffff"));
+                tab_title.setTextColor(Color.RED);
+                tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mcontext.getResources().getDimension(R.dimen.item_icon_simle_size));
                 TextPaint tp = tab_title.getPaint();
                 tp.setFakeBoldText(true);
             }

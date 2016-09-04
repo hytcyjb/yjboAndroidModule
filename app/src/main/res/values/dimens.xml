@@ -29,4 +29,5 @@
 
     <dimen name="indicator_size">6dp</dimen>
     <dimen name="indicator_margin">6dp</dimen>
+    <dimen name="text_size_20">20dp</dimen>
 </resources>

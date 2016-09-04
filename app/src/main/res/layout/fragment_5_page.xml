@@ -1,20 +1,31 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<!--<android.support.v4.view.ViewPager
+    android:id="@+id/viewPager"
+    android:layout_width="match_parent"
+    android:layout_height="154dp"/>-->
+
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="154dp"/>-->
-
-    <TextView
-        android:id="@+id/child_text"
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipeToLoadLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="显示数据..."
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="@dimen/dp_fourtyEight" />
+        app:swipe_style="classic">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false" />
+
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+
+</RelativeLayout>
 
 </FrameLayout>

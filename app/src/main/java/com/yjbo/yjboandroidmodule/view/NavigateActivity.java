@@ -216,7 +216,10 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
                 string = "广告标题：Home4Fragment";
                 break;
             case R.id.drawer_pic_frag:
-                string = "图片标签";
+                string = "图片标签(不加载下一页)";
+                break;
+            case R.id.drawer_pic_add:
+                string = "图片标签(加载下一页)";
                 break;
             case R.id.drawer_settings:
                 string = "github主页";

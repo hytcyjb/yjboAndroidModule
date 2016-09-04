@@ -7,23 +7,44 @@
         android:layout_height="match_parent"
         android:background="#ffffff">
 
-        <com.yjbo.yjboandroidmodule.util.PagerSlidingAdd xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/home_tabLayout"
+        <RelativeLayout
+            android:id="@+id/pager_relayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="#499CFa"
-            app:pstsIndicatorHeight="0dp"
-            app:pstsShouldExpand="true"
-            app:tabMode="scrollable" />
+            android:background="#ffffff">
+
+            <com.yjbo.yjboandroidmodule.util.PagerSlidingAdd xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/home_tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#499CFa"
+                android:layout_toLeftOf="@+id/txt_add"
+                app:pstsIndicatorHeight="0dp"
+                app:pstsShouldExpand="true"
+                app:tabMode="scrollable" />
+            <TextView
+                android:id="@+id/txt_add"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="#499CFa"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:text="添加"/>
+        </RelativeLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/home_viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/home_tabLayout"
-            android:background="#ffffff"/>
+            android:layout_below="@+id/pager_relayout"
+            android:background="#ffffff" />
     </RelativeLayout>
 
 </FrameLayout>

@@ -20,7 +20,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="#499CFa"
-                android:layout_toLeftOf="@+id/txt_add"
                 app:pstsIndicatorHeight="0dp"
                 app:pstsShouldExpand="true"
                 app:tabMode="scrollable" />
@@ -30,7 +29,6 @@
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="#499CFa"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"

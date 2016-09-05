@@ -48,6 +48,7 @@ import com.yjbo.yjboandroidmodule.R;
 /****
  * 没有修改viewpage的
  * 2016年9月3日15:18:39
+ *
  * @author yjbo
  */
 public class PagerSlidingAdd extends HorizontalScrollView {
@@ -114,6 +115,7 @@ public class PagerSlidingAdd extends HorizontalScrollView {
 
     //private int mTabBackgroundResId = R.drawable.icon_login_company_id;
     Context mcontext = null;
+
     public PagerSlidingAdd(Context context) {
         this(context, null);
         mcontext = context;
@@ -280,7 +282,11 @@ public class PagerSlidingAdd extends HorizontalScrollView {
         for (int i = 0; i < mTabCount; i++) {
             View v = mTabsContainer.getChildAt(i);
             //v.setBackgroundResource(mTabBackgroundResId);
-            v.setPadding(mTabPadding, v.getPaddingTop(), mTabPadding, v.getPaddingBottom());
+            if (i == mTabCount - 1) {//最后一个按钮给它离“添加按钮”远一点
+                v.setPadding(mTabPadding, v.getPaddingTop(), mTabPadding+100, v.getPaddingBottom());
+            } else {
+                v.setPadding(mTabPadding, v.getPaddingTop(), mTabPadding, v.getPaddingBottom());
+            }
             TextView tab_title = (TextView) v.findViewById(R.id.psts_tab_title);
             if (tab_title != null) {
                 tab_title.setTypeface(mTabTextTypeface, mTabTextTypefaceStyle);
@@ -687,8 +693,8 @@ public class PagerSlidingAdd extends HorizontalScrollView {
     }
 
     //public int getTabBackground() {
-     //   return mTabBackgroundResId;
-   // }
+    //   return mTabBackgroundResId;
+    // }
 
     public int getTabPaddingLeftRight() {
         return mTabPadding;

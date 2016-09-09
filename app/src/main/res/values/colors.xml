@@ -24,4 +24,6 @@
     <color name="blue_button">#59a6dc</color>
 
     <color name="style_color_primary">#d32f2f</color>
+    <color name="yahei">#333333</color>
+    <color name="black_gray">#ffbebebe</color>
 </resources>

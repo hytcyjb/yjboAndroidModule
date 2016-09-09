@@ -80,6 +80,7 @@ public class StaticStr {
         list.add("自动打开wifi模块");
         list.add("显示自定义颜色的进度条");
         list.add("密码框");
+        list.add("输入框");
         return list;
     }
     /***

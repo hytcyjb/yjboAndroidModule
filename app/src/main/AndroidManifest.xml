@@ -128,7 +128,8 @@
         <activity
             android:name="com.yjbo.mvp.PictureActivity.views.PicDetialActivity"
             android:theme="@style/AppTheme3" />
-        <activity android:name=".view.PassWordActivity"></activity>
+        <activity android:name=".view.PassWordActivity" />
+        <activity android:name=".view.EditTextActivity"></activity>
     </application>
 
 </manifest>

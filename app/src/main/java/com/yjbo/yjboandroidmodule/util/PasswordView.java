@@ -45,6 +45,7 @@ public class PasswordView extends EditText {
         bordPaint = new Paint();
         bordPaint.setStrokeWidth(12);
         bordPaint.setColor(Color.BLUE);
+        //FILL 设置背景色，否则输入的时候会左上角有数字；
         bordPaint.setStyle(Paint.Style.FILL);
 
 
@@ -118,9 +119,6 @@ public class PasswordView extends EditText {
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
         this.textLength = text.toString().length();
-        if (textLength == 6) {//一直在吐司，就和写在上面一样
-            Toast.makeText(getContext(), "您设置的密码为" + text, Toast.LENGTH_SHORT).show();
-        }
         invalidate();
     }
 

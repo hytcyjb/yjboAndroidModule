@@ -79,4 +79,5 @@ dependencies {
     //引入picasso加载图片的方法
     compile 'com.squareup.picasso:picasso:2.5.2'
     //添加了环信聊天的lib包：hyphenatechat_3.1.4.jar ，还有2个.so文件：armeabi  libhyphenate.so  libhyphenate_av.so
+    compile 'com.mcxiaoke.volley:library:1.0.19'
 }

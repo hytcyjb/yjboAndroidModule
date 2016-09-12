@@ -120,6 +120,9 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
                     case 8://图片加载框架
                         startClass(PicMainActivity.class, position);
                         break;
+                    case 9://添加头布局
+                        startClass(AddHeaderActivity.class, position);
+                        break;
                 }
             }
         });

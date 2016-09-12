@@ -130,6 +130,7 @@
             android:theme="@style/AppTheme3" />
         <activity android:name=".view.PassWordActivity" />
         <activity android:name=".view.EditTextActivity"></activity>
+        <activity android:name=".view.AddHeaderActivity"></activity>
     </application>
 
 </manifest>

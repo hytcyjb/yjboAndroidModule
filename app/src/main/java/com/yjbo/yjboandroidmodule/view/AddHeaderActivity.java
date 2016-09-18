@@ -16,6 +16,8 @@ import com.yjbo.yjboandroidmodule.util.GridItemDecoration;
 
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
+
 public class AddHeaderActivity extends Activity {
 
     private RecyclerView mRecyclerView;
@@ -26,7 +28,8 @@ public class AddHeaderActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_header_add);
-
+        //测试数组新增数据的
+        EventBus.getDefault().post("1");
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
 //        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLayoutManager = new GridLayoutManager(this, 2);

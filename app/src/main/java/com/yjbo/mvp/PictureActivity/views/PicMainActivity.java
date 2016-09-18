@@ -33,6 +33,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshListener, OnLoadMoreListener {
     @Bind(R.id.swipe_target)
@@ -45,6 +46,8 @@ public class PicMainActivity extends BaseYjboSwipeActivity implements OnRefreshL
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_pic_main);
+        //测试数组新增数据的
+        EventBus.getDefault().post("0");
     }
 
     @Override

@@ -44,8 +44,8 @@ public class StaticStr {
         list.add("事件的分发1");
         list.add("创建桌面快捷方式");
         list.add("缓存网页列表");
-        list.add("图片加载框架");
-        list.add("添加头布局");
+        list.add("图片加载框架(eventbus监听)");
+        list.add("添加头布局(eventbus监听)");
         return list;
     }
     /***

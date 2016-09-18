@@ -2,21 +2,26 @@ package com.yjbo.yjboandroidmodule.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.aspsine.swipetoloadlayout.SwipeTrigger;
 import com.yjbo.mvp.PictureActivity.views.PicMainActivity;
 import com.yjbo.yjboandroidmodule.R;
 import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
 import com.yjbo.yjboandroidmodule.base.BaseYjboActivity;
+import com.yjbo.yjboandroidmodule.entity.MainMessage;
 import com.yjbo.yjboandroidmodule.test.testActivity;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
+import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.StaticStr;
 import com.yjbo.yjboandroidmodule.util.video.TakeVideoActivity;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
@@ -26,6 +31,9 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
 
 /***
  * 学习知识
@@ -33,7 +41,7 @@ import butterknife.ButterKnife;
  *
  * @author yjbo
  */
-public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListener, OnLoadMoreListener {
+public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListener, OnLoadMoreListener,SwipeTrigger {
 
     @Bind(R.id.swipe_target)
     RecyclerView swipeTarget;
@@ -41,10 +49,12 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
     SwipeToLoadLayout swipeToLoadLayout;
     ListAdapter listAdapter;
     private List<String> list = new ArrayList<>();
+    private List<String> listAdd = new ArrayList<>();
 
     @Override
     public void setonCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_study_kw);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -57,6 +67,20 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
 //        setSGNextColor(R.color.white);
     }
 
+    //主线程中执行
+    @Subscribe(threadMode = ThreadMode.MainThread)
+    public void onMainEventBus(String msg) {
+        L.d("onEventBus() returned: " + Thread.currentThread()+"==msg=="+msg);
+        if ("0".equals(msg)) {
+            listAdapter.addData(0, "添加字符1");
+        }else if ("1".equals(msg)){
+            listAdd.clear();
+            listAdd.add("新增数组0");
+            listAdd.add("新增数组1");
+            listAdd.add("新增数组2");
+            listAdapter.addData(listAdd);
+        }
+    }
     private void initSwipeLayout() {
         View hearload = LayoutInflater.from(this).inflate(R.layout.swipe_google_header, swipeToLoadLayout, false);
         View footload = LayoutInflater.from(this).inflate(R.layout.swipe_classic_footer, swipeToLoadLayout, false);
@@ -123,6 +147,9 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
                     case 9://添加头布局
                         startClass(AddHeaderActivity.class, position);
                         break;
+                    default:
+                        CommonUtil.show(StudyKWActivity.this,"点击了"+position);
+                        break;
                 }
             }
         });
@@ -149,6 +176,7 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
 
     @Override
     public void onRefresh() {
+        CommonUtil.show(StudyKWActivity.this,"onRefresh====");
         loadover();
     }
 
@@ -161,5 +189,32 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
+
+    @Override
+    public void onPrepare() {
+
+    }
+
+    @Override
+    public void onSwipe(int i, boolean b) {
+
+    }
+
+    @Override
+    public void onRelease() {
+
+    }
+
+    @Override
+    public void complete() {
+        CommonUtil.show(StudyKWActivity.this,"刷新完成====");
+    }
+
+    @Override
+    public void onReset() {
+
+    }
+
 }

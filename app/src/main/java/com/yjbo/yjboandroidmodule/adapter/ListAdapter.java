@@ -85,13 +85,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyItemInserted(position);
         notifyDataSetChanged();
     }
+    //添加数组数据的方法
+    public void addData(List<String> list0) {
+        list.addAll(list0);
+//        notifyItemInserted(position);
+        notifyDataSetChanged();
+    }
 
     //删除数据的方法
     public void removeData(int position) {
         if ("你好呀，字符进来了".equals(list.get(position))) {
             list.remove(position);
             notifyItemRemoved(position);
-            notifyDataSetChanged();
+//            notifyDataSetChanged();
         }
     }
 

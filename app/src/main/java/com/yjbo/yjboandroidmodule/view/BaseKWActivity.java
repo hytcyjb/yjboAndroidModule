@@ -130,6 +130,9 @@ public class BaseKWActivity extends BaseYjboActivity implements OnRefreshListene
                     case 10://输入框
                         startClass(EditTextActivity.class, position);
                         break;
+                    case 11://展示框
+                        startClass(PopWindowActivity.class, position);
+                        break;
                 }
             }
         });

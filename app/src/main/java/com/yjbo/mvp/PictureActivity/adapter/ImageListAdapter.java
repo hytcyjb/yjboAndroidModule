@@ -32,10 +32,12 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     private List<String> list;
     private Context mContext;
     private int mkind = 0;
+    private String mPosId = "";
 
-    public void bindData(List<String> list, Context mContext, int kind) {
+    public void bindData(List<String> list, Context mContext, int kind,String PosId) {
         this.list = list;
         this.mkind = kind;
+        this.mPosId = PosId;
         this.mContext = mContext;
         notifyDataSetChanged();
     }
@@ -50,7 +52,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.itemTxt.setText(list.get(position));
+        holder.itemTxt.setText(mPosId+"="+list.get(position));
         holder.itemLayout.setTag(position);
         if (position < list.size()) {
             if (mkind == 0) {

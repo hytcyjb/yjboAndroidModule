@@ -147,6 +147,9 @@ public class StudyKWActivity extends BaseYjboActivity implements OnRefreshListen
                     case 9://添加头布局
                         startClass(AddHeaderActivity.class, position);
                         break;
+                    case 10://新闻头条
+                        startClass(TopNewActivity.class, position);
+                        break;
                     default:
                         CommonUtil.show(StudyKWActivity.this,"点击了"+position);
                         break;

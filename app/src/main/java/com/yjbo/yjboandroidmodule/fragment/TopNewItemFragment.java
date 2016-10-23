@@ -18,18 +18,13 @@ import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yjbo.mvp.PictureActivity.adapter.ImageListAdapter;
-import com.yjbo.mvp.PictureActivity.views.PicDetialActivity;
-import com.yjbo.mvp.PictureActivity.views.ShowPicListActivity;
 import com.yjbo.yjboandroidmodule.R;
-import com.yjbo.yjboandroidmodule.adapter.ListAdapter;
-import com.yjbo.yjboandroidmodule.entity.CharacterClass;
 import com.yjbo.yjboandroidmodule.util.CommonUtil;
 import com.yjbo.yjboandroidmodule.util.KProgressDialog;
 import com.yjbo.yjboandroidmodule.util.L;
 import com.yjbo.yjboandroidmodule.util.StaticStr;
 import com.yjbo.yjboandroidmodule.util.WeakHandler;
 import com.yjbo.yjboandroidmodule.util.view.DividerItemDecorationHx;
-import com.yjbo.yjboandroidmodule.view.Webview3Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +34,14 @@ import butterknife.ButterKnife;
 
 /**
  * 图片标签，新闻
- * 2016年9月3日09:57:043
+ * 2016年10月17日22:23:55
  *
  * @author yjbo
  */
-public class Home5Fragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
+public class TopNewItemFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
 
+    @Bind(R.id.pd_txt)
+    TextView pd_txt;
     @Bind(R.id.swipe_target)
     RecyclerView swipeTarget;
     @Bind(R.id.swipeToLoadLayout)
@@ -69,34 +66,37 @@ public class Home5Fragment extends Fragment implements OnRefreshListener, OnLoad
 
     }
 
-    public static Home5Fragment newInstance(String mNodeId,String PosId) {
-        Home5Fragment homePageChildFragment = new Home5Fragment();
-        String nodeId = mNodeId;
-        Bundle bundle = new Bundle();
-        bundle.putString("mNodeId", nodeId);
-        bundle.putString("mPosId", PosId);
-        homePageChildFragment.setArguments(bundle);
-        L.i("newInstance" + nodeId);
-        return homePageChildFragment;
-    }
+//    public static TopNewItemFragment newInstance(String mNodeId, String PosId) {
+//        TopNewItemFragment homePageChildFragment = new TopNewItemFragment();
+//        String nodeId = mNodeId;
+//        Bundle bundle = new Bundle();
+//        bundle.putString("mNodeId", nodeId);
+//        bundle.putString("mPosId", PosId);
+//        homePageChildFragment.setArguments(bundle);
+//        L.i("newInstance" + nodeId);
+//        return homePageChildFragment;
+//    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_5_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_topnew_item_page, container, false);
         ButterKnife.bind(this, view);
-        mNodeId = getArguments().getString("mNodeId");
-        mPosId = getArguments().getString("mPosId");
 //        KProgressDialog.create(mactivity);
 //        KProgressDialog.show("正在加载..." + mNodeId);
-        L.i("onCreateView" + mNodeId);
+        initValues();
 //        init();
         initSwipeLayout();
         setonData();
         return view;
     }
-
+    private void initValues() {
+        if (getArguments() != null) {
+            mNodeId = getArguments().getString("mNodeId");
+            mPosId = getArguments().getString("mPosId");
+        }
+    }
     private void init() {
 //        weakHandler.postDelayed(new Runnable() {
 //            @Override
@@ -109,15 +109,20 @@ public class Home5Fragment extends Fragment implements OnRefreshListener, OnLoad
 
     public void setonData() {
         listAdapter = new ImageListAdapter();
-        KProgressDialog.create(getActivity());
-        KProgressDialog.show(mPosId+"正在加载中...");
+        if (!"0".equals(mNodeId)){
+            L.i("onCreateView" + mNodeId);
+            KProgressDialog.create(getActivity());
+            KProgressDialog.show(mPosId+"正在加载第"+mNodeId+"页数据...");
+        }
         weakHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 list = StaticStr.getListPic();
                 listAdapter.bindData(list, mactivity, 1,mPosId);
                 swipeTarget.setAdapter(listAdapter);
+                L.i("加载完成" + mNodeId);
                 KProgressDialog.dismiss();
+                pd_txt.setVisibility(View.GONE);
             }
         },5000);
     }
@@ -211,7 +216,15 @@ public class Home5Fragment extends Fragment implements OnRefreshListener, OnLoad
     public void onPause() {
         super.onPause();
         L.i("onPause" + mNodeId);
+        KProgressDialog.dismiss();
 //        mPagerAdapter.stop();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        L.i("onStop" + mNodeId);
+        KProgressDialog.dismiss();
     }
 
     /***

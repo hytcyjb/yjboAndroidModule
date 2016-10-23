@@ -46,6 +46,7 @@ public class StaticStr {
         list.add("缓存网页列表");
         list.add("图片加载框架(eventbus监听)");
         list.add("添加头布局(eventbus监听)");
+        list.add("仿今日头条");
         return list;
     }
     /***
@@ -82,6 +83,7 @@ public class StaticStr {
         list.add("显示自定义颜色的进度条");
         list.add("密码框");
         list.add("输入框");
+        list.add("PopWindow框");
         return list;
     }
     /***

@@ -5,10 +5,14 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 import android.widget.Toast;
+
+import com.yjbo.yjboandroidmodule.MyApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -284,5 +288,28 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return false;
+    }
+    public static void dynamicSetTabLayoutMode(TabLayout tabLayout) {
+        int tabWidth = calculateTabWidth(tabLayout);
+        int screenWidth = getScreenWith();
+
+        if (tabWidth <= screenWidth) {
+            tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        } else {
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        }
+    }
+    private static int calculateTabWidth(TabLayout tabLayout) {
+        int tabWidth = 0;
+        for (int i = 0; i < tabLayout.getChildCount(); i++) {
+            final View view = tabLayout.getChildAt(i);
+            view.measure(0, 0); // 通知父view测量，以便于能够保证获取到宽高
+            tabWidth += view.getMeasuredWidth();
+        }
+        return tabWidth;
+    }
+
+    public static int getScreenWith() {
+        return MyApplication.getAppContext().getResources().getDisplayMetrics().widthPixels;
     }
 }

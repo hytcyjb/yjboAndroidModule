@@ -44,7 +44,6 @@ import butterknife.ButterKnife;
  * @author yjbo
  */
 public class Home5Fragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
-
     @Bind(R.id.swipe_target)
     RecyclerView swipeTarget;
     @Bind(R.id.swipeToLoadLayout)
@@ -108,14 +107,14 @@ public class Home5Fragment extends Fragment implements OnRefreshListener, OnLoad
     }
 
     public void setonData() {
-        listAdapter = new ImageListAdapter();
+        listAdapter = new ImageListAdapter(mactivity);
         KProgressDialog.create(getActivity());
         KProgressDialog.show(mPosId+"正在加载中...");
         weakHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 list = StaticStr.getListPic();
-                listAdapter.bindData(list, mactivity, 1,mPosId);
+                listAdapter.bindData(list,  1,mPosId);
                 swipeTarget.setAdapter(listAdapter);
                 KProgressDialog.dismiss();
             }

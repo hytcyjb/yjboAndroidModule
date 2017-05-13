@@ -28,7 +28,7 @@ public class TopNewActivity extends BaseYjboActivity {
     ViewPager viewPager;
     @Bind(R.id.tabs)
     TabLayout mTabs;
-    private FragmentManager fragmentManager;
+//    private FragmentManager fragmentManager;
     List<TopNewItemFragment> listHome5Fra = new ArrayList<>();
 
     @Override
@@ -54,10 +54,10 @@ public class TopNewActivity extends BaseYjboActivity {
         for (int i = 0; i < 20; i++) {
             mHeroes.add("页面" + i);
         }
-        fragmentManager = getSupportFragmentManager();
+//        fragmentManager = getSupportFragmentManager();
         List<TopNewItemFragment> home5Fragments = setListFragment(mHeroes);
 
-        viewPager.setAdapter(new TopNewAdapter(fragmentManager, mHeroes,home5Fragments));
+        viewPager.setAdapter(new TopNewAdapter(getSupportFragmentManager(), mHeroes,home5Fragments));
 
         mTabs.setupWithViewPager(viewPager);
 

@@ -34,11 +34,14 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     private int mkind = 0;
     private String mPosId = "";
 
-    public void bindData(List<String> list, Context mContext, int kind,String PosId) {
+    public ImageListAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public void bindData(List<String> list, int kind, String PosId) {
         this.list = list;
         this.mkind = kind;
         this.mPosId = PosId;
-        this.mContext = mContext;
         notifyDataSetChanged();
     }
 

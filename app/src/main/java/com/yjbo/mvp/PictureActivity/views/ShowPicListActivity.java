@@ -62,9 +62,9 @@ public class ShowPicListActivity extends BaseYjboSwipeActivity implements OnRefr
 
     @Override
     public void setonData() {
-        listAdapter = new ImageListAdapter();
+        listAdapter = new ImageListAdapter(ShowPicListActivity.this);
         list = StaticStr.getListPic();
-        listAdapter.bindData(list, ShowPicListActivity.this, kind,"");
+        listAdapter.bindData(list,  kind,"");
         swipeTarget.setAdapter(listAdapter);
     }
 

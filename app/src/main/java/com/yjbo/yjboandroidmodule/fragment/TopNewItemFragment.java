@@ -53,7 +53,7 @@ public class TopNewItemFragment extends Fragment implements OnRefreshListener, O
     String mNodeId = "";
     String mPosId = "";
     WeakHandler weakHandler = new WeakHandler();
-
+    View view = null;
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -81,14 +81,16 @@ public class TopNewItemFragment extends Fragment implements OnRefreshListener, O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_topnew_item_page, container, false);
-        ButterKnife.bind(this, view);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_topnew_item_page, container, false);
+            ButterKnife.bind(this, view);
 //        KProgressDialog.create(mactivity);
 //        KProgressDialog.show("正在加载..." + mNodeId);
-        initValues();
+            initValues();
 //        init();
-        initSwipeLayout();
-        setonData();
+            initSwipeLayout();
+            setonData();
+        }
         return view;
     }
     private void initValues() {
@@ -108,20 +110,20 @@ public class TopNewItemFragment extends Fragment implements OnRefreshListener, O
     }
 
     public void setonData() {
-        listAdapter = new ImageListAdapter();
-        if (!"0".equals(mNodeId)){
+        listAdapter = new ImageListAdapter(mactivity);
+        if (!"1".equals(mNodeId)){
             L.i("onCreateView" + mNodeId);
-            KProgressDialog.create(getActivity());
-            KProgressDialog.show(mPosId+"正在加载第"+mNodeId+"页数据...");
+//            KProgressDialog.create(getActivity());
+//            KProgressDialog.show(mPosId+"正在加载第"+mNodeId+"页数据...");
         }
         weakHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 list = StaticStr.getListPic();
-                listAdapter.bindData(list, mactivity, 1,mPosId);
+                listAdapter.bindData(list, 1,mPosId);
                 swipeTarget.setAdapter(listAdapter);
                 L.i("加载完成" + mNodeId);
-                KProgressDialog.dismiss();
+//                KProgressDialog.dismiss();
                 pd_txt.setVisibility(View.GONE);
             }
         },5000);
@@ -216,7 +218,7 @@ public class TopNewItemFragment extends Fragment implements OnRefreshListener, O
     public void onPause() {
         super.onPause();
         L.i("onPause" + mNodeId);
-        KProgressDialog.dismiss();
+//        KProgressDialog.dismiss();
 //        mPagerAdapter.stop();
     }
 
@@ -224,7 +226,7 @@ public class TopNewItemFragment extends Fragment implements OnRefreshListener, O
     public void onStop() {
         super.onStop();
         L.i("onStop" + mNodeId);
-        KProgressDialog.dismiss();
+//        KProgressDialog.dismiss();
     }
 
     /***
@@ -238,7 +240,7 @@ public class TopNewItemFragment extends Fragment implements OnRefreshListener, O
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        KProgressDialog.dismiss();
+//        KProgressDialog.dismiss();
         weakHandler.removeCallbacksAndMessages(null);
         L.i("onDestroyView" + mNodeId);
     }

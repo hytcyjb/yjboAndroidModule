@@ -25,6 +25,7 @@ public class StaticStr {
         list.add("值得研究知识");
         list.add("基础知识");
         list.add("环信聊天");
+        list.add("加载插件apk");
         return list;
     }
 

@@ -1,2 +1,2 @@
-include ':testjavaall', ':app1'
+include ':testjavaall', ':app1',":plugin",":plugapp"
 project(':app1').projectDir = new File('app')

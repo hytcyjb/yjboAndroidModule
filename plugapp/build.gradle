@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.yjbo.yjboandroidmodule"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //打包出固定签名的包http://www.codes51.com/itwd/1160642.html
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
+            //是否混淆
+            minifyEnabled false
+//            zipAlignEnabled true
+            // 移除无用的resource文件
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为XXXX_v1.0_2016-01-15_wandoujia.apk
+                        def fileName = "yjboAnPlug.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    //    compile 'com.badoo.mobile:android-weak-handler:1.1'
+    /*进度条，对话框*/
+    //eventbus
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.jakewharton:butterknife:7.0.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.kaopiz:kprogresshud:1.0.1'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.2'
+    compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    //添加了rxjava的三方类
+    compile 'io.reactivex:rxjava:1.0.9'
+    //最小版本是9
+    compile 'io.reactivex:rxandroid:0.24.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    //最小版本是14---这是控件点击事件用的，RxView
+    //网络请求部分
+    compile 'com.google.code.gson:gson:2.5'
+    // gson
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.okhttp:okhttp:2.6.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    //引入glide加载图片的方法
+    compile 'com.github.bumptech.glide:glide:3.6.0'
+    //引入picasso加载图片的方法
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    //添加了环信聊天的lib包：hyphenatechat_3.1.4.jar ，还有2个.so文件：armeabi  libhyphenate.so  libhyphenate_av.so
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile project(':plugin')
+}

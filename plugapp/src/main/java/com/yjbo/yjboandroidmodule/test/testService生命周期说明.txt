@@ -1,0 +1,32 @@
+testService生命周期说明
+1.启动： startService(new Intent(MainActivity.this, testService.class));
+testService--onCreate
+testService--onStartCommand
+testService--onStart
+
+2.再次启动： startService(new Intent(MainActivity.this, testService.class));
+ testService--onStartCommand
+ testService--onStart
+
+。。。。。再次启动都这样
+
+3.关闭服务：stopService(new Intent(MainActivity.this, testService.class));
+ testService--onDestroy
+
+4.再次关闭服务：stopService(new Intent(MainActivity.this, testService.class));
+  不执行任何操作
+
+
+
+-----------------如果是bind的话-----------------------------
+1.打开：
+testService--onCreate
+testService--onBind
+
+2.再次打开：--因为它是随着Activity的打开而打开的，关闭而关闭的
+testService--onCreate
+testService--onBind
+
+3.关闭：
+testService--onUnbind
+testService--onDestroy

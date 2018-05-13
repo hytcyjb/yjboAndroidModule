@@ -1,0 +1,29 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <com.yjbo.yjboandroidmodule.util.PagerSlidingFirst xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/home_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="#499CFa"
+            app:pstsIndicatorHeight="0dp"
+            app:pstsShouldExpand="true"
+            app:tabMode="scrollable" />
+
+        <com.yjbo.yjboandroidmodule.util.NoPreloadViewPager
+            android:id="@+id/home_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_tabLayout"
+            android:background="#ffffff"/>
+    </RelativeLayout>
+
+</FrameLayout>

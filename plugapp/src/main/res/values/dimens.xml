@@ -1,0 +1,33 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!--swipte刷新 start-->
+    <dimen name="refresh_header_height_twitter">80dp</dimen>
+    <dimen name="load_more_footer_height_twitter">60dp</dimen>
+    <dimen name="load_more_footer_height_classic">60dp</dimen>
+    <dimen name="load_more_drawable_size_google">36dp</dimen>
+    <dimen name="load_more_footer_height_google">72dp</dimen>
+    <dimen name="seventy_two">@dimen/load_more_footer_height_google</dimen>
+    <dimen name="load_more_trigger_offset_google">88dp</dimen>
+    <dimen name="load_more_final_offset_google">120dp</dimen>
+    <!--swipte刷新 end-->
+    <!-- google start-->
+    <dimen name="refresh_header_height_google">100dp</dimen>
+    <dimen name="refresh_trigger_offset_google">100dp</dimen>
+    <dimen name="refresh_final_offset_google">150dp</dimen>
+    <dimen name="refresh_drawable_size_google">40dp</dimen>
+    <dimen name="dp_fourtyEight">48dp</dimen>
+    <!-- google end-->
+
+    <!-- item的小页面里面的图标的大小 -->
+    <dimen name="item_icon_size">50dp</dimen>
+    <!-- item的小页面里面的图标的大小-小点的；同时也是右侧头/底部分的图片的高度 ,以及侧滑眉头的高度,是日报、周报的宽度 -->
+    <dimen name="item_icon_simle_size">33dp</dimen>
+
+    <dimen name="indicator_size">6dp</dimen>
+    <dimen name="indicator_margin">6dp</dimen>
+    <dimen name="text_size_20">20dp</dimen>
+</resources>

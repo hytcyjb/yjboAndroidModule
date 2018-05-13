@@ -12,4 +12,6 @@
 /gradlew.bat
 /gradle.properties
 
-
+/plugapp/build
+/plugapp/src/androidTest
+/plugapp/src/test

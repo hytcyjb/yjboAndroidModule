@@ -203,6 +203,9 @@ public class MainActivity extends BaseYjboActivity implements OnRefreshListener,
 //                        }
                         startClass(BaseKWActivity.class, position);
                         break;
+                    case 4://学习的知识
+                        startClass(PlugActivity.class, position);
+                        break;
                 }
             }
         });

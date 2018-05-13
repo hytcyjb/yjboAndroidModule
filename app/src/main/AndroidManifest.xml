@@ -133,6 +133,10 @@
         <activity android:name=".view.AddHeaderActivity" />
         <activity android:name=".view.TopNewActivity" />
         <activity android:name=".view.PopWindowActivity"></activity>
+        <activity android:name=".view.PlugActivity"
+            android:supportsRtl="true"></activity>
+        <activity android:name=".view.plug.ProxyActivity"></activity>
+        <activity android:name=".view.plug.ProxySecActivity"></activity>
     </application>
 
 </manifest>

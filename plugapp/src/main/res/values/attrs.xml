@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--横向滑动-->
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsIndicatorColor" format="color" /><!--标题下面的下划线颜色-->
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <attr name="pstsUnderlineColor" format="color" />
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <attr name="pstsDividerColor" format="color" />
+        <attr name="pstsDividerWidth" format="dimension" />
+        <attr name="pstsDividerPadding" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <attr name="pstsShouldExpand" format="boolean" /><!--标题是否填充满横向布局-->
+        <attr name="pstsPaddingMiddle" format="boolean" />
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsTabBackground" format="reference" />
+        <attr name="pstsTabTextSize" format="dimension" />
+        <attr name="pstsTabTextColor" format="reference" /><!--标题的颜色-->
+        <attr name="pstsTabTextStyle" format="reference">
+            <flag name="normal" value="0x0" />
+            <flag name="bold" value="0x1" />
+            <flag name="italic" value="0x2" />
+        </attr>
+        <attr name="pstsTabTextAllCaps" format="boolean" />
+        <attr name="pstsTabTextAlpha" format="integer" />
+        <attr name="pstsTabTextFontFamily" format="string" />
+    </declare-styleable>
+    <declare-styleable name="GoogleCircleProgressView">
+        <attr name="gcp_inner_radius" format="dimension"/>
+        <attr name="gcp_background_color" format="color"/>
+        <attr name="gcp_progress_color" format="color"/>
+        <attr name="gcp_progress_stoke_width" format="dimension"/>
+        <attr name="gcp_show_arrow" format="boolean"/>
+        <attr name="gcp_enable_circle_background" format="boolean"/>
+        <attr name="gcp_arrow_width" format="dimension"/>
+        <attr name="gcp_arrow_height" format="dimension"/>
+
+        <attr name="gcp_progress" format="integer"/>
+        <attr name="gcp_max" format="integer"/>
+
+
+        <attr name="gcp_progress_text_size" format="dimension"/>
+        <attr name="gcp_progress_text_color" format="color"/>
+
+        <!--<attr name="gcp_progress_text_offset" format="dimension"/>-->
+
+        <attr name="gcp_progress_text_visibility" format="enum">
+            <enum name="visible" value="0"/>
+            <enum name="invisible" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="edge_size" format="dimension"/>
+        <attr name="edge_flag">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="all" value="3" />
+        </attr>
+        <attr name="shadow_left" format="reference"/>
+        <attr name="shadow_right" format="reference"/>
+        <attr name="shadow_bottom" format="reference"/>
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference"/>
+    <!--横向滑动-->
+    <declare-styleable name="PagerSlidingFirst">
+        <attr name="pstsIndicatorColor1" format="color" /><!--标题下面的下划线颜色-->
+        <attr name="pstsIndicatorHeight1" format="dimension" />
+        <attr name="pstsUnderlineColor1" format="color" />
+        <attr name="pstsUnderlineHeight1" format="dimension" />
+        <attr name="pstsDividerColor1" format="color" />
+        <attr name="pstsDividerWidth1" format="dimension" />
+        <attr name="pstsDividerPadding1" format="dimension" />
+        <attr name="pstsScrollOffset1" format="dimension" />
+        <attr name="pstsShouldExpand1" format="boolean" /><!--标题是否填充满横向布局-->
+        <attr name="pstsPaddingMiddle1" format="boolean" />
+        <attr name="pstsTabPaddingLeftRight1" format="dimension" />
+        <attr name="pstsTabBackground1" format="reference" />
+        <attr name="pstsTabTextSize1" format="dimension" />
+        <attr name="pstsTabTextColor1" format="reference" /><!--标题的颜色-->
+        <attr name="pstsTabTextStyle1" format="reference">
+            <flag name="normal" value="0x0" />
+            <flag name="bold" value="0x1" />
+            <flag name="italic" value="0x2" />
+        </attr>
+        <attr name="pstsTabTextAllCaps1" format="boolean" />
+        <attr name="pstsTabTextAlpha1" format="integer" />
+        <attr name="pstsTabTextFontFamily1" format="string" />
+    </declare-styleable>
+</resources>
